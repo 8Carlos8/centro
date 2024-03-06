@@ -28,23 +28,23 @@ Route::get('/', function () {
 Route::resource('Carteleras', CarteleraController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', BoletoController::class)
+Route::resource('Boletos', BoletoController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', EstacionamientoController::class)
+Route::resource('Estacionamientos', EstacionamientoController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', EventoController::class)
+Route::resource('Eventos', EventoController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', OrganizadorController::class)
+Route::resource('Organizadores', OrganizadorController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', PersonaController::class)
+Route::resource('Personas', PersonaController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', SalaController::class)
+Route::resource('Salas', SalaController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', UsuarioController::class)
+Route::resource('Usuarios', UsuarioController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
