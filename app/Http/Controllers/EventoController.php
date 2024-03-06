@@ -38,7 +38,7 @@ class EventoController extends Controller
         ]);
 
         Evento::create($request->all());
-        return redirect()->route('Evento.index')->with('success', 'Evento creado correctamente.');
+        return redirect()->route('Eventos.index')->with('success', 'Evento creado correctamente.');
     }
 
     /**
@@ -46,7 +46,7 @@ class EventoController extends Controller
      */
     public function show(string $id)
     {
-        return view('Evento.show', compact('evento'));
+        return view('Eventos.show', compact('evento'));
     }
 
     /**
@@ -54,7 +54,7 @@ class EventoController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Evento.edit', compact('evento'));
+        return view('Eventos.edit', compact('evento'));
     }
 
     /**
@@ -71,7 +71,7 @@ class EventoController extends Controller
         ]);
 
         $evento->update($request->all());
-        return redirect()->route('Evento.index')->with('success', 'Evento actualizado correctamente.');
+        return redirect()->route('Eventos.index')->with('success', 'Evento actualizado correctamente.');
     }
 
     /**
@@ -80,6 +80,6 @@ class EventoController extends Controller
     public function destroy(Evento $evento)
     {
         $evento->delete();
-        return redirect()->route('Evento.index')->with('success', 'Evento eliminado correctamente.');
+        return redirect()->route('Eventos.index')->with('success', 'Evento eliminado correctamente.');
     }
 }
