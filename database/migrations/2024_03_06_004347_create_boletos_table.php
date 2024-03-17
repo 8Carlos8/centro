@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('boletos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_cartelera');
+            $table->integer('noBoletos');
             $table->timestamps();
+
+            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_cartelera')->references('id')->on('carteleras')->onDelete('cascade');
         });
     }
 

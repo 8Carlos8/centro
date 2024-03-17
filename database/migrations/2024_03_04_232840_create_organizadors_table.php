@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('organizadors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_persona');
+            $table->integer('estado');
+            $table->string('razonSoc');
+            $table->string('direccion');
             $table->timestamps();
+
+            $table->foreign('id_persona')->references('id')->on('personas')->onDelete('cascade');
         });
     }
 

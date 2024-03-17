@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('carteleras', function (Blueprint $table) {
             $table->id();
-            //$table->id_evento();
+            $table->unsignedBigInteger('id_evento');
+            $table->unsignedBigInteger('id_sala');
+            $table->integer('estado');
+            $table->dateTime('inicio');
+            $table->dateTime('fin');
             $table->timestamps();
+
+            $table->foreign('id_evento')->references('id')->on('eventos')->onDelete('cascade');
+            $table->foreign('id_sala')->references('id')->on('salas')->onDelete('cascade');
         });
     }
 

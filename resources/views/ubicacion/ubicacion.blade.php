@@ -1,41 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
-    <link rel="icon" type="image/x-icon" href="imagenes/CULTURA1.png">
-    <title>CC Siglo XXI - Pagina Principal</title>
-    <link rel="stylesheet" href="css/custom.css">
+    <meta http-equiv="X-UA-Compatible" content="IE= edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="..\imagenes\CULTURA1.png">
+    <title>CC Siglo XXI - Ubicación</title>
+    <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
-        var contenido = "";
-        fetch("https://minitechsolutions.shop/ccsxxitest/api/cartelerahome.php")
-            .then(resp => resp.json())
-            .then(resp => {
-                console.log(resp);
-                resp.cartelera.forEach((a) => {
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
 
-                    contenido += "<div id=\"cartelera1\" class=\"col col-xxl-2 col-lg-4 col-sm-5 ms-1 mb-3 mb-sm-0\">" +
-                        "<div class=\"card mb-4\"><a href=\"evento/?id=" + a.ID + "\"><img id=\"poster\" src=\"";
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                    if (a.EVENTO.FOTO == "" || a.EVENTO.FOTO == "null" || a.EVENTO.FOTO == null) {
-                        contenido += "imagenes/poster-placeholder.png";
-                    } else {
-                        contenido += a.EVENTO.FOTO;
-                    }
+        // Esta funcion crea el iframe
+        var player1;
+        var player2;
+        var player3;
 
-                    contenido += "\" class=\"card-img-top\" alt=\"\"...\"\"></a><div class=\"card-footer\">" +
-                        "<small class=\"h6 text-muted\">" + a.EVENTO.NOMBRE + "</small><br>" +
-                        "<small class=\"text-muted\">" + a.SALA.NOMBRE + "<br>" + a.INICIO + "</small>" +
-                        "</div>" +
-                        "</div>" +
-                        "</div>";
-                });
-                document.getElementById("cartas").innerHTML = contenido;
-            })
+        function onYouTubeIframeAPIReady() {
+            player1 = new YT.Player('auditorio', {
+                height: 1280,
+                width: 720,
+                videoId: 'AsCkWPTgCO4',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+            player2 = new YT.Player('teatro', {
+                height: 1280,
+                width: 720,
+                videoId: 'z7_XwfgK1S4',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+            player3 = new YT.Player('cine', {
+                height: 1280,
+                width: 720,
+                videoId: '28PlA-Y3kZs',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+        }
+
+        // La API manda a reporducir el video
+        function onPlayerReady(event) {
+            event.target.setVolume(0);
+            event.target.playVideo();
+        }
     </script>
 </head>
 
@@ -45,7 +77,7 @@
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="">
-                    <img id="logo" src="identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
+                    <img id="logo" src="../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="bi bi-list"></i></span>
@@ -62,19 +94,19 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link active align-middle text-white" aria-current="page" href="">Inicio</a>
+                                    <a class="nav-link  align-middle text-white" aria-current="page" href="../index.html">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                    <a class="nav-link align-middle text-white" href="../cartelera/">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
+                                    <a class="nav-link align-middle text-white" href="../estacionamiento/">Estacionamiento</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="">Ubicación</a>
+                                    <a class="nav-link active align-middle text-white" href="#">Ubicación</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="">Quienes somos</a>
+                                    <a class="nav-link align-middle text-white" href="../somos/">Quienes somos</a>
                                 </li>
                             </ul>
                         </div>
@@ -85,10 +117,10 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Usuarios.login') }}">Iniciar Sesion</a>
+                                    <a class="nav-link align-middle text-white" href="">Iniciar Sesion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle  text-white" href="{{ route('Usuarios.create') }}">Registrarse</a>
+                                    <a class="nav-link align-middle  text-white" href="">Registrarse</a>
                                 </li>
                             </ul>
                         </div>
@@ -100,35 +132,76 @@
                             <i class="bi bi-person-fill"></i>
                         </button>
                         <ul id="useraccesslist" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('Usuarios.login') }}">Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#">Iniciar Sesión</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('Usuarios.create') }}">Registrarse</a></li>
+                            <li><a class="dropdown-item" href="#">Registrarse</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <!-- Carrusel -->
+
+    <!-- Imagen de Fondo y Titulo -->
     <section class="w-100">
-        <div class="card bg-black text-white w-100 z-0">
-            <img src="imagenes/index.png" class="bg-img w-100" />
+        <div class="card bg-dark text-white w-100 z-0">
+            <img src="../imagenes/cartelera.png" class="bg-img w-100" />
             <div class="card-img-overlay text-light justify-content-center flex-column text-center pt-0 pt-lg-5" style="background-color: rgba(0, 0, 0, 0.5)">
-                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> ¡Bienvenido!</h2>
+                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> Nuestros Recintos</h2>
             </div>
         </div>
     </section>
-    <section>
-        <div id="cartas" class="row z-1 mb-5 ms-2 justify-content-evenly">
-            <!-- Aqui deberia salir lo invocado por el servicio -->>
+
+    <!-- Contenido -->
+    <div id="ubicacion" class="container-fluid">
+        <div class="row column-gap-3 justify-content-center">
+            <div class="col col-10 col-xxl-3 mb-5 mt-sm-4">
+                <div class="card">
+                    <h5 class="card-title align-self-center fw-bolder m-3">Auditorio CCSXXI</h5>
+                    <div class="img-fluid" id="auditorio">
+                        <img src="../imagenes/somos.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">El Auditorio del Complejo Cultural Siglo XXI es un espacio versátil y moderno que puede acomodar a hasta 2,000 personas. El auditorio está equipado con un escenario, un sistema de sonido y un sistema de iluminación de última generación, lo que lo convierte en el lugar perfecto para una variedad de eventos, incluyendo conciertos, conferencias, presentaciones y eventos especiales.</p>
+                        <p class="card-text">El auditorio está ubicado en el corazón del centro de la ciudad, lo que lo hace fácilmente accesible para todos. El auditorio también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
+                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-10 col-xxl-3 mb-5">
+                <div class="card">
+                    <h5 class="card-title align-self-center fw-bolder m-3">Teatro CCSXXI</h5>
+                    <div class="img-fluid" id="teatro">
+                        <img src="../imagenes/auditorio.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">El Teatro del Complejo Cultural Siglo XXI es una joya arquitectónica. El teatro fue construido en 2019. El teatro cuenta con una capacidad de 500 personas y presenta una variedad de espectáculos, incluyendo obras de teatro, musicales, conciertos y eventos especiales.</p>
+                        <p class="card-text">El teatro cuenta con un escenario grande y bien equipado, así como un sistema de sonido e iluminación de última generación. El teatro también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
+                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-10 col-xxl-3 mb-5 mt-sm-4">
+                <div class="card">
+                    <h5 class="card-title align-self-center fw-bolder m-3">Sala de Cine CCSXXI</h5>
+                    <div class="img-fluid" id="cine">
+                        <img src="../imagenes/cine.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">La Sala de Cine del Complejo Cultural Siglo XXI es el lugar perfecto para disfrutar de una película con amigos y familiares. La sala cuenta con una pantalla grande, un sistema de sonido de última generación y asientos cómodos. La sala también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
+                        <p class="card-text">La Sala de Cine del Complejo Cultural Siglo XXI está ubicada en el mismo complejo, La sala también cuenta con una variedad de horarios de proyección, por lo que puede encontrar una película que se ajuste a su agenda.</p>
+                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 
     <!-- Pie de Pagina -->
     <footer>
-        <div id="footerino" class="container-fluid">
+        <div id="footerinou" class="container-fluid z-1">
             <div class="row justify-content-md-center pb-lg-5 pb-5 pt-5 m-0 text-white">
 
                 <div class="d-flex col-lg-5 mt-5 justify-content-center">
@@ -136,19 +209,19 @@
                     </p>
                 </div>
 
-                <div class="d-flex flex-column  ps-2 mt-sm-5 col-lg-3 align-middle">
+                <div class="d-flex flex-column  ps-0 mt-sm-5 col-lg-3 align-middle">
                     <div class="row justify-content-center">
                         <p><span class="text-white ms-sm-5">Mapa del Sitio:</span></p>
                         <div class="col col-10 col-xxl-4 justify-content-center">
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Inicio</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="{{ route('Carteleras.index') }}"><i class="bi bi-arrow-right-circle-fill"></i> Cartelera</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="{{ route('Estacionamientos.index') }}"><i class="bi bi-arrow-right-circle-fill"></i> Estacionamiento</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Ubicación</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../"><i class="bi bi-arrow-right-circle-fill"></i> Inicio</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../cartelera/"><i class="bi bi-arrow-right-circle-fill"></i> Cartelera</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../estacionamiento/"><i class="bi bi-arrow-right-circle-fill"></i> Estacionamiento</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../ubicacion/"><i class="bi bi-arrow-right-circle-fill"></i> Ubicación</a></p>
                         </div>
                         <div class="col col-10 col-xxl-4 justify-content-center">
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Quienes Somos</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="somos/#legal"><i class="bi bi-arrow-return-right"></i> Politica de Privacidad</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="somos/#legal"><i class="bi bi-arrow-return-right"></i> Aviso Legal</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/"><i class="bi bi-arrow-right-circle-fill"></i> Quienes Somos</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/#legal"><i class="bi bi-arrow-return-right"></i> Politica de Privacidad</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/#legal"><i class="bi bi-arrow-return-right"></i> Aviso Legal</a></p>
                         </div>
                     </div>
                 </div>

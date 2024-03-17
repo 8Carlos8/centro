@@ -9,6 +9,8 @@ use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\somosController;
+use App\Http\Controllers\ubicacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +49,12 @@ Route::resource('Salas', SalaController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
 Route::resource('Usuarios', UsuarioController::class)
-    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy', 'login']);
+
+Route::get('/Usuarios/login', [UsuarioController::class, 'login'])->name('Usuarios.login');
+
+Route::resource('somos', somosController::class)
+    ->only(['index']);
+
+Route::resource('ubicacion', ubicacionController::class)
+    ->only(['index']);

@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_organizador');
+            $table->string('nombre');
+            $table->string('tipo');
+            $table->dateTime('duracion');
+            $table->binary('foto');
             $table->timestamps();
+
+            $table->foreign('id_organizador')->references('id')->on('organizadors')->onDelete('cascade');
         });
     }
 
