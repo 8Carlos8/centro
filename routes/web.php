@@ -51,6 +51,8 @@ Route::resource('Salas', SalaController::class)
 Route::resource('Usuarios', UsuarioController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy', 'login']);
 
+Route::post('/Usuarios', [UsuarioController::class, 'store'])->name('Usuarios.store');
+
 Route::get('/Usuarios/login', [UsuarioController::class, 'login'])->name('Usuarios.login');
 
 Route::resource('somos', somosController::class)

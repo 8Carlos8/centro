@@ -42,38 +42,39 @@
                                 <p class="fs-3 fw-bold"> Registrarse </p>
                             </div>
                             <div>
-                                <form action="inicio.php" class="ps-4 pe-4 mb-3">
+                                <form action="{{ route('Usuarios.store') }}" method="POST" class="ps-4 pe-4 mb-3">
+                                    @csrf
                                     <div class="mt-3 mb-3">
                                         <label for="usuario" class="form-label">Usuario</label>
-                                        <input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Nombre de Usuario">
+                                        <input type="text" class="form-control" id="username" aria-describedby="usuario" placeholder="Nombre de Usuario">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Correo Electronico</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Contraseña">
+                                        <input type="email" class="form-control" id="correo" placeholder="Correo">
                                     </div>
                                     <div class="mb-3">
                                         <label for="pass" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+                                        <input type="password" class="form-control" id="password" placeholder="Contraseña">
                                     </div>
                                     <div class="mb-3">
                                         <label for="npass" class="form-label"> Repetir Contraseña</label>
-                                        <input type="password" class="form-control" id="npass" placeholder="Contraseña">
+                                        <input type="password" class="form-control" id="password" placeholder="Contraseña">
                                     </div>
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" placeholder="Contraseña">
+                                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
                                     </div>
                                     <div class="mb-3">
                                         <label for="amat" class="form-label">Apellido Materno</label>
-                                        <input type="text" class="form-control" id="amat" placeholder="Contraseña">
+                                        <input type="text" class="form-control" id="a_paterno" placeholder="Apellido">
                                     </div>
                                     <div class="mb-3">
                                         <label for="apat" class="form-label">Apellido Paterno</label>
-                                        <input type="text" class="form-control" id="apat" placeholder="Contraseña">
+                                        <input type="text" class="form-control" id="a_materno" placeholder="Apellido">
                                     </div>
                                     <div class="mb-3">
                                         <label for="fnac" class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control" id="fnac" placeholder="Contraseña">
+                                        <input type="date" class="form-control" id="fecha_nac" placeholder="">
                                     </div>
                                     <script>
                                         document.getElementById("fnac").valueAsDate = new Date();
@@ -305,7 +306,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex w-100 mt-3 justify-content-center">
-                                        <a id="filtrocartelera" href="registro.php" class="btn mt-3">Registrarse</a>
+                                        <button type="submit" class="btn mt-3">Registrarse</button> <!-- Cambia <a> por <button type="submit"> -->
                                     </div>
                                 </form>
                             </div>

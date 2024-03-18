@@ -35,23 +35,17 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_persona' => 'require',
-            'estado' => 'require',
+            'id_persona' => '',
+            'estado' => '',
             'correo' => 'require',
             'username' => 'require',
             'password' => 'require',
-            'rol' => 'require',
+            'rol' => '',
         ]);
 
-        /*
- public function Persona()
-    {
-        return $this->belongsTo(Persona::class, 'id_persona');
-    }
-        */
-
         Usuario::create($request->all());
-        return redirect()->route('Usuarios.index')->with('success', 'Usuario creado correctamente.');
+        return view('Usuarios.index');
+        //return redirect()->route('Usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
 
     /**

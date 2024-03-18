@@ -16,9 +16,4 @@ class Usuario extends Model
     protected $dispatchesEvents = [
         'created' => UsuarioCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
