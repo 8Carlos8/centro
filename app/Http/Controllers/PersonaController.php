@@ -21,7 +21,7 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        return view('Personas.created');
+        return view('Personas.create');
     }
 
     /**
@@ -30,14 +30,16 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'require',
-            'a_paterno' => 'require',
-            'a_materno' => 'require',
-            'fecha_nac' => 'require',
-            'telefono' => 'require',
+            'id' => 'required|unique:personas',
+            'nombre' => 'required',
+            'a_paterno' => 'required',
+            'a_materno' => 'required',
+            'fecha_nac' => 'required',
+            'telefono' => 'required',
         ]);
 
         Persona::create($request->all());
+        return redirect()->route('Usuarios.store');
         return redirect()->route('Personas.index')->with('success', 'Persona creada correctamente.');
     }
 
@@ -63,11 +65,12 @@ class PersonaController extends Controller
     public function update(Request $request, Persona $persona)
     {
         $request->validate([
-            'nombre' => 'require',
-            'a_paterno' => 'require',
-            'a_materno' => 'require',
-            'fecha_nac' => 'require',
-            'telefono' => 'require',
+            'id' => 'required|unique:personas',
+            'nombre' => 'required',
+            'a_paterno' => 'required',
+            'a_materno' => 'required',
+            'fecha_nac' => 'required',
+            'telefono' => 'required',
         ]);
 
         $persona->update($request->all());

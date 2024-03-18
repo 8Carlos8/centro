@@ -11,14 +11,9 @@ class Persona extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Persona'];
+    protected $fillable = ['nombre', 'a_paterno', 'a_materno', 'fecha_nac', 'telefono'];
 
     protected $dispatchesEvents = [
         'created' => PersonaCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

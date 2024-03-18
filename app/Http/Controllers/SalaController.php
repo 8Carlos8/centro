@@ -21,7 +21,7 @@ class SalaController extends Controller
      */
     public function create()
     {
-        return view('Salas.created');
+        return view('Salas.create');
     }
 
     /**

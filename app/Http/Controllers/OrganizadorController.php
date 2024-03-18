@@ -21,7 +21,7 @@ class OrganizadorController extends Controller
      */
     public function create()
     {
-        return view('Organizadores.created');
+        return view('Organizadores.create');
     }
 
     /**

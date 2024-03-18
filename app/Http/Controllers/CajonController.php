@@ -15,7 +15,7 @@ class CajonController extends Controller
 
     public function create()
     {
-        return view('Cajones.created');
+        return view('Cajones.create');
     }
 
     public function store(Request $request)

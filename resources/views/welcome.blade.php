@@ -88,7 +88,7 @@
                                     <a class="nav-link align-middle text-white" href="{{ route('Usuarios.login') }}">Iniciar Sesion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle  text-white" href="{{ route('Usuarios.create') }}">Registrarse</a>
+                                    <a class="nav-link align-middle  text-white" href="{{ route('Personas.create') }}">Registrarse</a>
                                 </li>
                             </ul>
                         </div>

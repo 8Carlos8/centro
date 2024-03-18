@@ -21,7 +21,7 @@ class CarteleraController extends Controller
      */
     public function create()
     {
-        return view('Carteleras.created');
+        return view('Carteleras.create');
     }
 
     /**

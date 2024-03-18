@@ -42,8 +42,9 @@
                                 <p class="fs-3 fw-bold"> Registrarse </p>
                             </div>
                             <div>
-                                <form action="{{ route('Usuarios.store') }}" method="POST" class="ps-4 pe-4 mb-3">
+                                <form action="{{ route('Personas.store') }}" method="POST" class="ps-4 pe-4 mb-3">
                                     @csrf
+                                    <input type="hidden" name="id_persona" value="{{ $id_persona }}">
                                     <div class="mt-3 mb-3">
                                         <label for="usuario" class="form-label">Usuario</label>
                                         <input type="text" class="form-control" id="username" aria-describedby="usuario" placeholder="Nombre de Usuario">

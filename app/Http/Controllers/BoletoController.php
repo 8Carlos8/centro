@@ -21,7 +21,7 @@ class BoletoController extends Controller
      */
     public function create()
     {
-        return view('Boletos.created');
+        return view('Boletos.create');
     }
 
     /**

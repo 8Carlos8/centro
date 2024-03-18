@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -24,10 +25,14 @@ class UsuarioController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('Usuarios.create');
+        $id_persona = $request->input('id_persona');
+        // Aquí puedes hacer lo que necesites con id_persona, como pasarlo a la vista
+
+        return view('Usuarios.create', compact('id_persona'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,17 +40,16 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_persona' => '',
-            'estado' => '',
-            'correo' => 'require',
-            'username' => 'require',
-            'password' => 'require',
-            'rol' => '',
+            'id_persona' => 'required',
+            'estado' => 'required',
+            'correo' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'rol' => 'required',
         ]);
 
         Usuario::create($request->all());
-        return view('Usuarios.index');
-        //return redirect()->route('Usuarios.index')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('Usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
 
     /**

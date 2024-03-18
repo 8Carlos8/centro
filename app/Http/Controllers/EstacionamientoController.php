@@ -21,7 +21,7 @@ class EstacionamientoController extends Controller
      */
     public function create()
     {
-        return view('Estacionamientos.created');
+        return view('Estacionamientos.create');
     }
 
     /**

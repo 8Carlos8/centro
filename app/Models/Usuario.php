@@ -11,7 +11,7 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Usuario'];
+    protected $fillable = ['nombre', 'correo', 'password']; // Asumiendo que estos son los campos en tu tabla 'usuarios'
 
     protected $dispatchesEvents = [
         'created' => UsuarioCreated::class,
