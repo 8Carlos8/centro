@@ -30,15 +30,15 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_organizador' => 'require',
-            'nombre' => 'require',
-            'tipo' => 'require',
-            'duracion' => 'require',
-            'foto' => 'require',
+            'id_organizador' => '',
+            'nombre' => '',
+            'tipo' => '',
+            'duracion' => '',
+            'foto' => '',
         ]);
 
         Evento::create($request->all());
-        return redirect()->route('Eventos.index')->with('success', 'Evento creado correctamente.');
+        return redirect()->route('Eventos.index');
     }
 
     /**

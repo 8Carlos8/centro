@@ -30,24 +30,32 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required|unique:personas',
-            'nombre' => 'required',
-            'a_paterno' => 'required',
-            'a_materno' => 'required',
-            'fecha_nac' => 'required',
-            'telefono' => 'required',
+            'nombre' => 'required|string|max:255',
+            'a_paterno' => 'required|string',
+            'a_materno' => 'required|string',
+            'fecha_nac' => 'required|date',
+            'telefono' => 'required|string',
         ]);
 
-        Persona::create($request->all());
-        return redirect()->route('Usuarios.store');
+        $persona = new Persona();
+        $persona->nombre = $request->nombre;
+        $persona->a_paterno = $request->a_paterno;
+        $persona->a_materno = $request->a_materno;
+        $persona->fecha_nac = $request->fecha_nac;
+        $persona->telefono = $request->telefono;
+        $persona->save();
+
         return redirect()->route('Personas.index')->with('success', 'Persona creada correctamente.');
     }
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
+        $persona = Persona::findOrFail($id);
         return view('Personas.show', compact('persona'));
     }
 
@@ -56,7 +64,8 @@ class PersonaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Persona.edit', compact('persona'));
+        $persona = Persona::findOrFail($id);
+        return view('Personas.edit', compact('persona'));
     }
 
     /**
@@ -65,24 +74,26 @@ class PersonaController extends Controller
     public function update(Request $request, Persona $persona)
     {
         $request->validate([
-            'id' => 'required|unique:personas',
-            'nombre' => 'required',
-            'a_paterno' => 'required',
-            'a_materno' => 'required',
-            'fecha_nac' => 'required',
-            'telefono' => 'required',
+            'nombre' => 'required|string|max:255',
+            'a_paterno' => 'required|string|max:255',
+            'a_materno' => 'required|string|max:255',
+            'fecha_nac' => 'required|date',
+            'telefono' => 'required|string|max:255',
         ]);
 
         $persona->update($request->all());
+
         return redirect()->route('Personas.index')->with('success', 'Persona actualizada correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Persona $persona)
+    public function destroy(string $id)
     {
+        $persona = Persona::findOrFail($id);
         $persona->delete();
-        return redirect()->route('Persona.index')->with('success', 'Persona eliminada correctamente.');
+        return redirect()->route('Personas.index')->with('success', 'Persona eliminada correctamente.');
     }
 }

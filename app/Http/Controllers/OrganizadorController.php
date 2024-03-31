@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organizador;
+use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class OrganizadorController extends Controller
 {
@@ -21,7 +24,8 @@ class OrganizadorController extends Controller
      */
     public function create()
     {
-        return view('Organizadores.create');
+        $personas = Persona::all();
+        return view('Organizadores.create', ['personas' => $personas]);
     }
 
     /**
@@ -30,21 +34,29 @@ class OrganizadorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_persona' => 'require',
-            'estado' => 'require',
-            'razonsoc' => 'require',
-            'direccion' => 'require',
+            'id_persona' => 'required|numeric',
+            'estado' => 'required|numeric',
+            'razonSoc' => 'required|string',
+            'direccion' => 'required|string',
         ]);
 
-        Organizador::create($request->all());
+        $organizador = new Organizador();
+        $organizador->id_persona = $request->id_persona;
+        $organizador->estado = $request->estado;
+        $organizador->razonSoc = $request->razonSoc;
+        $organizador->direccion = $request->direccion;
+        $organizador->save(); // Guardar el nuevo organizador en la base de datos
+
         return redirect()->route('Organizadores.index')->with('success', 'Organizador creado correctamente.');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
+        $organizador = Organizador::findOrFail($id);
         return view('Organizadores.show', compact('organizador'));
     }
 
@@ -53,7 +65,9 @@ class OrganizadorController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Organizadores.edit', compact('organizador'));
+        $personas = Persona::all();
+        $organizador = Organizador::findOrFail($id);
+        return view('Organizadores.edit', ['personas' => $personas], compact('organizador'));
     }
 
     /**
@@ -62,10 +76,10 @@ class OrganizadorController extends Controller
     public function update(Request $request, Organizador $organizador)
     {
         $request->validate([
-            'id_persona' => 'require',
-            'estado' => 'require',
-            'razonsoc' => 'require',
-            'direccion' => 'require',
+            'id_persona' => 'required',
+            'estado' => 'required',
+            'razonSoc' => 'required',
+            'direccion' => 'required',
         ]);
 
         $organizador->update($request->all());
@@ -75,8 +89,9 @@ class OrganizadorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Organizador $organizador)
+    public function destroy(string $id)
     {
+        $organizador = Organizador::findOrFail($id);
         $organizador->delete();
         return redirect()->route('Organizadores.index')->with('success', 'Organizador eliminado correctamente.');
     }

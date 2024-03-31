@@ -39,11 +39,15 @@ Route::resource('Estacionamientos', EstacionamientoController::class)
 Route::resource('Eventos', EventoController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
+Route::put('/Organizadores/{organizador}', [OrganizadorController::class, 'update'])->name('Organizadores.update');
+
 Route::resource('Organizadores', OrganizadorController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
+Route::put('/Personas/{persona}', [PersonaController::class, 'update'])->name('Personas.update');
+
 Route::resource('Personas', PersonaController::class)
-    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
 Route::resource('Salas', SalaController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
