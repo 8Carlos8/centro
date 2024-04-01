@@ -61,7 +61,7 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <label class="dropdown-item">Usuario Activo: <?= $ua->USERNAME ?></label>
+                                    <label class="dropdown-item">Usuario Activo: </label>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="../../logout.php">Cerrar Sesión</a>
@@ -76,7 +76,7 @@
                             <i class="bi bi-person-fill"></i>
                         </button>
                         <ul id="useraccesslist" class="dropdown-menu">
-                            <li><label class="dropdown-item">Usuario Activo: <?= $ua->USERNAME ?></label></li>
+                            <li><label class="dropdown-item">Usuario Activo: </label></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

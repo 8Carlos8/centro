@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Persona;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -35,6 +36,12 @@ class PersonaController extends Controller
             'a_materno' => 'required|string',
             'fecha_nac' => 'required|date',
             'telefono' => 'required|string',
+            //Validación de los datos de usuarios
+            'correo' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'estado' => 'required',
+            'rol' => 'required',
         ]);
 
         $persona = new Persona();
@@ -44,6 +51,16 @@ class PersonaController extends Controller
         $persona->fecha_nac = $request->fecha_nac;
         $persona->telefono = $request->telefono;
         $persona->save();
+
+        //Creación del usuario
+        $usuario = new Usuario();
+        $usuario->id_persona = $persona->id;
+        $usuario->estado = $request->estado;
+        $usuario->correo = $request->correo;
+        $usuario->username = $request->username;
+        $usuario->password = $request->password;
+        $usuario->rol = $request->rol;
+        $usuario->save();
 
         return redirect()->route('Personas.index')->with('success', 'Persona creada correctamente.');
     }
@@ -79,10 +96,22 @@ class PersonaController extends Controller
             'a_materno' => 'required|string|max:255',
             'fecha_nac' => 'required|date',
             'telefono' => 'required|string|max:255',
+            //Actualizar datos del usuario
+            'correo' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'estado' => 'required',
+            'rol' => 'required',
         ]);
 
         $persona->update($request->all());
-
+        $usuario = $persona->usuario;
+        $usuario->correo = $request->correo;
+        $usuario->username = $request->username;
+        $usuario->password = $request->password;
+        $usuario->rol = $request->rol;
+        $usuario->estado = $request->estado;
+        $usuario->save();
         return redirect()->route('Personas.index')->with('success', 'Persona actualizada correctamente.');
     }
 

@@ -249,6 +249,26 @@
                 <input type="text" class="form-control w-50" id="telefono" name="telefono" placeholder="Telefono (10 Digitos)">
             </div>
         </div>
+
+        <div class="mt-3 mb-3">
+            <label for="usuario" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="usuario" placeholder="Nombre de Usuario">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electronico</label>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo">
+        </div>
+        <div class="mb-3">
+            <label for="pass" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+        </div>
+        <div class="mb-3">
+            <label for="npass" class="form-label"> Repetir Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Contraseña">
+        </div>
+
+        <input type="hidden" id="rol" name="rol" value="1">
+        <input type="hidden" id="estado" name="estado" value="1">
         <div class="d-flex w-100 mt-3 justify-content-center">
             <button type="submit" class="btn mt-3">Registrarse</button> <!-- Cambia <a> por <button type="submit"> -->
         </div>
