@@ -11,14 +11,13 @@ class Sala extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Sala'];
+    protected $fillable = [
+        'estado',
+        'nombre',
+        'asientos'
+    ];
 
     protected $dispatchesEvents = [
         'created' => SalaCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

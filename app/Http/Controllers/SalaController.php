@@ -13,7 +13,7 @@ class SalaController extends Controller
     public function index()
     {
         $salas = Sala::all();
-        return view('Sala.index', compact('salas'));
+        return view('Salas.index', compact('salas'));
     }
 
     /**
@@ -30,12 +30,16 @@ class SalaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'estado' => 'require',
-            'nombre' => 'require',
-            'asientos' => 'require',
+            'estado' => 'required',
+            'nombre' => 'required',
+            'asientos' => 'required',
         ]);
 
-        Sala::create($request->all());
+        $sala = new Sala();
+        $sala->estado = $request->estado;
+        $sala->nombre = $request->nombre;
+        $sala->asientos = $request->asientos;
+        $sala->save();
         return redirect()->route('Salas.index')->with('success', 'Sala creada correctamente.');
     }
 
@@ -44,6 +48,7 @@ class SalaController extends Controller
      */
     public function show(string $id)
     {
+        $sala = Sala::findOrFail($id);
         return view('Salas.show', compact('sala'));
     }
 
@@ -52,7 +57,8 @@ class SalaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Sala.edit', compact('sala'));
+        $sala = Sala::findOrFail($id);
+        return view('Salas.edit', compact('sala'));
     }
 
     /**
@@ -61,9 +67,9 @@ class SalaController extends Controller
     public function update(Request $request, Sala $sala)
     {
         $request->validate([
-            'estado' => 'require',
-            'nombre' => 'require',
-            'asientos' => 'require',
+            'estado' => 'required',
+            'nombre' => 'required',
+            'asientos' => 'required',
         ]);
 
         $sala->update($request->all());
@@ -73,8 +79,9 @@ class SalaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sala $sala)
+    public function destroy(string $id)
     {
+        $sala = Sala::findOrFail($id);
         $sala->delete();
         return redirect()->route('Salas.index')->with('success', 'Sala elimanda correctamente.');
     }

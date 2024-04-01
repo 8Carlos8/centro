@@ -1,14 +1,8 @@
 <div class="container mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4 text-gray-900">Detalle del evento</h1>
 
-    @if (session('status'))
-    <div class="bg-green-500 text-white p-4 mb-4 rounded-lg">
-        {{ session('status') }}
-    </div>
-    @endif
-
     <div class="mb-4">
-        <a href="{{ route('eventos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al listado</a>
+        <a href="{{ route('Eventos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al listado</a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -17,20 +11,24 @@
             <p>{{ $evento->id }}</p>
         </div>
         <div>
-            <label for="id_sala" class="form-label text-gray-700">ID de la sala</label>
-            <p>{{ $evento->id_sala }}</p>
+            <label for="id_sala" class="form-label text-gray-700">ID del Organizador</label>
+            <p>{{ $evento->id_organizador }}</p>
         </div>
         <div>
-            <label for="estado" class="form-label text-gray-700">Estado del evento</label>
-            <p>{{ $evento->estado }}</p>
+            <label for="estado" class="form-label text-gray-700">Nombre del evento</label>
+            <p>{{ $evento->nombre }}</p>
         </div>
         <div>
-            <label for="inicio" class="form-label text-gray-700">Fecha de inicio</label>
-            <p>{{ $evento->inicio }}</p>
+            <label for="inicio" class="form-label text-gray-700">Tipo de evento</label>
+            <p>{{ $evento->tipo }}</p>
         </div>
         <div>
-            <label for="fin" class="form-label text-gray-700">Fecha de finalización</label>
-            <p>{{ $evento->fin }}</p>
+            <label for="fin" class="form-label text-gray-700">Duracion del Evento</label>
+            <p>{{ $evento->duracion }}</p>
+        </div>
+        <div>
+            <label for="fin" class="form-label text-gray-700">Foto del Evento</label>
+            <p>{{ $evento->foto }}</p>
         </div>
     </div>
 </div>

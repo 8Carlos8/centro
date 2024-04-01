@@ -11,14 +11,13 @@ class Cajon extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Cajon'];
+    protected $fillable = [
+        'zona',
+        'cajon',
+        'estado',
+    ];
 
     protected $dispatchesEvents = [
         'created' => CajonCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

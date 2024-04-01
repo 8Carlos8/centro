@@ -7,27 +7,27 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-            <label for="id_evento" class="form-label text-gray-700">ID de la Persona</label>
+            <label for="id_persona" class="form-label text-gray-700">ID de la Persona</label>
             <p>{{ $persona->id }}</p>
         </div>
         <div>
-            <label for="id_sala" class="form-label text-gray-700">Nombre</label>
+            <label for="nombre" class="form-label text-gray-700">Nombre</label>
             <p>{{ $persona->nombre }}</p>
         </div>
         <div>
-            <label for="estado" class="form-label text-gray-700">Apellido Paterno</label>
+            <label for="a_paterno" class="form-label text-gray-700">Apellido Paterno</label>
             <p>{{ $persona->a_paterno }}</p>
         </div>
         <div>
-            <label for="inicio" class="form-label text-gray-700">Apellido Materno</label>
+            <label for="a_materno" class="form-label text-gray-700">Apellido Materno</label>
             <p>{{ $persona->a_materno }}</p>
         </div>
         <div>
-            <label for="fin" class="form-label text-gray-700">Fecha de Nacimiento</label>
+            <label for="fecha_nac" class="form-label text-gray-700">Fecha de Nacimiento</label>
             <p>{{ $persona->fecha_nac }}</p>
         </div>
         <div>
-            <label for="fin" class="form-label text-gray-700">Telefono</label>
+            <label for="telefono" class="form-label text-gray-700">Telefono</label>
             <p>{{ $persona->telefono }}</p>
         </div>
     </div>

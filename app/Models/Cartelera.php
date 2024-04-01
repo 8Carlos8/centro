@@ -12,14 +12,25 @@ class Cartelera extends Model
     use HasFactory;
 
 
-    protected $fillable = ['Cartelera'];
+    protected $fillable = [
+        'id_evento',
+        'id_sala',
+        'estado',
+        'inicio',
+        'fin',
+    ];
+
+    protected function Evento()
+    {
+        return $this->belongsTo(Evento::class, 'id_evento');
+    }
+
+    protected function Sala()
+    {
+        return $this->belongsTo(Sala::class, 'id_sala');
+    }
 
     protected $dispatchesEvents = [
         'created' => CarteleraCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

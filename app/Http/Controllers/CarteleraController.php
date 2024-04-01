@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cartelera;
+use App\Models\Evento;
+use App\Models\Sala;
 use Illuminate\Http\Request;
 
 class CarteleraController extends Controller
@@ -21,7 +23,9 @@ class CarteleraController extends Controller
      */
     public function create()
     {
-        return view('Carteleras.create');
+        $eventos = Evento::all();
+        $salas = Sala::all();
+        return view('Carteleras.create', ['eventos' => $eventos], ['salas' => $salas]);
     }
 
     /**
@@ -37,19 +41,13 @@ class CarteleraController extends Controller
             'fin' => 'required',
         ]);
 
-        /*
-public function Evento()
-    {
-        return $this->belongsTo(Evento::class, 'id_evento');
-    }
-
-    public function Sala()
-    {
-        return $this->belongsTo(Sala::class, 'id_sala');
-    }
-        */
-
-        Cartelera::create($request->all());
+        $cartelera = new Cartelera();
+        $cartelera->id_evento = $request->id_evento;
+        $cartelera->id_sala = $request->id_sala;
+        $cartelera->estado = $request->estado;
+        $cartelera->inicio = $request->inicio;
+        $cartelera->fin = $request->fin;
+        $cartelera->save();
         return redirect()->route('Carteleras.index')->with('success', 'Cartelera creada correctamente.');
     }
 
@@ -58,6 +56,7 @@ public function Evento()
      */
     public function show(string $id)
     {
+        $cartelera = Cartelera::findOrFail($id);
         return view('Carteleras.show', compact('cartelera'));
     }
 
@@ -66,7 +65,10 @@ public function Evento()
      */
     public function edit(string $id)
     {
-        return view('Carteleras.edit', compact('cartelera'));
+        $eventos = Evento::all();
+        $salas = Sala::all();
+        $cartelera = Cartelera::findOrFail($id);
+        return view('Carteleras.edit', ['eventos' => $eventos, 'salas' => $salas], compact('cartelera'));
     }
 
     /**
@@ -84,16 +86,16 @@ public function Evento()
 
         $cartelera->update($request->all());
 
-        return redirect()->route('Cartelera.index')->with('success', 'Cartelera actualizado correctamente.');
+        return redirect()->route('Carteleras.index')->with('success', 'Cartelera actualizado correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cartelera $cartelera)
+    public function destroy(string $id)
     {
+        $cartelera = Cartelera::findOrFail($id);
         $cartelera->delete();
-
         return redirect()->route('Carteleras.index')->with('success', 'Cartelera eliminado correctamente.');
     }
 }

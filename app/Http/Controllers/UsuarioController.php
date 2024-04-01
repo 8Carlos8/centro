@@ -27,10 +27,8 @@ class UsuarioController extends Controller
      */
     public function create(Request $request)
     {
-        $id_persona = $request->input('id_persona');
-        // Aquí puedes hacer lo que necesites con id_persona, como pasarlo a la vista
-
-        return view('Usuarios.create', compact('id_persona'));
+        $personas = Persona::all();
+        return view('Usuarios.create', ['personas' => $personas]);
     }
 
 
@@ -48,7 +46,14 @@ class UsuarioController extends Controller
             'rol' => 'required',
         ]);
 
-        Usuario::create($request->all());
+        $usuario = new Usuario();
+        $usuario->id_persona = $request->id_persona;
+        $usuario->estado = $request->estado;
+        $usuario->correo = $request->correo;
+        $usuario->username = $request->username;
+        $usuario->password = $request->password;
+        $usuario->rol = $request->rol;
+        $usuario->save();
         return redirect()->route('Usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
 
@@ -57,6 +62,7 @@ class UsuarioController extends Controller
      */
     public function show(string $id)
     {
+        $usuario = Usuario::findOrFail($id);
         return view('Usuarios.show', compact('usuario'));
     }
 
@@ -65,7 +71,9 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Usuarios.edit', compact('usuario'));
+        $personas = Persona::all();
+        $usuario = Usuario::findOrFail($id);
+        return view('Usuarios.edit', ['personas' => $personas], compact('usuario'));
     }
 
     /**
@@ -89,8 +97,9 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(string $id)
     {
+        $usuario = Usuario::findOrFail($id);
         $usuario->delete();
         return redirect()->route('Usuarios.index')->with('success', 'Usuario elimado correctamente.');
     }

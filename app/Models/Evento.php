@@ -11,14 +11,20 @@ class Evento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Evento'];
+    protected $fillable = [
+        'id_organizador',
+        'nombre',
+        'tipo',
+        'duracion',
+        'foto',
+    ];
+
+    protected function Organizador()
+    {
+        return $this->belongsTo(Organizador::class, 'id_organizador');
+    }
 
     protected $dispatchesEvents = [
         'created' => EventoCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

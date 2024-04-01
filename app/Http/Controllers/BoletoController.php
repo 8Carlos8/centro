@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Boleto;
+use App\Models\Usuario;
+use App\Models\Cartelera;
 use Illuminate\Http\Request;
 
 class BoletoController extends Controller
@@ -21,7 +23,9 @@ class BoletoController extends Controller
      */
     public function create()
     {
-        return view('Boletos.create');
+        $usuarios = Usuario::all();
+        $carteleras = Cartelera::all();
+        return view('Boletos.create', ['usuarios' => $usuarios], ['carteleras' => $carteleras]);
     }
 
     /**
@@ -30,14 +34,16 @@ class BoletoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_persona' => 'require',
-            'id_evento' => 'require',
-            'id_cajon' => 'require',
-            'lugaresAp' => 'require',
-            'fecha' => 'require',
+            'id_usuario' => 'require',
+            'id_cartelera' => 'require',
+            'noBoletos' => 'require',
         ]);
 
-        Boleto::create($request->all());
+        $boleto = new Boleto();
+        $boleto->id_usuario = $request->id_usuario;
+        $boleto->id_cartelera = $request->id_cartelera;
+        $boleto->noBoletos = $request->noBoletos;
+        $boleto->save();
         return redirect()->route('Boletos.index')->with('success', 'Boleto creado correctamente');
     }
 
@@ -46,6 +52,7 @@ class BoletoController extends Controller
      */
     public function show(string $id)
     {
+        $boleto = Boleto::findOrFail($id);
         return view('Boletos.show', compact('boleto'));
     }
 
@@ -54,7 +61,10 @@ class BoletoController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Boletos.edit', compact('boleto'));
+        $usuarios = Usuario::all();
+        $carteleras = Cartelera::all();
+        $boleto = Boleto::findOrFail($id);
+        return view('Boletos.edit', ['usuarios' => $usuarios, 'carteleras' => $carteleras], compact('boleto'));
     }
 
     /**
@@ -63,11 +73,9 @@ class BoletoController extends Controller
     public function update(Request $request, Boleto $boleto)
     {
         $request->validate([
-            'id_persona' => 'require',
-            'id_evento' => 'require',
-            'id_cajon' => 'require',
-            'lugaresAp' => 'require',
-            'fecha' => 'require',
+            'id_usuario' => 'require',
+            'id_cartelera' => 'require',
+            'noBoletos' => 'require',
         ]);
 
         Boleto::update($request->all());
@@ -77,8 +85,9 @@ class BoletoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Boleto $boleto)
+    public function destroy(string $id)
     {
+        $boleto = Boleto::findOrFail($id);
         $boleto->delete();
         return redirect()->route('Boletos.index')->with('success', 'Boleto eliminado correctamente.');
     }

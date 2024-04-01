@@ -11,14 +11,23 @@ class Boleto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Boleto'];
+    protected $fillable = [
+        'id_usuario',
+        'id_cartelera',
+        'noBoletos',
+    ];
+
+    protected function Usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'id_usuario');
+    }
+
+    protected function Cartelera()
+    {
+        return $this->belongsTo(Cartelera::class, 'id_cartelera');
+    }
 
     protected $dispatchesEvents = [
         'created' => BoletoCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Organizador;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -21,7 +23,8 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('Eventos.create');
+        $organizadores = Organizador::all();
+        return view('Eventos.create', ['organizadores' => $organizadores]);
     }
 
     /**
@@ -30,14 +33,20 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_organizador' => '',
-            'nombre' => '',
-            'tipo' => '',
-            'duracion' => '',
-            'foto' => '',
+            'id_organizador' => 'required',
+            'nombre' => 'required',
+            'tipo' => 'required',
+            'duracion' => 'required',
+            'foto' => 'required',
         ]);
 
-        Evento::create($request->all());
+        $evento = new Evento();
+        $evento->id_organizador = $request->id_organizador;
+        $evento->nombre = $request->nombre;
+        $evento->tipo = $request->tipo;
+        $evento->duracion = $request->duracion;
+        $evento->foto = $request->foto;
+        $evento->save();
         return redirect()->route('Eventos.index');
     }
 
@@ -46,6 +55,7 @@ class EventoController extends Controller
      */
     public function show(string $id)
     {
+        $evento = Evento::findOrFail($id);
         return view('Eventos.show', compact('evento'));
     }
 
@@ -54,7 +64,9 @@ class EventoController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Eventos.edit', compact('evento'));
+        $organizadores = Organizador::all();
+        $evento = Evento::findOrFail($id);
+        return view('Eventos.edit', ['organizadores' => $organizadores], compact('evento'));
     }
 
     /**
@@ -63,11 +75,11 @@ class EventoController extends Controller
     public function update(Request $request, Evento $evento)
     {
         $request->validate([
-            'id_organizador' => 'require',
-            'nombre' => 'require',
-            'tipo' => 'require',
-            'duracion' => 'require',
-            'foto' => 'require',
+            'id_organizador' => 'required',
+            'nombre' => 'required',
+            'tipo' => 'required',
+            'duracion' => 'required',
+            'foto' => 'required',
         ]);
 
         $evento->update($request->all());
@@ -77,8 +89,9 @@ class EventoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evento $evento)
+    public function destroy(string $id)
     {
+        $evento = Evento::findOrFail($id);
         $evento->delete();
         return redirect()->route('Eventos.index')->with('success', 'Evento eliminado correctamente.');
     }

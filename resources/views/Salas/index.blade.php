@@ -18,13 +18,14 @@
         <tbody>
             @foreach ($salas as $sala)
             <tr>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $evento->id }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $evento->estado }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $evento->nombre }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $evento->asientos }}</td>
+                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $sala->id }}</td>
+                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $sala->estado }}</td>
+                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $sala->nombre }}</td>
+                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $sala->asientos }}</td>
                 <td class="border-gray-300 px-4 py-2 text-gray-700">
-                    <a href="{{ route('eventos.edit', $evento) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
-                    <form action="{{ route('eventos.destroy', $evento) }}" method="POST" class="inline-block">
+                    <a href="{{ route('Salas.edit', $sala->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
+                    <a href="{{ route('Salas.show', $sala->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
+                    <form action="{{ route('Salas.destroy', $sala) }}" method="POST" class="inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>

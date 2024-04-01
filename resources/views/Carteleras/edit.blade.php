@@ -1,9 +1,9 @@
 <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4 text-gray-900">Crear nueva Cartelera</h1>
+    <h1 class="text-3xl font-bold mb-4 text-gray-900">Actualizar la Cartelera</h1>
 
-    <form action="{{ route('Carteleras.store') }}" method="POST">
+    <form action="{{ route('Carteleras.update', $cartelera->id) }}" method="POST">
         @csrf
-
+        @method('PUT')
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="id_evento">ID Evento</label>
             <select class="form-select" id="id_evento" name="id_evento">
@@ -26,17 +26,17 @@
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="estado">Estado</label>
-            <input type="text" id="estado" name="estado" placeholder="Estado de la Cartelera" class="form-input">
+            <input type="text" id="estado" name="estado" placeholder="Estado de la Cartelera" class="form-input" value="{{ $cartelera->estado }}">
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="inicio">Inicio</label>
-            <input type="date" id="inicio" name="inicio" class="form-input">
+            <input type="date" id="inicio" name="inicio" class="form-input" value="{{ $cartelera->inicio }}">
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fin">Fin</label>
-            <input type="date" id="fin" name="fin" class="form-input">
+            <input type="date" id="fin" name="fin" class="form-input" value="{{ $cartelera->fin }}">
         </div>
 
         <div class="mb-4">

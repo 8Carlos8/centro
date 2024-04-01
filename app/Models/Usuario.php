@@ -11,7 +11,19 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'correo', 'password']; // Asumiendo que estos son los campos en tu tabla 'usuarios'
+    protected $fillable = [
+        'id_persona',
+        'estado',
+        'correo',
+        'username',
+        'password',
+        'rol',
+    ];
+
+    protected function Persona()
+    {
+        return $this->belongsTo(Persona::class, 'id_persona');
+    }
 
     protected $dispatchesEvents = [
         'created' => UsuarioCreated::class,

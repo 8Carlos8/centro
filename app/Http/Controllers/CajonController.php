@@ -26,17 +26,23 @@ class CajonController extends Controller
             'estado' => 'require',
         ]);
 
-        Cajon::create($request->all());
+        $cajon = new Cajon();
+        $cajon->zona = $request->zona;
+        $cajon->cajon = $request->cajon;
+        $cajon->estado = $request->estado;
+        $cajon->save();
         return redirect()->route('Cajones.index')->with('success', 'Cajon creado correctamente');
     }
 
-    public function show()
+    public function show(string $id)
     {
+        $cajon = Cajon::findOrFail($id);
         return view('Cajones.show', compact('cajon'));
     }
 
     public function edit(string $id)
     {
+        $cajon = Cajon::findOrFail($id);
         return view('Cajones.edit', compact('cajon'));
     }
 
@@ -48,12 +54,13 @@ class CajonController extends Controller
             'estado' => 'require',
         ]);
 
-        Cajon::update($request->all());
+        $cajon->update($request->all());
         return redirect()->route('Cajones.index')->with('success', 'Cajon actualizado correctamente');
     }
 
-    public function destroy(Cajon $cajon)
+    public function destroy(string $id)
     {
+        $cajon = Cajon::findOrFail($id);
         $cajon->delete();
         return redirect()->route('Cajones.index')->with('success', 'Cajon eliminado correctamente');
     }
