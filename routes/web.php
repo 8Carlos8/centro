@@ -9,6 +9,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\SalaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\somosController;
 use App\Http\Controllers\ubicacionController;
@@ -28,55 +29,40 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::put('/Carteleras/{cartelera}', [CarteleraController::class, 'update'])->name('Carteleras.update');
+// Agrupar rutas que requieren autenticación
+Route::middleware(['auth'])->group(function () {
+    Route::put('/Carteleras/{cartelera}', [CarteleraController::class, 'update'])->name('Carteleras.update');
+    Route::resource('Carteleras', CarteleraController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::resource('Carteleras', CarteleraController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    Route::put('/Boletos/{boleto}', [BoletoController::class, 'update'])->name('Boletos.update');
+    Route::resource('Boletos', BoletoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::put('/Boletos/{boleto}', [BoletoController::class, 'update'])->name('Boletos.update');
+    Route::put('/Cajones/{cajon}', [CajonController::class, 'update'])->name('Cajones.update');
+    Route::resource('Cajones', CajonController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::resource('Boletos', BoletoController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    Route::resource('Estacionamientos', EstacionamientoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::put('/Cajones/{cajon}', [CajonController::class, 'update'])->name('Cajones.update');
+    Route::put('/Eventos/{evento}', [EventoController::class, 'update'])->name('Eventos.update');
+    Route::resource('Eventos', EventoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::resource('Cajones', CajonController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    Route::put('/Organizadores/{organizador}', [OrganizadorController::class, 'update'])->name('Organizadores.update');
+    Route::resource('Organizadores', OrganizadorController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::resource('Estacionamientos', EstacionamientoController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    Route::put('/Personas/{persona}', [PersonaController::class, 'update'])->name('Personas.update');
+    Route::get('/Personas/inicio', [PersonaController::class, 'inicio'])->name('Personas.inicio'); // Define la ruta 'inicio' y asigna un nombre
+    Route::resource('Personas', PersonaController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-Route::put('/Eventos/{evento}', [EventoController::class, 'update'])->name('Eventos.update');
+    Route::put('/Salas/{sala}', [SalaController::class, 'update'])->name('Salas.update');
+    Route::resource('Salas', SalaController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+});
 
-Route::resource('Eventos', EventoController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-
-Route::put('/Organizadores/{organizador}', [OrganizadorController::class, 'update'])->name('Organizadores.update');
-
-Route::resource('Organizadores', OrganizadorController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-
-Route::put('/Personas/{persona}', [PersonaController::class, 'update'])->name('Personas.update');
-
-Route::resource('Personas', PersonaController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-
-Route::put('/Salas/{sala}', [SalaController::class, 'update'])->name('Salas.update');
-
-Route::resource('Salas', SalaController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-
-Route::put('/Usuarios/{usuario}', [UsuarioController::class, 'update'])->name('Usuarios.update');
-
-Route::resource('Usuarios', UsuarioController::class)
-    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'login']);
-
+// Rutas de autenticación
+Route::get('/Usuarios/login', [AuthController::class, 'showLoginForm'])->name('Usuarios.login');
+Route::post('/Usuarios/login', [AuthController::class, 'login'])->name('login');
+Route::post('/Usuarios/logout', [AuthController::class, 'logout'])->name('logout'); // Ruta para cerrar sesión
+Route::resource('Usuarios', UsuarioController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'login', 'inicio']);
 Route::post('/Usuarios', [UsuarioController::class, 'store'])->name('Usuarios.store');
 
-Route::get('/Usuarios/login', [UsuarioController::class, 'login'])->name('Usuarios.login');
-
-Route::resource('somos', somosController::class)
-    ->only(['index']);
-
-Route::resource('ubicacion', ubicacionController::class)
-    ->only(['index']);
+// Rutas públicas
+Route::resource('somos', somosController::class)->only(['index']);
+Route::resource('ubicacion', ubicacionController::class)->only(['index']);

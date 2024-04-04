@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Persona;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash; // Asegúrate de importar la clase Hash
 
 class PersonaController extends Controller
 {
@@ -23,6 +24,11 @@ class PersonaController extends Controller
     public function create()
     {
         return view('Personas.create');
+    }
+
+    public function inicio()
+    {
+        return view('Personas.inicio');
     }
 
     /**
@@ -58,7 +64,7 @@ class PersonaController extends Controller
         $usuario->estado = $request->estado;
         $usuario->correo = $request->correo;
         $usuario->username = $request->username;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make($request->password); // Encriptar la contraseña antes de guardarla
         $usuario->rol = $request->rol;
         $usuario->save();
 
@@ -108,7 +114,7 @@ class PersonaController extends Controller
         $usuario = $persona->usuario;
         $usuario->correo = $request->correo;
         $usuario->username = $request->username;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make($request->password); // Encriptar la nueva contraseña antes de guardarla
         $usuario->rol = $request->rol;
         $usuario->estado = $request->estado;
         $usuario->save();

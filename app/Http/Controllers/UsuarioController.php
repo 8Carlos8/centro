@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash; // Asegúrate de importar la clase Hash
 
 class UsuarioController extends Controller
 {
@@ -14,12 +15,13 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = Usuario::all();
-        return view('Usuarios.index', compact('usuarios'));
+        $personas = Persona::all();
+        return view('Usuarios.index', ['personas' => $personas], compact('usuarios'));
     }
 
-    public function login()
+    public function inicio()
     {
-        return view('Usuarios.login');
+        return view('Usuarios.inicio');
     }
 
     /**

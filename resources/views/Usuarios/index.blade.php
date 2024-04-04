@@ -1,3 +1,16 @@
+@auth
+<!-- Esto se mostrará solo si hay una sesión activa -->
+<p>Bienvenido, {{ auth()->user()->username }}</p>
+@else
+<!-- Esto se mostrará si no hay una sesión activa -->
+<p>Por favor, inicia sesión para acceder a esta página.</p>
+@endauth
+
+
+@guest
+<!-- Esto se mostrará si no hay una sesión activa -->
+<p>Por favor, inicia sesión para acceder a esta página.</p>
+@endguest
 <html>
 
 <head>
@@ -119,38 +132,38 @@
                     <tr>
                         <?php
                         foreach ($personas as $persona) {
-                            if ($usuario->ID_PERSONA == $persona->ID) {
+                            if ($usuario->id_persona == $persona->id) {
                         ?>
-                                <td><span title="<?= $persona->NOMBRE ?>"><?= $persona->NOMBRE ?></span></td>
-                                <td><span title="<?= $persona->A_PATERNO ?>"><?= $persona->A_PATERNO ?></span></td>
-                                <td><span title="<?= $persona->A_MATERNO ?>"><?= $persona->A_MATERNO ?></span></td>
-                                <td><span title="<?= $persona->FECHA_NAC ?>"><?= $persona->FECHA_NAC ?></span></td>
-                                <td><span title="<?= $persona->TELEFONO ?>"><?= $persona->TELEFONO ?></span></td>
+                                <td><span title="<?= $persona->nombre ?>"><?= $persona->nombre ?></span></td>
+                                <td><span title="<?= $persona->a_paterno ?>"><?= $persona->a_paterno ?></span></td>
+                                <td><span title="<?= $persona->a_materno ?>"><?= $persona->a_materno ?></span></td>
+                                <td><span title="<?= $persona->fecha_nac ?>"><?= $persona->fecha_nac ?></span></td>
+                                <td><span title="<?= $persona->telefono ?>"><?= $persona->telefono ?></span></td>
                         <?php
                             }
                         }
                         ?>
-                        <td><span title="<?= $usuario->USERNAME ?>"><?= $usuario->USERNAME ?></span></td>
-                        <td><span title="<?= $usuario->CORREO ?>"><?= $usuario->CORREO ?></span></td>
-                        <td><span title="<?= $usuario->ROL ?>">
-                                <?= ($usuario->ROL == 0) ? "Inactivo" : "" ?>
-                                <?= ($usuario->ROL == 1) ? "Usuario General" : "" ?>
-                                <?= ($usuario->ROL == 2) ? "Organizador" : "" ?>
-                                <?= ($usuario->ROL == 3) ? "Secretaria" : "" ?>
-                                <?= ($usuario->ROL == 4) ? "Jefe" : "" ?>
-                                <?= ($usuario->ROL == 5) ? "Administrador" : "" ?>
+                        <td><span title="<?= $usuario->username ?>"><?= $usuario->username ?></span></td>
+                        <td><span title="<?= $usuario->correo ?>"><?= $usuario->correo ?></span></td>
+                        <td><span title="<?= $usuario->rol ?>">
+                                <?= ($usuario->rol == 0) ? "Inactivo" : "" ?>
+                                <?= ($usuario->rol == 1) ? "Usuario General" : "" ?>
+                                <?= ($usuario->rol == 2) ? "Organizador" : "" ?>
+                                <?= ($usuario->rol == 3) ? "Secretaria" : "" ?>
+                                <?= ($usuario->rol == 4) ? "Jefe" : "" ?>
+                                <?= ($usuario->rol == 5) ? "Administrador" : "" ?>
                             </span></td>
-                        <td><span title="<?= $usuario->ESTADO ?>">
-                                <?= ($usuario->ESTADO == 0) ? "Desconocido" : "" ?>
-                                <?= ($usuario->ESTADO == 1) ? "Activo" : "" ?>
-                                <?= ($usuario->ESTADO == 2) ? "Deudor" : "" ?>
-                                <?= ($usuario->ESTADO == 3) ? "En Contrato" : "" ?>
-                                <?= ($usuario->ESTADO == 4) ? "Cancelado" : "" ?>
-                                <?= ($usuario->ESTADO == 5) ? "Terminado" : "" ?>
+                        <td><span title="<?= $usuario->estado ?>">
+                                <?= ($usuario->estado == 0) ? "Desconocido" : "" ?>
+                                <?= ($usuario->estado == 1) ? "Activo" : "" ?>
+                                <?= ($usuario->estado == 2) ? "Deudor" : "" ?>
+                                <?= ($usuario->estado == 3) ? "En Contrato" : "" ?>
+                                <?= ($usuario->estado == 4) ? "Cancelado" : "" ?>
+                                <?= ($usuario->estado == 5) ? "Terminado" : "" ?>
                             </span></td>
-                        <td align="center"><a class="btn btn-primary" href="visualizar.php?id=<?= $usuario->ID ?>&pid=<?= $usuario->ID_PERSONA ?>" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                            <a class="btn btn-warning" href="modificar.php?id=<?= $usuario->ID ?>&pid=<?= $usuario->ID_PERSONA ?>" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                            <a class="btn btn-danger" href="" onClick="confirma('eliminar.php?id=<?= $usuario->ID ?>&pid=<?= $usuario->ID_PERSONA ?>'); return false;" title='Eliminar usuario'><i class="bi bi-trash3"></i>&nbsp;Eliminar Usuario</a>
+                        <td align="center"><a class="btn btn-primary" href="visualizar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                            <a class="btn btn-warning" href="modificar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
+                            <a class="btn btn-danger" href="" onClick="confirma('eliminar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>'); return false;" title='Eliminar usuario'><i class="bi bi-trash3"></i>&nbsp;Eliminar Usuario</a>
                         </td>
                     </tr>
                 <?php

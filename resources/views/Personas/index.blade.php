@@ -4,6 +4,20 @@
     <div class="mb-4">
         <a href="{{ route('Personas.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nuevo evento</a>
     </div>
+    @auth
+    <!-- Esto se mostrará solo si hay una sesión activa -->
+    <p>Bienvenido, {{ auth()->user()->username }}</p>
+    @else
+    <!-- Esto se mostrará si no hay una sesión activa -->
+    <p>Por favor, inicia sesión para acceder a esta página.</p>
+    @endauth
+
+
+    @guest
+    <!-- Esto se mostrará si no hay una sesión activa -->
+    <p>Por favor, inicia sesión para acceder a esta página.</p>
+    @endguest
+
 
     @if (session('status'))
     <div class="bg-green-500 text-white p-4 mb-4 rounded-lg">
@@ -46,4 +60,12 @@
             @endforeach
         </tbody>
     </table>
+
+    @if (Auth::check())
+    <form action="{{ route('logout') }}" method="POST" class="inline-block">
+        @csrf
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+    </form>
+    @endif
+
 </div>

@@ -6,10 +6,12 @@ use App\Events\UsuarioCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Auth\Authenticatable;
+
 
 class Usuario extends Model
 {
-    use HasFactory;
+    use HasFactory, Authenticatable;
 
     protected $fillable = [
         'id_persona',
