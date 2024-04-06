@@ -21,9 +21,9 @@ class CajonController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'zona' => 'require',
-            'cajon' => 'require',
-            'estado' => 'require',
+            'zona' => 'required',
+            'cajon' => 'required',
+            'estado' => 'required',
         ]);
 
         $cajon = new Cajon();
@@ -49,9 +49,9 @@ class CajonController extends Controller
     public function update(Request $request, Cajon $cajon)
     {
         $request->validate([
-            'zona' => 'require',
-            'cajon' => 'require',
-            'estado' => 'require',
+            'zona' => 'required',
+            'cajon' => 'required',
+            'estado' => 'required',
         ]);
 
         $cajon->update($request->all());

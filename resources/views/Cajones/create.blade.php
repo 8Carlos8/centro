@@ -6,7 +6,13 @@
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="zona">Zona</label>
-            <input type="text" id="zona" name="zona" placeholder="Zona del Cajon" class="form-input">
+            <select class="form-select @error('zona') is-invalid @enderror" aria-label="Zona del cajon" id="zona" name="zona" required>
+                <option value="">Seleccione Zona</option>
+                <option value="A">Zona A</option>
+                <option value="B">Zona B</option>
+                <option value="C">Zona C</option>
+                <option value="D">Zona D</option>
+            </select>
         </div>
 
         <div class="mb-4">
@@ -20,7 +26,7 @@
         </div>
 
         <div class="mb-4">
-            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear Cartelera</button>
+            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear Cajon</button>
         </div>
     </form>
 </div>

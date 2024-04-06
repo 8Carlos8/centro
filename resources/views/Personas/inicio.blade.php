@@ -9,6 +9,7 @@
         </div>
         <div class="col col-xxl-6">
             <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Salas.index') }}" ROLe="button">Sala</a><br>
+            <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.index') }}" ROLe="button">Estacionamiento</a><br>
             <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Eventos.index') }}" ROLe="button">Evento</a><br>
             <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Carteleras.index') }}" ROLe="button">Cartelera</a><br>
         </div>

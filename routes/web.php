@@ -27,7 +27,7 @@ use App\Http\Controllers\ubicacionController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // Agrupar rutas que requieren autenticación
 Route::middleware(['auth'])->group(function () {
@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/Cajones/{cajon}', [CajonController::class, 'update'])->name('Cajones.update');
     Route::resource('Cajones', CajonController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
+    Route::put('/Estacionamientos/{estacionamiento}', [EstacionamientoController::class, 'update'])->name('Estacionamientos.update');
     Route::resource('Estacionamientos', EstacionamientoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Eventos/{evento}', [EventoController::class, 'update'])->name('Eventos.update');
@@ -64,5 +65,14 @@ Route::resource('Usuarios', UsuarioController::class)->only(['index', 'create', 
 Route::post('/Usuarios', [UsuarioController::class, 'store'])->name('Usuarios.store');
 
 // Rutas públicas
-Route::resource('somos', somosController::class)->only(['index']);
-Route::resource('ubicacion', ubicacionController::class)->only(['index']);
+// Ruta para 'somos'
+Route::get('/resources/views/somos', function () {
+    // Aquí puedes colocar la lógica que deseas ejecutar para esta ruta
+    return view('somos.somos'); // Por ejemplo, retornar una vista llamada 'somos.blade.php'
+})->name('somos');
+
+// Ruta para 'ubicacion'
+Route::get('/resources/views/ubicacion', function () {
+    // Aquí puedes colocar la lógica que deseas ejecutar para esta ruta
+    return view('ubicacion.ubicacion'); // Por ejemplo, retornar una vista llamada 'ubicacion.blade.php'
+})->name('ubicacion');

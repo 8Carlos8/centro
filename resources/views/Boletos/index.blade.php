@@ -3,6 +3,7 @@
 
     <div class="mb-4">
         <a href="{{ route('Boletos.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Obtener Boletos</a>
+        <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
     </div>
 
     <table class="table-auto w-full border-collapse border-gray-200">

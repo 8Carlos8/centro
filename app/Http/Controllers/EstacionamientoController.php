@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estacionamiento;
+use App\Models\Cajon;
 use Illuminate\Http\Request;
 
 class EstacionamientoController extends Controller
@@ -21,7 +22,8 @@ class EstacionamientoController extends Controller
      */
     public function create()
     {
-        return view('Estacionamientos.create');
+        $cajones = Cajon::all();
+        return view('Estacionamientos.create', ['cajones' => $cajones]);
     }
 
     /**
@@ -30,13 +32,19 @@ class EstacionamientoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'require',
-            'estado' => 'require',
-            'ultimocambio' => 'require',
+            'id_cajon' => 'required',
+            'entrada' => 'required',
+            'salida' => 'required',
+            'estado' => 'required',
         ]);
 
-        Estacionamiento::create($request->all());
-        return redirect()->route('Estacionamiento.index')->with('success', 'Estacionamiento creado correctamente.');
+        $estacionamiento = new Estacionamiento();
+        $estacionamiento->id_cajon = $request->id_cajon;
+        $estacionamiento->entrada = $request->entrada;
+        $estacionamiento->salida = $request->salida;
+        $estacionamiento->estado = $request->estado;
+        $estacionamiento->save();
+        return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento creado correctamente.');
     }
 
     /**
@@ -44,7 +52,8 @@ class EstacionamientoController extends Controller
      */
     public function show(string $id)
     {
-        return view('Estacionamiento.show', compact('estacionamiento'));
+        $estacionamiento = Estacionamiento::findOrFail($id);
+        return view('Estacionamientos.show', compact('estacionamiento'));
     }
 
     /**
@@ -52,7 +61,9 @@ class EstacionamientoController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Estacionamiento.edit', compact('estacionamiento'));
+        $cajones = Cajon::all();
+        $estacionamiento = Estacionamiento::findOrFail($id);
+        return view('Estacionamientos.edit', ['cajones' => $cajones], compact('estacionamiento'));
     }
 
     /**
@@ -61,21 +72,23 @@ class EstacionamientoController extends Controller
     public function update(Request $request, Estacionamiento $estacionamiento)
     {
         $request->validate([
-            'nombre' => 'require',
-            'estado' => 'require',
-            'ultimocambio' => 'require',
+            'id_cajon' => 'required',
+            'entrada' => 'required',
+            'salida' => 'required',
+            'estado' => 'required',
         ]);
 
         $estacionamiento->update($request->all());
-        return redirect()->route('Estacionamiento.index')->with('success', 'Estacionamiento actualizado correctamente.');
+        return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento actualizado correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estacionamiento $estacionamiento)
+    public function destroy(string $id)
     {
+        $estacionamiento = Estacionamiento::findOrFail($id);
         $estacionamiento->delete();
-        return redirect()->route('Estacionamiento.index')->with('success', 'Estacionamiento eliminado correctamente.');
+        return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento eliminado correctamente.');
     }
 }

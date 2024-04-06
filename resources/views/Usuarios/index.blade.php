@@ -104,7 +104,7 @@
         <div class="card py-2 m-5">
             <div class="row justify-content-center">
                 <div class="col-2 ps-2 mt-4">
-                    <a href="../panela.php" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
                 </div>
                 <div class="col-8">
                     <h2 class="mt-4 text-center text-black">Lista de Usuarios</h2>

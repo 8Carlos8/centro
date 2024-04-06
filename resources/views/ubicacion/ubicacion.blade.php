@@ -94,19 +94,19 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link  align-middle text-white" aria-current="page" href="../index.html">Inicio</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('welcome') }}">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../cartelera/">Cartelera</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../estacionamiento/">Estacionamiento</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active align-middle text-white" href="#">Ubicación</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../somos/">Quienes somos</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('somos') }}">Quienes somos</a>
                                 </li>
                             </ul>
                         </div>

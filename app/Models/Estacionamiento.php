@@ -11,14 +11,19 @@ class Estacionamiento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Estacionamiento'];
+    protected $fillable = [
+        'id_cajon',
+        'entrada',
+        'salida',
+        'estado',
+    ];
+
+    protected function Cajon()
+    {
+        return $this->belongsTo(Cajon::class, 'id_cajon');
+    }
 
     protected $dispatchesEvents = [
         'created' => EstacionamientoCreated::class,
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
