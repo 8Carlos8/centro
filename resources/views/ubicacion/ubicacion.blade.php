@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="..\imagenes\CULTURA1.png">
     <title>CC Siglo XXI - Ubicación</title>
-    <link rel="stylesheet" href="../css/custom.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -77,7 +77,7 @@
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="">
-                    <img id="logo" src="../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
+                    <img id="logo" src="{{ asset('identidad/CULTURA1White.png') }}" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="bi bi-list"></i></span>
@@ -147,7 +147,7 @@
     <!-- Imagen de Fondo y Titulo -->
     <section class="w-100">
         <div class="card bg-dark text-white w-100 z-0">
-            <img src="../imagenes/cartelera.png" class="bg-img w-100" />
+            <img src="{{ asset('imagenes/cartelera.png') }}" class="bg-img w-100" />
             <div class="card-img-overlay text-light justify-content-center flex-column text-center pt-0 pt-lg-5" style="background-color: rgba(0, 0, 0, 0.5)">
                 <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> Nuestros Recintos</h2>
             </div>
