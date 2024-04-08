@@ -17,7 +17,7 @@
     <title>CC Siglo XXI - Lista de Usuarios</title>
     <link rel="icon" type="image/x-icon" href="../../../imagenes/CULTURA1.png">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../../../css/custom.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -51,19 +51,19 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link active align-middle text-white" href="index.php">Usuario</a>
+                                    <a class="nav-link active align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../organizador/index.php">Organizador</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../sala/index.php">Sala</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Salas.index') }}" >Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../evento/index.php">Eventos</a>
+                                    <a class="nav-link align-middle text-white"  href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="../cartelera/index.php">Cartelera</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
                                 </li>
                             </ul>
                         </div>
@@ -103,9 +103,7 @@
     <div class="container-fluid py-2 z-1">
         <div class="card py-2 m-5">
             <div class="row justify-content-center">
-                <div class="col-2 ps-2 mt-4">
-                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                </div>
+
                 <div class="col-8">
                     <h2 class="mt-4 text-center text-black">Lista de Usuarios</h2>
                 </div>
@@ -169,7 +167,19 @@
                 <?php
                 }
                 ?>
+                
             </table>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                    </div>
+                    <div class="col-2 ps-2 mt-4 text-end">
+                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>

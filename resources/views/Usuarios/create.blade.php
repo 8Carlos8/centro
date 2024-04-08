@@ -17,7 +17,7 @@
     <section class="w-100">
         <div>
             <div class="card position-absolute bg-black text-white w-100 z-n1">
-                <img src="../imagenes/registro.jpg" class="bg-img w-100" />
+                <img src="{{ asset('imagenes/registro.jpg')}}" class="bg-img w-100" />
                 <div class="card-img-overlay text-light justify-content-center flex-column text-center pt-0 pt-lg-5" style="background-color: rgba(0, 0, 0, 0.5)">
                 </div>
             </div>
