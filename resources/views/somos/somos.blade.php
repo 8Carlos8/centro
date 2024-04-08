@@ -8,9 +8,9 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('imagenes\CULTURA1.png') }}">
     <title>CC Siglo XXI - Quienes Somos</title>
     <<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </head>
 
 <body style="background-color:#2d2039">
@@ -59,10 +59,10 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link align-middle text-white" href="">Iniciar Sesion</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Usuarios.login') }}">Iniciar Sesion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle  text-white" href="">Registrarse</a>
+                                    <a class="nav-link align-middle  text-white" href="{{ route('Personas.create') }}">Registrarse</a>
                                 </li>
                             </ul>
                         </div>

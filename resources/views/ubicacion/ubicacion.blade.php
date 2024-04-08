@@ -117,10 +117,10 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link align-middle text-white" href="">Iniciar Sesion</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Usuarios.login') }}">Iniciar Sesion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle  text-white" href="">Registrarse</a>
+                                    <a class="nav-link align-middle  text-white" href="{{ route('Personas.create') }}">Registrarse</a>
                                 </li>
                             </ul>
                         </div>
