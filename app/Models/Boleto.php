@@ -14,6 +14,7 @@ class Boleto extends Model
     protected $fillable = [
         'id_usuario',
         'id_cartelera',
+        'id_cajones',
         'noBoletos',
     ];
 

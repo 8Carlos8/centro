@@ -18,6 +18,7 @@ class Cartelera extends Model
         'estado',
         'inicio',
         'fin',
+        'lugares',
     ];
 
     protected function Evento()

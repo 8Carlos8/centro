@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('tipo');
             $table->dateTime('duracion');
-            $table->binary('foto');
+            $table->string('poster');
+            $table->string('banner');
             $table->timestamps();
 
             $table->foreign('id_organizador')->references('id')->on('organizadors')->onDelete('cascade');

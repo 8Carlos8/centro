@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_evento');
             $table->unsignedBigInteger('id_sala');
-            $table->integer('estado');
+            $table->unsignedBigInteger('estado');
             $table->dateTime('inicio');
             $table->dateTime('fin');
+            $table->integer('lugares');
             $table->timestamps();
 
             $table->foreign('id_evento')->references('id')->on('eventos')->onDelete('cascade');
