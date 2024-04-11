@@ -28,6 +28,11 @@ class Boleto extends Model
         return $this->belongsTo(Cartelera::class, 'id_cartelera');
     }
 
+    protected function Cajon()
+    {
+        return $this->belongsTo(Cajon::class, 'id_cajones');
+    }
+
     protected $dispatchesEvents = [
         'created' => BoletoCreated::class,
     ];

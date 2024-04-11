@@ -40,7 +40,12 @@
         </div>
 
         <div class="mb-4">
-            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear Cartelera</button>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lugares">Lugares</label>
+            <input type="number" id="lugares" name="lugares" class="form-input" value="{{ $cartelera->lugares }}">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Actualizar Cartelera</button>
         </div>
     </form>
 </div>

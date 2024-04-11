@@ -1,12 +1,12 @@
 <head>
-    <title>CC Siglo XXI - Lista de Usuarios</title>
+    <title>CC Siglo XXI - Lista de Carteleras</title>
     <link rel="icon" type="image/x-icon" href="../../../imagenes/CULTURA1.png">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    
+
     </script>
 </head>
 
@@ -36,10 +36,10 @@
                                     <a class="nav-link  align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}" >Sala</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  align-middle text-white"  href="{{ route('Eventos.index') }}">Eventos</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
@@ -53,10 +53,21 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <label class="dropdown-item">Usuario Activo: </label>
+                                    @auth
+                                    <!-- Esto se mostrará solo si hay una sesión activa -->
+                                    <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item" href="../../logout.php">Cerrar Sesión</a>
+                                    @if (Auth::check())
+                                    <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                        @csrf
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                    </form>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -68,11 +79,26 @@
                             <i class="bi bi-person-fill"></i>
                         </button>
                         <ul id="useraccesslist" class="dropdown-menu">
-                            <li><label class="dropdown-item">Usuario Activo: </label></li>
+                            <li>
+                                @auth
+                                <!-- Esto se mostrará solo si hay una sesión activa -->
+                                <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                @else
+                                <!-- Esto se mostrará si no hay una sesión activa -->
+                                <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                @endauth
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../logout.php">Cerrar Sesión</a></li>
+                            <li>
+                                @if (Auth::check())
+                                <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                    @csrf
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                </form>
+                                @endif
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -80,46 +106,48 @@
         </nav>
     </header>
 
-<div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4 text-gray-900">Carteleras</h1>
+    <div class="container mx-auto py-4">
+        <h1 class="text-3xl font-bold mb-4 text-gray-900">Carteleras</h1>
 
-    <div class="mb-4">
-        <a href="{{ route('Carteleras.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nueva Cartelera</a>
-        <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
+        <div class="mb-4">
+            <a href="{{ route('Carteleras.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nueva Cartelera</a>
+            <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
+        </div>
+
+        <table class="table-auto w-full border-collapse border-gray-200">
+            <thead>
+                <tr>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">ID Evento</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">ID Sala</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Inicio</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Fin</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">Lugares</th>
+                    <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($carteleras as $cartelera)
+                <tr>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_evento }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_sala }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->estado }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->inicio }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->fin }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->lugares }}</td>
+                    <td class="border-gray-300 px-4 py-2 text-gray-700">
+                        <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
+                        <a href="{{ route('Carteleras.show', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
+                        <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-
-    <table class="table-auto w-full border-collapse border-gray-200">
-        <thead>
-            <tr>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Evento</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Sala</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Inicio</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Fin</th>
-                <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($carteleras as $cartelera)
-            <tr>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_evento }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_sala }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->estado }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->inicio }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->fin }}</td>
-                <td class="border-gray-300 px-4 py-2 text-gray-700">
-                    <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
-                    <a href="{{ route('Carteleras.show', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
-                    <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Boleto;
 use App\Models\Usuario;
 use App\Models\Cartelera;
+use App\Models\Cajon;
 use Illuminate\Http\Request;
 
 class BoletoController extends Controller
@@ -25,7 +26,8 @@ class BoletoController extends Controller
     {
         $usuarios = Usuario::all();
         $carteleras = Cartelera::all();
-        return view('Boletos.create', ['usuarios' => $usuarios], ['carteleras' => $carteleras]);
+        $cajones = Cajon::all();
+        return view('Boletos.create', ['usuarios' => $usuarios], ['carteleras' => $carteleras], ['cajones' => $cajones]);
     }
 
     /**
@@ -34,14 +36,16 @@ class BoletoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_usuario' => 'require',
-            'id_cartelera' => 'require',
-            'noBoletos' => 'require',
+            'id_usuario' => 'required',
+            'id_cartelera' => 'required',
+            'id_cajones' => 'required',
+            'noBoletos' => 'required',
         ]);
 
         $boleto = new Boleto();
         $boleto->id_usuario = $request->id_usuario;
         $boleto->id_cartelera = $request->id_cartelera;
+        $boleto->id_cajones = $request->id_cajones;
         $boleto->noBoletos = $request->noBoletos;
         $boleto->save();
         return redirect()->route('Boletos.index')->with('success', 'Boleto creado correctamente');
@@ -63,8 +67,9 @@ class BoletoController extends Controller
     {
         $usuarios = Usuario::all();
         $carteleras = Cartelera::all();
+        $cajones = Cajon::all();
         $boleto = Boleto::findOrFail($id);
-        return view('Boletos.edit', ['usuarios' => $usuarios, 'carteleras' => $carteleras], compact('boleto'));
+        return view('Boletos.edit', ['usuarios' => $usuarios, 'carteleras' => $carteleras, 'cajones' => $cajones], compact('boleto'));
     }
 
     /**
@@ -73,9 +78,10 @@ class BoletoController extends Controller
     public function update(Request $request, Boleto $boleto)
     {
         $request->validate([
-            'id_usuario' => 'require',
-            'id_cartelera' => 'require',
-            'noBoletos' => 'require',
+            'id_usuario' => 'required',
+            'id_cartelera' => 'required',
+            'id_cajones' => 'required',
+            'noBoletos' => 'required',
         ]);
 
         Boleto::update($request->all());

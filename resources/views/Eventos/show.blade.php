@@ -11,24 +11,28 @@
             <p>{{ $evento->id }}</p>
         </div>
         <div>
-            <label for="id_sala" class="form-label text-gray-700">ID del Organizador</label>
+            <label for="id_organizador" class="form-label text-gray-700">ID del Organizador</label>
             <p>{{ $evento->id_organizador }}</p>
         </div>
         <div>
-            <label for="estado" class="form-label text-gray-700">Nombre del evento</label>
+            <label for="nombre" class="form-label text-gray-700">Nombre del evento</label>
             <p>{{ $evento->nombre }}</p>
         </div>
         <div>
-            <label for="inicio" class="form-label text-gray-700">Tipo de evento</label>
+            <label for="tipo" class="form-label text-gray-700">Tipo de evento</label>
             <p>{{ $evento->tipo }}</p>
         </div>
         <div>
-            <label for="fin" class="form-label text-gray-700">Duracion del Evento</label>
+            <label for="duracion" class="form-label text-gray-700">Duracion del Evento</label>
             <p>{{ $evento->duracion }}</p>
         </div>
         <div>
-            <label for="fin" class="form-label text-gray-700">Foto del Evento</label>
-            <p>{{ $evento->foto }}</p>
+            <label for="poster" class="form-label text-gray-700">Poster del Evento</label>
+            <p>{{ $evento->poster }}</p>
+        </div>
+        <div>
+            <label for="banner" class="form-label text-gray-700">Banner del Evento</label>
+            <p>{{ $evento->banner }}</p>
         </div>
     </div>
 </div>

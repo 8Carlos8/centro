@@ -36,5 +36,9 @@
             <label for="fin" class="form-label text-gray-700">Fecha de finalización</label>
             <p>{{ $cartelera->fin }}</p>
         </div>
+        <div>
+            <label for="lugares" class="form-label text-gray-700">Lugares</label>
+            <p>{{ $cartelera->lugares }}</p>
+        </div>
     </div>
 </div>

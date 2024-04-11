@@ -26,10 +26,6 @@ class PersonaController extends Controller
         return view('Personas.create');
     }
 
-    public function inicio()
-    {
-        return view('Personas.inicio');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -71,7 +67,10 @@ class PersonaController extends Controller
         return redirect()->route('Personas.index')->with('success', 'Persona creada correctamente.');
     }
 
-
+    public function inicio()
+    {
+        return view('Personas.inicio');
+    }
 
     /**
      * Display the specified resource.

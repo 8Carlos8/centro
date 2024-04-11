@@ -2,7 +2,7 @@
     <h1 class="text-3xl font-bold mb-4 text-gray-900">Personas</h1>
 
     <div class="mb-4">
-        <a href="{{ route('Personas.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nuevo evento</a>
+        <a href="{{ route('Personas.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nueva Persona</a>
         <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
     </div>
     @auth

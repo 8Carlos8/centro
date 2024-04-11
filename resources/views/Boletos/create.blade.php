@@ -25,6 +25,16 @@
         </div>
 
         <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_cajon">ID Cajones</label>
+            <select class="form-select" id="id_cajon" name="id_cajon">
+                <option value="">Seleccionar Cajones</option>
+                @foreach($cajones as $cajon)
+                <option value="{{ $cajon->id }}">{{ $cajon->id }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="noBoletos">Numero de Boletos</label>
             <input type="text" id="noBoletos" name="noBoletos" placeholder="Boletos" class="form-input">
         </div>

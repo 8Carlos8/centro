@@ -37,7 +37,8 @@ class EventoController extends Controller
             'nombre' => 'required',
             'tipo' => 'required',
             'duracion' => 'required',
-            'foto' => 'required',
+            'poster' => 'required',
+            'banner' => 'required',
         ]);
 
         $evento = new Evento();
@@ -45,7 +46,8 @@ class EventoController extends Controller
         $evento->nombre = $request->nombre;
         $evento->tipo = $request->tipo;
         $evento->duracion = $request->duracion;
-        $evento->foto = $request->foto;
+        $evento->poster = $request->poster;
+        $evento->banner = $request->banner;
         $evento->save();
         return redirect()->route('Eventos.index');
     }
@@ -79,7 +81,8 @@ class EventoController extends Controller
             'nombre' => 'required',
             'tipo' => 'required',
             'duracion' => 'required',
-            'foto' => 'required',
+            'poster' => 'required',
+            'banner' => 'required',
         ]);
 
         $evento->update($request->all());

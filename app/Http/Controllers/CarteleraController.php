@@ -39,6 +39,7 @@ class CarteleraController extends Controller
             'estado' => 'required',
             'inicio' => 'required',
             'fin' => 'required',
+            'lugares' => 'required',
         ]);
 
         $cartelera = new Cartelera();
@@ -47,6 +48,7 @@ class CarteleraController extends Controller
         $cartelera->estado = $request->estado;
         $cartelera->inicio = $request->inicio;
         $cartelera->fin = $request->fin;
+        $cartelera->lugares = $request->lugares;
         $cartelera->save();
         return redirect()->route('Carteleras.index')->with('success', 'Cartelera creada correctamente.');
     }
@@ -82,6 +84,7 @@ class CarteleraController extends Controller
             'estado' => 'required',
             'inicio' => 'required',
             'fin' => 'required',
+            'lugares' => 'required',
         ]);
 
         $cartelera->update($request->all());
