@@ -1,5 +1,5 @@
 <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4 text-gray-900">Detalle del evento</h1>
+    <h1 class="text-3xl font-bold mb-4 text-gray-900">Detalle del Boleto</h1>
 
     <div class="mb-4">
         <a href="{{ route('Boletos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al listado</a>
@@ -17,6 +17,10 @@
         <div>
             <label for="id_cartelera" class="form-label text-gray-700">ID de la Cartelera</label>
             <p>{{ $evento->id_cartelera }}</p>
+        </div>
+        <div>
+            <label for="id_cajones" class="form-label text-gray-700">ID de los Cajones</label>
+            <p>{{ $evento->id_cajones }}</p>
         </div>
         <div>
             <label for="noBoletos" class="form-label text-gray-700">Numero de boletos</label>

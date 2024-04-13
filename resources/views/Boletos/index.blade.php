@@ -12,6 +12,7 @@
                 <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
                 <th class="border-gray-300 px-4 py-2 text-gray-700">ID Usuario</th>
                 <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cartelera</th>
+                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cajones</th>
                 <th class="border-gray-300 px-4 py-2 text-gray-700">Numero de boletos</th>
                 <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
             </tr>
@@ -22,6 +23,7 @@
                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id }}</td>
                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_usuario }}</td>
                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cartelera }}</td>
+                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cajones }}</td>
                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->noBoletos }}</td>
                 <td class="border-gray-300 px-4 py-2 text-gray-700">
                     <a href="{{ route('Boletos.edit', $boleto->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>

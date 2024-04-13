@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_cartelera');
+            $table->unsignedBigInteger('id_cajon');
             $table->integer('noBoletos');
             $table->timestamps();
 
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
             $table->foreign('id_cartelera')->references('id')->on('carteleras')->onDelete('cascade');
+            $table->foreign('id_cajon')->references('id')->on('cajons')->onDelete('cascade');
         });
     }
 

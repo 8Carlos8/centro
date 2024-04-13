@@ -16,7 +16,8 @@ class Evento extends Model
         'nombre',
         'tipo',
         'duracion',
-        'foto',
+        'poster',
+        'banner'
     ];
 
     protected function Organizador()

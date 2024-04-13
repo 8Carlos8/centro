@@ -30,8 +30,13 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="foto">Foto</label>
-            <input type="file" id="foto" name="foto" class="form-input">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="poster">Poster</label>
+            <input type="file" id="poster" name="poster" class="form-input">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="banner">Banner</label>
+            <input type="file" id="banner" name="banner" class="form-input">
         </div>
 
         <div class="mb-4">

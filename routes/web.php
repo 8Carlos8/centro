@@ -76,3 +76,5 @@ Route::get('/resources/views/ubicacion', function () {
     // Aquí puedes colocar la lógica que deseas ejecutar para esta ruta
     return view('ubicacion.ubicacion'); // Por ejemplo, retornar una vista llamada 'ubicacion.blade.php'
 })->name('ubicacion');
+
+Route::resource('Personas', PersonaController::class)->only(['create', 'store']);
