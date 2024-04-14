@@ -13,6 +13,7 @@ class Evento extends Model
 
     protected $fillable = [
         'id_organizador',
+        'id_estacionamiento',
         'nombre',
         'tipo',
         'duracion',
@@ -23,6 +24,11 @@ class Evento extends Model
     protected function Organizador()
     {
         return $this->belongsTo(Organizador::class, 'id_organizador');
+    }
+
+    protected function Estacinamiento()
+    {
+        return $this->belongsTo(Estacionamiento::class, 'id_estacionamiento');
     }
 
     protected $dispatchesEvents = [

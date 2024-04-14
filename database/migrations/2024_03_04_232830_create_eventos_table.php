@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_organizador');
+            $table->unsignedBigInteger('id_estacionamiento');
             $table->string('nombre');
             $table->string('tipo');
             $table->dateTime('duracion');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_organizador')->references('id')->on('organizadors')->onDelete('cascade');
+            $table->foreign('id_estacionamiento')->references('id')->on('estacionamientos')->onDelete('cascade');
         });
     }
 

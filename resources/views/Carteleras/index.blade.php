@@ -110,7 +110,14 @@
         <h1 class="text-3xl font-bold mb-4 text-gray-900">Carteleras</h1>
 
         <div class="mb-4">
+            @auth
+            @if (auth()->user()->rol == 1)
             <a href="{{ route('Carteleras.create') }}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear nueva Cartelera</a>
+            @endif
+            @else
+            <!-- Esto se mostrará si no hay una sesión activa -->
+            <p>Por favor, inicia sesión para acceder a esta página.</p>
+            @endauth
             <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
         </div>
 
@@ -138,13 +145,20 @@
                     <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->fin }}</td>
                     <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->lugares }}</td>
                     <td class="border-gray-300 px-4 py-2 text-gray-700">
-                        <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
                         <a href="{{ route('Carteleras.show', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
+                        @auth
+                        @if (auth()->user()->rol == 1)
+                        <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
                         <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
                         </form>
+                        @endif
+                        @else
+                        <!-- Esto se mostrará si no hay una sesión activa -->
+                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                        @endauth
                     </td>
                 </tr>
                 @endforeach

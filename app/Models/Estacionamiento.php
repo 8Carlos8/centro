@@ -12,7 +12,8 @@ class Estacionamiento extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_cajon',
+        'id_cajonIni',
+        'id_cajonFin',
         'entrada',
         'salida',
         'estado',

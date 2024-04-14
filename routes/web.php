@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('Cajones', CajonController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Estacionamientos/{estacionamiento}', [EstacionamientoController::class, 'update'])->name('Estacionamientos.update');
+    Route::get('Estacionamientos/reporte', [EstacionamientoController::class, 'reporte'])->name('Estacionamientos.reporte');
     Route::resource('Estacionamientos', EstacionamientoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Eventos/{evento}', [EventoController::class, 'update'])->name('Eventos.update');
@@ -78,3 +79,11 @@ Route::get('/resources/views/ubicacion', function () {
 })->name('ubicacion');
 
 Route::resource('Personas', PersonaController::class)->only(['create', 'store']);
+
+Route::get('/Publi/CarP', function () {
+    return view('Publi.CarP');
+})->name('Publi.CarP');
+
+Route::get('/Publi/EstP', function () {
+    return view('Publi.EstP');
+})->name('Publi.EstP');

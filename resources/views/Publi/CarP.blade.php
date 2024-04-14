@@ -6,67 +6,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE= edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="..\imagenes\CULTURA1.png">
-    <title>CC Siglo XXI - Ubicación</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>CC Siglo XXI - Cartelera</title>
+    <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
-        // 2. This code loads the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
+        var contenido = "";
+        fetch("https://minitechsolutions.shop/ccsxxitest/api/cartelera.php?pagina=1")
+            .then(resp => resp.json())
+            .then(resp => {
+                console.log(resp);
+                resp.cartelera.forEach((a) => {
 
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    contenido += "<div class=\"card bg-white\"><div class=\"row w-100 pt-2 pb-2\"><div class=\"col col-2\"><div class=\"d-flex w-100 justify-content-center\"><img id=\"thumbnail\" src=\"";
 
-        // Esta funcion crea el iframe
-        var player1;
-        var player2;
-        var player3;
+                    if (a.EVENTO.FOTO == "" || a.EVENTO.FOTO == "null" || a.EVENTO.FOTO == null) {
+                        contenido += "../imagenes/poster-placeholder.png";
+                    } else {
+                        contenido += a.EVENTO.FOTO;
+                    }
 
-        function onYouTubeIframeAPIReady() {
-            player1 = new YT.Player('auditorio', {
-                height: 1280,
-                width: 720,
-                videoId: 'AsCkWPTgCO4',
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                }
+                    contenido += "\"></div></div><div class=\"col col-7 align-self-center\"><p class=\"h3\">" + a.EVENTO.NOMBRE + "</p><p class=\"h6\">" + a.SALA.NOMBRE + " - " + a.INICIO + "</p>" +
+                        "</div><div class=\"col col-3 align-self-center\"><div class=\"d-flex w-100 pe-xl-5 justify-content-end\">" +
+                        "<a id=\"filtrocartelera\" class=\"btn me-3\" href=\"../evento/?id=" + a.ID + "\" value=\"Ver Detalles\">Ver Detalles</a></div></div></div></div>";
+                });
+                document.getElementById("cartelera2").innerHTML = contenido;
             });
-            player2 = new YT.Player('teatro', {
-                height: 1280,
-                width: 720,
-                videoId: 'z7_XwfgK1S4',
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                }
-            });
-            player3 = new YT.Player('cine', {
-                height: 1280,
-                width: 720,
-                videoId: '28PlA-Y3kZs',
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                }
-            });
+
+        var pagina = 1;
+
+        function invocaplus() {
+            pagina++;
+            contenido = "";
+            document.getElementById("cartelera2").innerHTML = "";
+            fetch("https://minitechsolutions.shop/ccsxxitest/api/cartelera.php?pagina=" + pagina)
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (resp.cartelera == "Algo salio mal") {
+                        contenido += "<div class=\"card bg-white\"><div class=\"row w-100 pt-2 pb-2\"><div class=\"col col-2\"><div class=\"d-flex w-100 justify-content-center\">";
+                        contenido += "</div></div><div class=\"col col-7 mt-5 mb-5 align-self-center\"><p class=\"h3 mt-5 mb-5\"> Algo ha Salido Mal de Nuestro Lado </p><img class=\"h6\" src=\"../imagenes/403.jpg\">" +
+                            "</div></div></div></div>";
+                    } else {
+                        resp.cartelera.forEach((a) => {
+
+                            contenido += "<div class=\"card bg-white\"><div class=\"row w-100 pt-2 pb-2\"><div class=\"col col-2\"><div class=\"d-flex w-100 justify-content-center\"><img id=\"thumbnail\" src=\"";
+
+                            if (a.EVENTO.FOTO == "" || a.EVENTO.FOTO == "null" || a.EVENTO.FOTO == null) {
+                                contenido += "../imagenes/poster-placeholder.png";
+                            } else {
+                                contenido += a.EVENTO.FOTO;
+                            }
+
+                            contenido += "\"></div></div><div class=\"col col-7 align-self-center\"><p class=\"h3\">" + a.EVENTO.NOMBRE + "</p><p class=\"h6\">" + a.SALA.NOMBRE + " - " + a.INICIO + "</p>" +
+                                "</div><div class=\"col col-3 align-self-center\"><div class=\"d-flex w-100 pe-xl-5 justify-content-end\">" +
+                                "<a id=\"filtrocartelera\" class=\"btn me-3\" href=\"../evento/?id=" + a.ID + "\" value=\"Ver Detalles\">Ver Detalles</a></div></div></div></div>";
+                        });
+                    }
+                    document.getElementById("cartelera2").innerHTML = contenido;
+
+                });
         }
 
-        // La API manda a reporducir el video
-        function onPlayerReady(event) {
-            event.target.setVolume(0);
-            event.target.playVideo();
+        function invocaminus() {
+            pagina--;
+            contenido = "";
+            document.getElementById("cartelera2").innerHTML = "";
+            fetch("https://minitechsolutions.shop/ccsxxitest/api/cartelera.php?pagina=" + pagina)
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (resp.cartelera == "Algo salio mal") {
+                        contenido += "<div class=\"card bg-white\"><div class=\"row w-100 pt-2 pb-2\"><div class=\"col col-2\"><div class=\"d-flex w-100 justify-content-center\">";
+                        contenido += "</div></div><div class=\"col col-7 mt-5 mb-5 align-self-center\"><p class=\"h3 mt-5 mb-5\"> Algo ha Salido Mal de Nuestro Lado </p><img class=\"h6\" src=\"../imagenes/403.jpg\">" +
+                            "</div></div></div></div>";
+                    } else {
+                        resp.cartelera.forEach((a) => {
+
+                            contenido += "<div class=\"card bg-white\"><div class=\"row w-100 pt-2 pb-2\"><div class=\"col col-2\"><div class=\"d-flex w-100 justify-content-center\"><img id=\"thumbnail\" src=\"";
+
+                            if (a.EVENTO.FOTO == "" || a.EVENTO.FOTO == "null" || a.EVENTO.FOTO == null) {
+                                contenido += "../imagenes/poster-placeholder.png";
+                            } else {
+                                contenido += a.EVENTO.FOTO;
+                            }
+
+                            contenido += "\"></div></div><div class=\"col col-7 align-self-center\"><p class=\"h3\">" + a.EVENTO.NOMBRE + "</p><p class=\"h6\">" + a.SALA.NOMBRE + " - " + a.INICIO + "</p>" +
+                                "</div><div class=\"col col-3 align-self-center\"><div class=\"d-flex w-100 pe-xl-5 justify-content-end\">" +
+                                "<a id=\"filtrocartelera\" class=\"btn me-3\" href=\"../evento/?id=" + a.ID + "\" value=\"Ver Detalles\">Ver Detalles</a></div></div></div></div>";
+                        });
+                    }
+                    document.getElementById("cartelera2").innerHTML = contenido;
+                });
+        }
+
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
         }
     </script>
 </head>
@@ -77,7 +113,7 @@
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="">
-                    <img id="logo" src="{{ asset('identidad/CULTURA1White.png') }}" class="img-fluid float-end w-auto" alt="logo">
+                    <img id="logo" src="../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="bi bi-list"></i></span>
@@ -93,17 +129,18 @@
                         </form>
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
+
                                 <li class="nav-item m-0">
                                     <a class="nav-link align-middle text-white" href="{{ route('welcome') }}">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Publi.CarP') }}">Cartelera</a>
+                                    <a class="nav-link active align-middle text-white" href="#">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link align-middle text-white" href="{{ route('Publi.EstP') }}">Estacionamiento</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active align-middle text-white" href="#">Ubicación</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('ubicacion') }}">Ubicación</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link align-middle text-white" href="{{ route('somos') }}">Quienes somos</a>
@@ -143,65 +180,100 @@
             </div>
         </nav>
     </header>
-
-    <!-- Imagen de Fondo y Titulo -->
+    <!-- Cabecera -->
     <section class="w-100">
         <div class="card bg-dark text-white w-100 z-0">
-            <img src="{{ asset('imagenes/cartelera.png') }}" class="bg-img w-100" />
+            <img src="../imagenes/cartelera.png" class="bg-img w-100" />
             <div class="card-img-overlay text-light justify-content-center flex-column text-center pt-0 pt-lg-5" style="background-color: rgba(0, 0, 0, 0.5)">
-                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> Nuestros Recintos</h2>
+                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> Cartelera</h2>
             </div>
         </div>
     </section>
-
-    <!-- Contenido -->
-    <div id="ubicacion" class="container-fluid">
-        <div class="row column-gap-3 justify-content-center">
-            <div class="col col-10 col-xxl-3 mb-5 mt-sm-4">
+    <!-- Filtros -->
+    <section>
+        <div id="cartelera" class="row z-1 p-5">
+            <div id="filtro" class="col rounded mb-4 col-12 col-lg-12 col-xxl-2">
                 <div class="card">
-                    <h5 class="card-title align-self-center fw-bolder m-3">Auditorio CCSXXI</h5>
-                    <div class="img-fluid" id="auditorio">
-                        <img src="../imagenes/somos.png" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">El Auditorio del Complejo Cultural Siglo XXI es un espacio versátil y moderno que puede acomodar a hasta 2,000 personas. El auditorio está equipado con un escenario, un sistema de sonido y un sistema de iluminación de última generación, lo que lo convierte en el lugar perfecto para una variedad de eventos, incluyendo conciertos, conferencias, presentaciones y eventos especiales.</p>
-                        <p class="card-text">El auditorio está ubicado en el corazón del centro de la ciudad, lo que lo hace fácilmente accesible para todos. El auditorio también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
-                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+                    <button id="filtrocartelera" class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                        Filtros <i class="bi bi-arrow-down-short"></i>
+                    </button>
+                    <div class="collapse show" id="collapseExample">
+                        <div class="card card-body">
+                            <div>
+                                <span class="form-label fw-bold mt-2">Por Nombre del Evento</span>
+                                <input class="form-control mt-2 mb-2" type="text" id="nombreevento" placeholder="Nombre del Evento">
+                                <span class="form-label fw-bold mt-2">Por Fecha:</span><br>
+                                <span class="form-label mt-2">Inicio</span>
+                                <input class="form-control mt-2 mb-2" type="date" default="" id="fechain" placeholder="">
+                                <span class="form-label mt-2">Fin</span>
+                                <input class="form-control mt-2 mb-2" type="date" default="" id="fechaout" placeholder="">
+                                <script>
+                                    document.getElementById("fechain").valueAsDate = new Date();
+                                    document.getElementById("fechaout").valueAsDate = addDays(document.getElementById("fechain").valueAsDate, 5);
+                                </script>
+                                <span class="form-label fw-bold mt-2">Categoria</span>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="checkC" value="C">
+                                    <label class="form-check-label" for="radiocat"> Conciertos y Festivales </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="checkT" value="T">
+                                    <label class="form-check-label" for="radiocat"> Teatro y Culturales </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="checkD" value="D">
+                                    <label class="form-check-label" for="radiocat"> Deportivos </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="checkF" value="F">
+                                    <label class="form-check-label" for="radiocat"> Familiares </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="checkE" value="E">
+                                    <label class="form-check-label" for="radiocat"> Especiales </label>
+                                </div>
+                                <div>
+                                    <span class="form-label mt-2">Lugar del Evento</span>
+                                    <select class="form-select mt-2" name="lugarevento" id="lugarevento">
+                                        <option value="0">Selecciona un Lugar</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="d-grid mt-3 gap-2">
+                                    <a class="btn btn-success">Aplicar Filtros</a>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-10 col-xxl-3 mb-5">
-                <div class="card">
-                    <h5 class="card-title align-self-center fw-bolder m-3">Teatro CCSXXI</h5>
-                    <div class="img-fluid" id="teatro">
-                        <img src="../imagenes/auditorio.png" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">El Teatro del Complejo Cultural Siglo XXI es una joya arquitectónica. El teatro fue construido en 2019. El teatro cuenta con una capacidad de 500 personas y presenta una variedad de espectáculos, incluyendo obras de teatro, musicales, conciertos y eventos especiales.</p>
-                        <p class="card-text">El teatro cuenta con un escenario grande y bien equipado, así como un sistema de sonido e iluminación de última generación. El teatro también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
-                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+            <div id="filtro" class="col rounded col-12 col-lg-12 col-xxl-10 pe-0">
+                <div class="card bg-white">
+                    <p id="result" class="p-2">
+                        Resultados de la Busqueda <i class="bi bi-arrow-down-short"></i>
+                    </p>
+                    <div id="cartelera2" class="w-100">
+                        <!-- Resultado de Busqueda -->
                     </div>
                 </div>
-            </div>
-            <div class="col col-10 col-xxl-3 mb-5 mt-sm-4">
-                <div class="card">
-                    <h5 class="card-title align-self-center fw-bolder m-3">Sala de Cine CCSXXI</h5>
-                    <div class="img-fluid" id="cine">
-                        <img src="../imagenes/cine.png" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">La Sala de Cine del Complejo Cultural Siglo XXI es el lugar perfecto para disfrutar de una película con amigos y familiares. La sala cuenta con una pantalla grande, un sistema de sonido de última generación y asientos cómodos. La sala también cuenta con una variedad de comodidades, incluyendo un bar, un área de descanso y un estacionamiento subterráneo.</p>
-                        <p class="card-text">La Sala de Cine del Complejo Cultural Siglo XXI está ubicada en el mismo complejo, La sala también cuenta con una variedad de horarios de proyección, por lo que puede encontrar una película que se ajuste a su agenda.</p>
-                        <a id="filtrocartelera" href="#" class="btn btn-primary">Ver Eventos en el Recinto</a>
+                <div class="card mt-3 bg-white">
+                    <div class="row pt-2 pb-2">
+                        <div class="col col-12">
+                            <div class="d-flex w-100 justify-content-center">
+                                <a class="btn btn-danger ms-2 me-2" onclick="invocaminus()">
+                                    << /a>&nbsp;&nbsp;
+                                        <a class="btn btn-danger ms-2 me-2" onclick="invocaplus()">></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
     <!-- Pie de Pagina -->
     <footer>
-        <div id="footerinou" class="container-fluid z-1">
+        <div id="footerinoc" class="container-fluid">
             <div class="row justify-content-md-center pb-lg-5 pb-5 pt-5 m-0 text-white">
 
                 <div class="d-flex col-lg-5 mt-5 justify-content-center">

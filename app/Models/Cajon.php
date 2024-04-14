@@ -17,6 +17,10 @@ class Cajon extends Model
         'estado',
     ];
 
+    public function estacionamientos()
+    {
+        return $this->hasMany(Estacionamiento::class, 'id_cajonIni');
+    }
     protected $dispatchesEvents = [
         'created' => CajonCreated::class,
     ];

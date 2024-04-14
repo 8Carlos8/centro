@@ -29,7 +29,7 @@
             <select class="form-select" id="id_cajon" name="id_cajon">
                 <option value="">Seleccionar Cajones</option>
                 @foreach($cajones as $cajon)
-                <option value="{{ $cajon->id }}">{{ $cajon->id }}</option>
+                <option value="{{ $cajon->id }}">{{ $cajon->zona }} - {{ $cajon->cajon }}</option>
                 @endforeach
             </select>
         </div>

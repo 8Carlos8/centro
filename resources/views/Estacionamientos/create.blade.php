@@ -5,11 +5,21 @@
         @csrf
 
         <div class="mb-3">
-            <label for="id_cajon" class="form-label text-gray-700">ID del Cajon</label>
-            <select class="form-select" id="id_cajon" name="id_cajon">
+            <label for="id_cajon" class="form-label text-gray-700">ID del Cajon inicio</label>
+            <select class="form-select" id="id_cajonIni" name="id_cajonIni">
                 <option value="">Seleccionar Cajon</option>
                 @foreach($cajones as $cajon)
-                <option value="{{ $cajon->id }}">{{ $cajon->cajon }}</option>
+                <option value="{{ $cajon->id }}">Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_cajon" class="form-label text-gray-700">ID del Cajon final</label>
+            <select class="form-select" id="id_cajonFin" name="id_cajonFin">
+                <option value="">Seleccionar Cajon</option>
+                @foreach($cajones as $cajon)
+                <option value="{{ $cajon->id }}">Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
                 @endforeach
             </select>
         </div>

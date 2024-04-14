@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use App\Models\Organizador;
+use App\Models\Estacionamiento;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class EventoController extends Controller
     public function create()
     {
         $organizadores = Organizador::all();
-        return view('Eventos.create', ['organizadores' => $organizadores]);
+        $estacionamientos = Estacionamiento::all();
+        return view('Eventos.create', ['organizadores' => $organizadores], ['estacionamientos' => $estacionamientos]);
     }
 
     /**
@@ -34,20 +36,26 @@ class EventoController extends Controller
     {
         $request->validate([
             'id_organizador' => 'required',
+            'id_estacionamiento' => 'required',
             'nombre' => 'required',
             'tipo' => 'required',
             'duracion' => 'required',
-            'poster' => 'required',
-            'banner' => 'required',
+            'poster' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // Ajusta las reglas de validación para la carga de imágenes
+            'banner' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // Ajusta las reglas de validación para la carga de imágenes
         ]);
+
+        $posterPath = $request->file('poster')->store('posters', 'public');
+        $bannerPath = $request->file('banner')->store('banners', 'public');
 
         $evento = new Evento();
         $evento->id_organizador = $request->id_organizador;
+        $evento->id_estacionamiento = $request->id_estacionamiento;
         $evento->nombre = $request->nombre;
         $evento->tipo = $request->tipo;
         $evento->duracion = $request->duracion;
-        $evento->poster = $request->poster;
-        $evento->banner = $request->banner;
+        $evento->poster = $posterPath;
+        $evento->banner = $bannerPath;
+
         $evento->save();
         return redirect()->route('Eventos.index');
     }
@@ -67,8 +75,9 @@ class EventoController extends Controller
     public function edit(string $id)
     {
         $organizadores = Organizador::all();
+        $estacionamientos = Estacionamiento::all();
         $evento = Evento::findOrFail($id);
-        return view('Eventos.edit', ['organizadores' => $organizadores], compact('evento'));
+        return view('Eventos.edit', ['organizadores' => $organizadores, 'estacionamientos' => $estacionamientos], compact('evento'));
     }
 
     /**
@@ -78,6 +87,7 @@ class EventoController extends Controller
     {
         $request->validate([
             'id_organizador' => 'required',
+            'id_estacionamiento' => 'required',
             'nombre' => 'required',
             'tipo' => 'required',
             'duracion' => 'required',

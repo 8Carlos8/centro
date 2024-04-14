@@ -1,41 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
-    <link rel="icon" type="image/x-icon" href="imagenes/CULTURA1.png">
-    <title>CC Siglo XXI - Pagina Principal</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE= edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="..\imagenes\CULTURA1.png">
+    <title>CC Siglo XXI - Servicios</title>
+    <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
         var contenido = "";
-        fetch("https://minitechsolutions.shop/ccsxxitest/api/cartelerahome.php")
+        fetch("https://minitechsolutions.shop/ccsxxitest/api/parking.php")
             .then(resp => resp.json())
             .then(resp => {
-                console.log(resp);
-                resp.cartelera.forEach((a) => {
 
-                    contenido += "<div id=\"cartelera1\" class=\"col col-xxl-2 col-lg-4 col-sm-5 ms-1 mb-3 mb-sm-0\">" +
-                        "<div class=\"card mb-4\"><a href=\"evento/?id=" + a.ID + "\"><img id=\"poster\" src=\"";
+                contenido += "<img id=\"cajon1\" src=\"../imagenes/";
+                if (resp.estacionamiento[0].ESTADO == 0) contenido += "circulorojo.svg\">";
+                else contenido += "circuloverde.svg\">";
 
-                    if (a.EVENTO.FOTO == "" || a.EVENTO.FOTO == "null" || a.EVENTO.FOTO == null) {
-                        contenido += "img/poster-placeholder.png";
-                    } else {
-                        contenido += a.EVENTO.FOTO;
-                    }
+                contenido += "<img id=\"cajon2\" src=\"../imagenes/";
+                if (resp.estacionamiento[1].ESTADO == 0) contenido += "circulorojo.svg\">";
+                else contenido += "circuloverde.svg\">";
 
-                    contenido += "\" class=\"card-img-top\" alt=\"\"...\"\"></a><div class=\"card-footer\">" +
-                        "<small class=\"h6 text-muted\">" + a.EVENTO.NOMBRE + "</small><br>" +
-                        "<small class=\"text-muted\">" + a.SALA.NOMBRE + "<br>" + a.INICIO + "</small>" +
-                        "</div>" +
-                        "</div>" +
-                        "</div>";
+                contenido += "<img id=\"cajon3\" src=\"../imagenes/";
+                if (resp.estacionamiento[2].ESTADO == 0) contenido += "circulorojo.svg\">";
+                else contenido += "circuloverde.svg\">";
+
+
+                document.getElementById("cajon").innerHTML = contenido;
+
+            });
+
+        setTimeout(recargar(), 5000);
+
+        function recargar() {
+            var contenido = "";
+            fetch("https://minitechsolutions.shop/ccsxxitest/api/parking.php")
+                .then(resp => resp.json())
+                .then(resp => {
+
+                    contenido += "<img id=\"cajon1\" src=\"../imagenes/";
+                    if (resp.estacionamiento[0].ESTADO == 0) contenido += "circulorojo.svg\">";
+                    else contenido += "circuloverde.svg\">";
+
+                    contenido += "<img id=\"cajon2\" src=\"../imagenes/";
+                    if (resp.estacionamiento[1].ESTADO == 0) contenido += "circulorojo.svg\">";
+                    else contenido += "circuloverde.svg\">";
+
+                    contenido += "<img id=\"cajon3\" src=\"../imagenes/";
+                    if (resp.estacionamiento[2].ESTADO == 0) contenido += "circulorojo.svg\">";
+                    else contenido += "circuloverde.svg\">";
+
+
+                    document.getElementById("cajon").innerHTML = contenido;
+
                 });
-                document.getElementById("cartas").innerHTML = contenido;
-            })
+        }
     </script>
 </head>
 
@@ -45,7 +68,7 @@
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="">
-                    <img id="logo" src="{{ asset('identidad/CULTURA1White.png') }}" class="img-fluid float-end w-auto" alt="logo">
+                    <img id="logo" src="../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="bi bi-list"></i></span>
@@ -62,13 +85,13 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link active align-middle text-white" aria-current="page" href="">Inicio</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('welcome') }}">Inicio</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link align-middle text-white" href="{{ route('Publi.CarP') }}">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Publi.EstP') }}">Estacionamiento</a>
+                                    <a class="nav-link active align-middle text-white" href="#">Estacionamiento</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link align-middle text-white" href="{{ route('ubicacion') }}">Ubicación</a>
@@ -111,24 +134,43 @@
             </div>
         </nav>
     </header>
-    <!-- Carrusel -->
+
+    <!-- Imagen de Fondo y Titulo -->
     <section class="w-100">
-        <div class="card bg-black text-white w-100 z-0">
-            <img src="imagenes/index.png" class="bg-img w-100" />
+        <div class="card bg-dark text-white w-100 z-0">
+            <img src="../imagenes/cartelera.png" class="bg-img w-100" />
             <div class="card-img-overlay text-light justify-content-center flex-column text-center pt-0 pt-lg-5" style="background-color: rgba(0, 0, 0, 0.5)">
-                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5"> ¡Bienvenido!</h2>
+                <h2 class="fs-1 pt-4 pt-lg-1 pt-xxl-5">Estacionamiento</h2>
             </div>
         </div>
     </section>
+    <!-- Contenido de la Pagina -->
     <section>
-        <div id="cartas" class="row z-1 mb-5 ms-2 justify-content-evenly">
-            <!-- Aqui deberia salir lo invocado por el servicio -->>
+        <div class="container-fluid justify-items-center">
+            <div id="servicios" class="row">
+                <div id="cardserviciosl" class="col col-10 col-xxl-9">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div>
+                                        <a class="btn btn-danger mb-2" onclick="recargar()">Recargar</a>
+                                        <img id="estacionamiento" class="" src="../imagenes/estacionamiento.png">
+                                        <div id="cajon">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
     <!-- Pie de Pagina -->
     <footer>
-        <div id="footerino" class="container-fluid">
+        <div id="footerinos" class="container-fluid">
             <div class="row justify-content-md-center pb-lg-5 pb-5 pt-5 m-0 text-white">
 
                 <div class="d-flex col-lg-5 mt-5 justify-content-center">
@@ -136,19 +178,19 @@
                     </p>
                 </div>
 
-                <div class="d-flex flex-column  ps-2 mt-sm-5 col-lg-3 align-middle">
+                <div class="d-flex flex-column  ps-0 mt-sm-5 col-lg-3 align-middle">
                     <div class="row justify-content-center">
                         <p><span class="text-white ms-sm-5">Mapa del Sitio:</span></p>
                         <div class="col col-10 col-xxl-4 justify-content-center">
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Inicio</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="{{ route('Carteleras.index') }}"><i class="bi bi-arrow-right-circle-fill"></i> Cartelera</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="{{ route('Estacionamientos.index') }}"><i class="bi bi-arrow-right-circle-fill"></i> Estacionamiento</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Ubicación</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../"><i class="bi bi-arrow-right-circle-fill"></i> Inicio</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../cartelera/"><i class="bi bi-arrow-right-circle-fill"></i> Cartelera</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../estacionamiento/"><i class="bi bi-arrow-right-circle-fill"></i> Estacionamiento</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-sm-5" href="../ubicacion/"><i class="bi bi-arrow-right-circle-fill"></i> Ubicación</a></p>
                         </div>
                         <div class="col col-10 col-xxl-4 justify-content-center">
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href=""><i class="bi bi-arrow-right-circle-fill"></i> Quienes Somos</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="somos/#legal"><i class="bi bi-arrow-return-right"></i> Politica de Privacidad</a></p>
-                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="somos/#legal"><i class="bi bi-arrow-return-right"></i> Aviso Legal</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/"><i class="bi bi-arrow-right-circle-fill"></i> Quienes Somos</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/#legal"><i class="bi bi-arrow-return-right"></i> Politica de Privacidad</a></p>
+                            <p><a id="mapa" class="link-underline text-white link-underline-opacity-0 ms-xxl-0 ms-sm-5" href="../somos/#legal"><i class="bi bi-arrow-return-right"></i> Aviso Legal</a></p>
                         </div>
                     </div>
                 </div>

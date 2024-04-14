@@ -15,6 +15,10 @@
             <p>{{ $evento->id_organizador }}</p>
         </div>
         <div>
+            <label for="id_estacionamiento" class="form-label text-gray-700">ID del Estacinamiento</label>
+            <p>{{ $evento->id_estacionamiento }}</p>
+        </div>
+        <div>
             <label for="nombre" class="form-label text-gray-700">Nombre del evento</label>
             <p>{{ $evento->nombre }}</p>
         </div>

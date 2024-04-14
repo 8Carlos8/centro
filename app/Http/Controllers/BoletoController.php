@@ -27,8 +27,9 @@ class BoletoController extends Controller
         $usuarios = Usuario::all();
         $carteleras = Cartelera::all();
         $cajones = Cajon::all();
-        return view('Boletos.create', ['usuarios' => $usuarios], ['carteleras' => $carteleras], ['cajones' => $cajones]);
+        return view('Boletos.create', compact('usuarios', 'carteleras', 'cajones'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,14 +39,14 @@ class BoletoController extends Controller
         $request->validate([
             'id_usuario' => 'required',
             'id_cartelera' => 'required',
-            'id_cajones' => 'required',
+            'id_cajon' => 'required',
             'noBoletos' => 'required',
         ]);
 
         $boleto = new Boleto();
         $boleto->id_usuario = $request->id_usuario;
         $boleto->id_cartelera = $request->id_cartelera;
-        $boleto->id_cajones = $request->id_cajones;
+        $boleto->id_cajon = $request->id_cajon;
         $boleto->noBoletos = $request->noBoletos;
         $boleto->save();
         return redirect()->route('Boletos.index')->with('success', 'Boleto creado correctamente');
@@ -80,7 +81,7 @@ class BoletoController extends Controller
         $request->validate([
             'id_usuario' => 'required',
             'id_cartelera' => 'required',
-            'id_cajones' => 'required',
+            'id_cajon' => 'required',
             'noBoletos' => 'required',
         ]);
 

@@ -17,8 +17,12 @@
             <p>{{ $estacionamiento->id }}</p>
         </div>
         <div>
-            <label for="id_cajon" class="form-label text-gray-700">ID Cajon</label>
-            <p>{{ $estacionamiento->id_cajon }}</p>
+            <label for="id_cajonIni" class="form-label text-gray-700">ID Cajon Inicio</label>
+            <p>{{ $estacionamiento->id_cajonIni }}</p>
+        </div>
+        <div>
+            <label for="id_cajonFin" class="form-label text-gray-700">ID Cajon Fin</label>
+            <p>{{ $estacionamiento->id_cajonFin }}</p>
         </div>
         <div>
             <label for="entrada" class="form-label text-gray-700">Entrada</label>

@@ -1,15 +1,25 @@
 <div class="container mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4 text-gray-900">Crear nuevo Evento</h1>
 
-    <form action="{{ route('Eventos.store') }}" method="POST">
+    <form action="{{ route('Eventos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_persona">ID Persona</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_persona">ID Organizador</label>
             <select class="form-select" id="id_persona" name="id_organizador">
                 <option value="">Seleccionar Organizador</option>
                 @foreach($organizadores as $organizador)
                 <option value="{{ $organizador->id }}">{{ $organizador->id }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_persona">ID Estacinamiento</label>
+            <select class="form-select" id="id_estacionamiento" name="id_estacionamiento">
+                <option value="">Seleccionar Estacinamiento</option>
+                @foreach($estacionamientos as $estacionamiento)
+                <option value="{{ $estacionamiento->id }}">{{ $estacionamiento->id }}</option>
                 @endforeach
             </select>
         </div>

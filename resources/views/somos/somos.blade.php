@@ -39,10 +39,10 @@
                                     <a class="nav-link align-middle text-white" href="{{ route('welcome') }}">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Publi.CarP') }}">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Publi.EstP') }}">Estacionamiento</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link align-middle text-white" href="{{ route('ubicacion') }}">Ubicación</a>
@@ -74,11 +74,11 @@
                             <i class="bi bi-person-fill"></i>
                         </button>
                         <ul id="useraccesslist" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="{{ route('Usuarios.login') }}">Iniciar Sesión</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                            <li><a class="dropdown-item" href="{{ route('Personas.create') }}">Registrarse</a></li>
                         </ul>
                     </div>
                 </div>

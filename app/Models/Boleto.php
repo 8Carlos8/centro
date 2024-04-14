@@ -14,7 +14,7 @@ class Boleto extends Model
     protected $fillable = [
         'id_usuario',
         'id_cartelera',
-        'id_cajones',
+        'id_cajon',
         'noBoletos',
     ];
 
@@ -30,7 +30,7 @@ class Boleto extends Model
 
     protected function Cajon()
     {
-        return $this->belongsTo(Cajon::class, 'id_cajones');
+        return $this->belongsTo(Cajon::class, 'id_cajon');
     }
 
     protected $dispatchesEvents = [
