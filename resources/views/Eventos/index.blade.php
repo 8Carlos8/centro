@@ -13,7 +13,7 @@
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;">
-    <header class="w-100">
+     <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="../panela.php">
@@ -30,19 +30,31 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link  align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
+                                    <a class="nav-link active align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Personas.index') }}">Personas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Boletos.index') }}">Boletos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Cajones.index') }}">Cajones</a>
                                 </li>
                             </ul>
                         </div>
