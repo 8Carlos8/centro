@@ -14,7 +14,7 @@
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;">
-    <header class="w-100">
+        <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="../panela.php">
@@ -37,13 +37,13 @@
                                     <a class="nav-link active align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Salas.index') }}" >Sala</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white"  href="{{ route('Eventos.index') }}">Eventos</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link  align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
@@ -66,10 +66,21 @@
                         <div class="container" id="navbar">
                             <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <label class="dropdown-item">Usuario Activo: </label>
+                                    @auth
+                                    <!-- Esto se mostrará solo si hay una sesión activa -->
+                                    <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item" href="../../logout.php">Cerrar Sesión</a>
+                                    @if (Auth::check())
+                                    <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                        @csrf
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                    </form>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -81,11 +92,26 @@
                             <i class="bi bi-person-fill"></i>
                         </button>
                         <ul id="useraccesslist" class="dropdown-menu">
-                            <li><label class="dropdown-item">Usuario Activo: </label></li>
+                            <li>
+                                @auth
+                                <!-- Esto se mostrará solo si hay una sesión activa -->
+                                <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                @else
+                                <!-- Esto se mostrará si no hay una sesión activa -->
+                                <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                @endauth
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../logout.php">Cerrar Sesión</a></li>
+                            <li>
+                                @if (Auth::check())
+                                <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                    @csrf
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                </form>
+                                @endif
+                            </li>
                         </ul>
                     </div>
                 </div>

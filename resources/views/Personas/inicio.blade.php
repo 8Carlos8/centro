@@ -13,11 +13,11 @@
 </head>
 
 <body style="background-color:#231c16">
-    <header class="w-100">
+<header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
-                <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="#">
-                    <img id="logo" src="{{asset('identidad/CULTURA1White.png')}}" class="img-fluid float-end w-auto" alt="logo">
+                <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="../panela.php">
+                    <img id="logo" src="../../../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="bi bi-list"></i></span>
@@ -27,27 +27,95 @@
                 </button>
                 <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
                     <div class="container justify" id="navbar">
-                        <div class="container rounded" style="visibility: hidden;" id="navbart">
+                        <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Estacionamientos.index') }}">Sala</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Estacionamientos.index') }}">Estacionamiento</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Personas.index') }}">Personas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active align-middle text-white" href="{{ route('Boletos.index') }}">Boletos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Cajones.index') }}">Cajones</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
+                <div class="collapse navbar-collapse ms-2" id="userSupportedContent">
+                    <div class="container" id="navbar">
+                        <div class="container" id="navbar">
+                            <ul class="navbar-nav justify-content-center me-auto mt-3 mb-2 mb-lg-0">
+                                <li class="nav-item m-0">
+                                    @auth
+                                    <!-- Esto se mostrará solo si hay una sesión activa -->
+                                    <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
+                                </li>
+                                <li class="nav-item">
+                                    @if (Auth::check())
+                                    <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                        @csrf
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                    </form>
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-brand align-middle" id="userslong">
+                    <div class="btn-group ms-lg-5 mt-1">
+                        <button id="useraccess" type="button" class="btn btn-lg dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-fill"></i>
+                        </button>
+                        <ul id="useraccesslist" class="dropdown-menu">
+                            <li>
+                                @auth
+                                <!-- Esto se mostrará solo si hay una sesión activa -->
+                                <label class="dropdown-item">Usuario Activo: {{ auth()->user()->username }}</label>
+                                @else
+                                <!-- Esto se mostrará si no hay una sesión activa -->
+                                <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                @endauth
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                @if (Auth::check())
+                                <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                                    @csrf
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                </form>
+                                @endif
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <body>
