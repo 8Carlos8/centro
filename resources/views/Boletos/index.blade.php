@@ -174,9 +174,17 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="col-2 ps-2 mt-4 text-end">
-                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                    </div>
+                    <div class="col-2 ps-2 mt-4 text-end">
+                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                    </div>
                 </div>
+            </div>
+
             </div>
         </div>
     </div>

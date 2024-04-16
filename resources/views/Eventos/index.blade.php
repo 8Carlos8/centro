@@ -30,7 +30,7 @@
                         <div class="container rounded" id="navbart">
                             <ul class="nav nav-pills nav-fill justify-content-center me-auto mt-3 mb-3 mb-lg-0">
                                 <li class="nav-item m-0">
-                                    <a class="nav-link active align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
+                                    <a class="nav-link  align-middle text-white" href="{{ route('Usuarios.index') }}">Usuario</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link  align-middle text-white" href="{{ route('Organizadores.index') }}">Organizador</a>
@@ -39,7 +39,7 @@
                                     <a class="nav-link  align-middle text-white" href="{{ route('Salas.index') }}">Sala</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
+                                    <a class="nav-link active align-middle text-white" href="{{ route('Eventos.index') }}">Eventos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link  align-middle text-white" href="{{ route('Carteleras.index') }}">Cartelera</a>
@@ -185,9 +185,17 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="col-2 ps-2 mt-4 text-end">
-                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                    </div>
+                    <div class="col-2 ps-2 mt-4 text-end">
+                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                    </div>
                 </div>
+            </div>
+
             </div>
         </div>
     </div>
