@@ -121,7 +121,7 @@
     <div class="card py-2 m-5">
         <div class="row justify-content-center">
             <div class="container mx-auto py-4">
-                <h1 class="text-3xl font-bold mb-4 text-gray-900">Eventos</h1>
+                <h2 class="mt-4 text-center text-black">Eventos</h1>
 
                 <div class="col-2 ps-5 mt-4">
                     @auth
@@ -173,7 +173,7 @@
                                 <form action="{{ route('Eventos.destroy', $evento) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                 </form>
                                 @endif
                                 @else

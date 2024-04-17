@@ -122,7 +122,7 @@
     <div class="card py-2 m-5">
         <div class="row justify-content-center">
             <div class="container-fluid py-2 z-1">
-                <h1 class="text-3xl font-bold mb-4 text-gray-900">Organizadores</h1>
+                <h2 class="mt-4 text-center text-black">Organizadores</h1>
 
                 <div class="mb-4">
                     <a href="{{ route('Organizadores.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo organizador</a>
@@ -154,7 +154,7 @@
                                 <form action="{{ route('Organizadores.destroy', $organizador->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                 </form>
                             </td>
                         </tr>

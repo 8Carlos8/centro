@@ -51,7 +51,7 @@
                                     <a class="nav-link  align-middle text-white" href="{{ route('Personas.index') }}">Personas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active align-middle text-white" href="{{ route('Boletos.index') }}">Boletos</a>
+                                    <a class="nav-link align-middle text-white" href="{{ route('Boletos.index') }}">Boletos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link  align-middle text-white" href="{{ route('Cajones.index') }}">Cajones</a>

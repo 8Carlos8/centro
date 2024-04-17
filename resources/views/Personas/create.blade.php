@@ -38,34 +38,33 @@
                             <div class="d-flex w-100 justify-content-center">
                                 <p class="fs-3 fw-bold text-center"> Registrarse </p>
                             </div>
-                            <div class="mt-3 mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
+                            <div class=" mb-3">
+                                <label for="nombre" class="control-label ms-2">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="a_paterno" class="form-label">Apellido Materno</label>
+                            <div class="mb-3">
+                                <label for="a_paterno" class="control-label ms-2">Apellido Materno</label>
                                 <input type="text" class="form-control" id="a_paterno" name="a_paterno" placeholder="Apellido">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="a_materno" class="form-label">Apellido Paterno</label>
+                            <div class=" mb-3">
+                                <label for="a_materno" class="control-label ms-2">Apellido Paterno</label>
                                 <input type="text" class="form-control" id="a_materno" name="a_materno" placeholder="Apellido">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="fecha_nac" class="form-label">Fecha de Nacimiento</label>
+                            <div class=" mb-3">
+                                <label for="fecha_nac" class="control-label ms-2">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="">
                             </div>
 
-                            <div class="mt-3 mb-3">
+                            <div class=" mb-3">
                                 <script>
                                     document.getElementById("fecha_nac").valueAsDate = new Date();
                                 </script>
                             </div>
-
-                            <div class="mt-3 mb-3">
-                                <label for="telefono" class="form-label">Telefono</label>
+                            <div class="mb-3">
+                                <label for="telefono" class="control-label ms-2">Telefono</label>
                                 <div class="row column-gap-">
                                 <select class="form-select w-50" name="countryCode" id="codigopais">
                                                 <option data-countryCode="MX" selected value="52">Mexico (+52)</option>
@@ -292,32 +291,32 @@
                                 </div>
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="username" class="form-label">Usuario</label>
+                            <div class="mb-3">
+                                <label for="username" class="control-label ms-2">Usuario</label>
                                 <input type="text" class="form-control" id="username" name="username" aria-describedby="usuario" placeholder="Nombre de Usuario">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="correo" class="form-label">Correo Electronico</label>
+                            <div class="mb-3">
+                                <label for="correo" class="control-label ms-2">Correo Electronico</label>
                                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
+                            <div class=" mb-3">
+                                <label for="password" class="form-label ms-2">Contraseña</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
                             </div>
 
-                            <div class="mt-3 mb-3">
-                                <label for="npass" class="form-label">Repetir Contraseña</label>
+                            <div class=" mb-3">
+                                <label for="npass" class="control-label ms-2">Repetir Contraseña</label>
                                 <input type="password" class="form-control" id="npass" name="npass" placeholder="Contraseña">
                             </div>
 
-                            <div class="mt-3 mb-3">
+                            <div class="mb-3">
                                 <input type="hidden" id="rol" name="rol" value="2">
                                 <input type="hidden" id="estado" name="estado" value="1">
                             </div>
 
-                            <div class="mt-3 mb-3">
+                            <div class="mb-3">
                                 <div class="d-flex w-100 mt-3 justify-content-center">
                                     <button type="submit" class="btn btn-danger ms-2">Registrarse</button>
                                 </div>

@@ -47,8 +47,9 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="control-label ms-2">
-                        <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Actualizar Sala</button>
+                    <td class="mb-4">
+                        <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Editar</button>
+                        <a href="{{ route('Salas.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
                     </td>
                 </tr>
             </table>

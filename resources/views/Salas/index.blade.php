@@ -141,7 +141,7 @@
                         <form action="{{ route('Salas.destroy', $sala) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                            <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                         </form>
                     </td>
                 </tr>

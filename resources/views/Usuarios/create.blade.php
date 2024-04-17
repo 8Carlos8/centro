@@ -72,7 +72,7 @@
                                     <input type="hidden" id="estado" name="estado" value="1">
                                     <input type="hidden" id="rol" name="rol" value="2">
                                     <div class="d-flex w-100 mt-3 justify-content-center">
-                                        <button type="submit" class="btn mt-3">Registrarse</button> <!-- Cambia <a> por <button type="submit"> -->
+                                        <button type="submit" class="btn btn-danger ms-2">Registrarse</button> <!-- Cambia <a> por <button type="submit"> -->
                                     </div>
                                 </form>
                             </div>

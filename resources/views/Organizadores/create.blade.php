@@ -50,7 +50,7 @@
                     <tr>
                         <td>
                             <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Crear Organizador</button>
-                                <a href="{{ route('Boletos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            <a href="{{ route('Boletos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
                         </td>
                     </tr>
                 </table>

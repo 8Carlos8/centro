@@ -107,7 +107,7 @@
                                 @if (Auth::check())
                                 <form action="{{ route('logout') }}" method="POST" class="inline-block">
                                     @csrf
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
+                                    <button type="submit" class="btn btn-danger ms-2">Cerrar Sesión</button>
                                 </form>
                                 @endif
                             </li>
@@ -122,7 +122,7 @@
         <div class="card py-2 m-5">
             <div class="row justify-content-center">
                 <div class="container mx-auto py-4">
-                    <h1 class="text-3xl font-bold mb-4 text-gray-900">Personas</h1>
+                    <h2 class="mt-4 text-center text-black">Personas</h2>
 
                     <div class="mb-4">
                         <a href="{{ route('Personas.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nueva Persona</a>
@@ -155,7 +155,7 @@
                                     <form action="{{ route('Personas.destroy', $persona) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
 
                                 </td>
