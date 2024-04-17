@@ -1,16 +1,3 @@
-@auth
-<!-- Esto se mostrará solo si hay una sesión activa -->
-<p>Bienvenido, {{ auth()->user()->username }}</p>
-@else
-<!-- Esto se mostrará si no hay una sesión activa -->
-<p>Por favor, inicia sesión para acceder a esta página.</p>
-@endauth
-
-
-@guest
-<!-- Esto se mostrará si no hay una sesión activa -->
-<p>Por favor, inicia sesión para acceder a esta página.</p>
-@endguest
 <html>
 
 <head>
@@ -34,7 +21,7 @@
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;">
-       <header class="w-100">
+    <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="../panela.php">
@@ -146,16 +133,11 @@
                     <h2 class="mt-4 text-center text-black">Lista de Usuarios</h2>
                 </div>
                 <div class="col-2 ps-5 mt-4 align-items-end">
-                    <a href="insertar.php" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Registrar Usuario</a>
+                    <a href="{{ route('Usuarios.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Registrar Usuario</a>
                 </div>
             </div>
             <table class="table table-striped bg-white">
                 <tr>
-                    <td align="center"><b>Nombre</b></td>
-                    <td align="center"><b>Apellido Paterno</b></td>
-                    <td align="center"><b>Apellido Materno</b></td>
-                    <td align="center"><b>Fecha Nacimiento</b></td>
-                    <td align="center"><b>Telefono</b></td>
                     <td align="center"><b>Username</b></td>
                     <td align="center"><b>Correo</b></td>
                     <td align="center"><b>Rol</b></td>
@@ -166,28 +148,14 @@
                 foreach ($usuarios as $usuario) {
                 ?>
                     <tr>
-                        <?php
-                        foreach ($personas as $persona) {
-                            if ($usuario->id_persona == $persona->id) {
-                        ?>
-                                <td><span title="<?= $persona->nombre ?>"><?= $persona->nombre ?></span></td>
-                                <td><span title="<?= $persona->a_paterno ?>"><?= $persona->a_paterno ?></span></td>
-                                <td><span title="<?= $persona->a_materno ?>"><?= $persona->a_materno ?></span></td>
-                                <td><span title="<?= $persona->fecha_nac ?>"><?= $persona->fecha_nac ?></span></td>
-                                <td><span title="<?= $persona->telefono ?>"><?= $persona->telefono ?></span></td>
-                        <?php
-                            }
-                        }
-                        ?>
                         <td><span title="<?= $usuario->username ?>"><?= $usuario->username ?></span></td>
                         <td><span title="<?= $usuario->correo ?>"><?= $usuario->correo ?></span></td>
                         <td><span title="<?= $usuario->rol ?>">
                                 <?= ($usuario->rol == 0) ? "Inactivo" : "" ?>
-                                <?= ($usuario->rol == 1) ? "Usuario General" : "" ?>
-                                <?= ($usuario->rol == 2) ? "Organizador" : "" ?>
+                                <?= ($usuario->rol == 1) ? "Administrador" : "" ?>
+                                <?= ($usuario->rol == 2) ? "Usuario General" : "" ?>
                                 <?= ($usuario->rol == 3) ? "Secretaria" : "" ?>
                                 <?= ($usuario->rol == 4) ? "Jefe" : "" ?>
-                                <?= ($usuario->rol == 5) ? "Administrador" : "" ?>
                             </span></td>
                         <td><span title="<?= $usuario->estado ?>">
                                 <?= ($usuario->estado == 0) ? "Desconocido" : "" ?>
@@ -197,15 +165,19 @@
                                 <?= ($usuario->estado == 4) ? "Cancelado" : "" ?>
                                 <?= ($usuario->estado == 5) ? "Terminado" : "" ?>
                             </span></td>
-                        <td align="center"><a class="btn btn-primary" href="visualizar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                            <a class="btn btn-warning" href="modificar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                            <a class="btn btn-danger" href="" onClick="confirma('eliminar.php?id=<?= $usuario->id ?>&pid=<?= $usuario->id_persona ?>'); return false;" title='Eliminar usuario'><i class="bi bi-trash3"></i>&nbsp;Eliminar Usuario</a>
+                        <td align="center"><a class="btn btn-primary" href="{{ route('Usuarios.show', $usuario->id) }}" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                            <a class="btn btn-warning" href="{{ route('Usuarios.edit', $usuario->id) }}" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
+                            <form action="{{ route('Usuarios.destroy', $usuario) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                 <?php
                 }
                 ?>
-                
+
             </table>
             <div class="container-fluid">
                 <div class="row">

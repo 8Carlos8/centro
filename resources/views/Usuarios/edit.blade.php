@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport">
     <link rel="icon" type="image/x-icon" href="{{ asset ('imagenes/CULTURA1.png')}}">
-    <title>CC Siglo XXI - Registrarse</title>
+    <title>CC Siglo XXI - Actualizar</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -39,11 +39,12 @@
                                 </form>
                             </div>
                             <div class="d-flex w-100 justify-content-center">
-                                <p class="fs-3 fw-bold"> Registrarse </p>
+                                <p class="fs-3 fw-bold"> Actualizar </p>
                             </div>
                             <div>
-                                <form action="{{ route('Usuarios.store') }}" method="POST" class="ps-4 pe-4 mb-3">
+                                <form action="{{ route('Usuarios.update', $usuario->id) }}" method="POST" class="ps-4 pe-4 mb-3">
                                     @csrf
+                                    @method('PUT')
                                     <div class="mt-3 mb-3">
                                         <label class="control-label ms-2" for="id_persona">ID Persona</label>
                                         <select class="form-select" id="id_persona" name="id_persona">
@@ -55,15 +56,15 @@
                                     </div>
                                     <div class="mt-3 mb-3">
                                         <label for="usuario" class="form-label">Usuario</label>
-                                        <input type="text" class="form-control" id="username" name="username" aria-describedby="usuario" placeholder="Nombre de Usuario">
+                                        <input type="text" class="form-control" id="username" name="username" aria-describedby="usuario" placeholder="Nombre de Usuario" value="{{ $usuario->username }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Correo Electronico</label>
-                                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo">
+                                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo" value="{{ $usuario->correo }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="pass" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" value="{{ $usuario->password }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="npass" class="form-label"> Repetir Contraseña</label>
