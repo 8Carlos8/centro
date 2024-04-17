@@ -1,7 +1,7 @@
 <div class="container mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4 text-gray-900">Actualizar Cajon</h1>
 
-    <form action="{{ route('Carteleras.update', $cartelera->id) }}" method="POST">
+    <form action="{{ route('Cajones.update', $cajon->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-4">

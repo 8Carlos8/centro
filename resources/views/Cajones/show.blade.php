@@ -1,4 +1,3 @@
-<x-app-layout>
     <div class="container mx-auto py-4">
         <h1 class="text-3xl font-bold mb-4 text-gray-900">Detalle del Cajon</h1>
 
@@ -21,8 +20,7 @@
             </div>
             <div>
                 <label for="estado" class="form-label text-gray-700">Estado del Cajon</label>
-                <p>{{ $evento->estado }}</p>
+                <p>{{ $cajon->estado }}</p>
             </div>
         </div>
     </div>
-</x-app-layout>

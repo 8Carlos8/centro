@@ -101,22 +101,9 @@ class PersonaController extends Controller
             'a_materno' => 'required|string|max:255',
             'fecha_nac' => 'required|date',
             'telefono' => 'required|string|max:255',
-            //Actualizar datos del usuario
-            'correo' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'estado' => 'required',
-            'rol' => 'required',
         ]);
 
         $persona->update($request->all());
-        $usuario = $persona->usuario;
-        $usuario->correo = $request->correo;
-        $usuario->username = $request->username;
-        $usuario->password = Hash::make($request->password); // Encriptar la nueva contraseña antes de guardarla
-        $usuario->rol = $request->rol;
-        $usuario->estado = $request->estado;
-        $usuario->save();
         return redirect()->route('Personas.index')->with('success', 'Persona actualizada correctamente.');
     }
 

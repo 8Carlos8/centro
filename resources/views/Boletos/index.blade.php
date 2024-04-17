@@ -118,74 +118,74 @@
         </nav>
     </header>
 
-<div class="container-fluid py-2 z-1">
-    <div class="card py-2 m-5">
-        <div class="row justify-content-center">
-            <div class="container mx-auto py-4">
-                <h1 class="text-3xl font-bold mb-4 text-gray-900">Boletos</h1>
+    <div class="container-fluid py-2 z-1">
+        <div class="card py-2 m-5">
+            <div class="row justify-content-center">
+                <div class="container mx-auto py-4">
+                    <h1 class="text-3xl font-bold mb-4 text-gray-900">Boletos</h1>
 
-                <div class="mb-4">
-                    @auth
-                    @if (auth()->user()->rol == 1)
-                    <a href="{{ route('Boletos.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Obtener Boletos</a>
-                    @endif
-                    @else
-                    <!-- Esto se mostrará si no hay una sesión activa -->
-                    <p>Por favor, inicia sesión para acceder a esta página.</p>
-                    @endauth
-                </div>
-
-                <table class="table-auto w-full border-collapse border-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Usuario</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cartelera</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cajones</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Numero de boletos</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($boletos as $boleto)
-                        <tr>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_usuario }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cartelera }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cajones }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->noBoletos }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                <a href="{{ route('Boletos.show', $boleto->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
-                                @auth
-                                @if (auth()->user()->rol == 1)
-                                <a href="{{ route('Boletos.edit', $boleto->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
-                                <form action="{{ route('Boletos.destroy', $boleto) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
-                                </form>
-                                @endif
-                                @else
-                                <!-- Esto se mostrará si no hay una sesión activa -->
-                                <p>Por favor, inicia sesión para acceder a esta página.</p>
-                                @endauth
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                    <div class="mb-4">
+                        @auth
+                        @if (auth()->user()->rol == 1)
+                        <a href="{{ route('Boletos.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Obtener Boletos</a>
+                        @endif
+                        @else
+                        <!-- Esto se mostrará si no hay una sesión activa -->
+                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                        @endauth
                     </div>
-                    <div class="col-2 ps-2 mt-4 text-end">
-                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                    </div>
-                </div>
-            </div>
 
+                    <table class="table-auto w-full border-collapse border-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Usuario</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cartelera</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cajones</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Numero de boletos</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($boletos as $boleto)
+                            <tr>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_usuario }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cartelera }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cajon }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->noBoletos }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    <a href="{{ route('Boletos.show', $boleto->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Visualizar</a>
+                                    @auth
+                                    @if (auth()->user()->rol == 1)
+                                    <a href="{{ route('Boletos.edit', $boleto->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-lg">Editar</a>
+                                    <form action="{{ route('Boletos.destroy', $boleto) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-lg">Eliminar</button>
+                                    </form>
+                                    @endif
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                            </div>
+                            <div class="col-2 ps-2 mt-4 text-end">
+                                <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
