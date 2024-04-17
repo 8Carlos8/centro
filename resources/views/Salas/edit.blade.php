@@ -1,26 +1,61 @@
-<div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4 text-gray-900">Actualizar Organizador</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC Siglo XXI - Editar sala</title>
+    <link rel="icon" type="image/x-icon" href="../../../imagenes/CULTURA1.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body style="background-image: url(../../../imagenes/teatro.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 
-    <form action="{{ route('Salas.update', $sala->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_persona">Estado</label>
-            <input type="text" id="estado" name="estado" placeholder="Estado de la Sala" class="form-input" value="{{ $sala->id }}">
-        </div>
+<div class="container py-2 w-50 justify-content-center">
+    <div class="card">
+        <h2 class="mt-4 text-black ms-5">Editar Sala</h2>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="razonSoc">Nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre de la Sala" class="form-input" value="{{ $sala->nombre }}">
-        </div>
+        <form action="{{ route('Salas.update', $sala->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <table class="table mt-4">
+                <tr>
+                    <td class="control-label ms-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="id_persona">Estado</label>
+                    </td>
+                    <td class="control-label ms-2">
+                        <input type="text" id="estado" name="estado" placeholder="Estado de la Sala" class="form-input" value="{{ $sala->id }}">
+                    </td>
+                </tr>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="direccion">Asientos</label>
-            <input type="text" id="asientos" name="asientos" placeholder="Asientos que hay en la Sala" class="form-input" value="{{ $sala->asientos }}">
-        </div>
+                <tr>
+                    <td class="control-label ms-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="razonSoc">Nombre</label>
+                    </td>
+                    <td class="control-label ms-2">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de la Sala" class="form-input" value="{{ $sala->nombre }}">
+                    </td>
+                </tr>
 
-        <div class="mb-4">
-            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Actualizar Sala</button>
-        </div>
-    </form>
+                <tr>
+                    <td class="control-label ms-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="direccion">Asientos</label>
+                    </td>
+                    <td class="control-label ms-2">
+                        <input type="text" id="asientos" name="asientos" placeholder="Asientos que hay en la Sala" class="form-input" value="{{ $sala->asientos }}">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="control-label ms-2">
+                        <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Actualizar Sala</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

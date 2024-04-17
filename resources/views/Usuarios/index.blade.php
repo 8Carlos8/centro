@@ -146,7 +146,7 @@
                     <h2 class="mt-4 text-center text-black">Lista de Usuarios</h2>
                 </div>
                 <div class="col-2 ps-5 mt-4 align-items-end">
-                    <a href="insertar.php" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Registrar Usuario</a>
+                    <a href="{{ route('Usuarios.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Registrar Usuario</a>
                 </div>
             </div>
             <table class="table table-striped bg-white">
