@@ -27,7 +27,7 @@
             <div class="row w-100 justify-content-center">
                 <div class="col col-10 col-xxl-6 mt-5 mb-5 mt-xxl-5 mb-xxl-5">
                     <div class="d-flex align-items-center justify-content-center w-100 mt-xxl-5 mb-xxl-5 mp-5">
-                        <img class="img-fluid w-50" src="../identidad/CULTURAHWhiteA.png" alt="Logo CCSXXI">
+                        <img class="img-fluid w-50" src="{{ asset('identidad/CULTURA1White.png') }}" alt="Logo CCSXXI">
                     </div>
                 </div>
                 <div class="col col-10 mt-5 mt-xxl-5 mb-xxl-5 col-xxl-3">
