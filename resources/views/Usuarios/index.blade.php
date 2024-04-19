@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function confirma(miurl) {
-            question = confirm("¿Esta seguro de eliminar este elemento?")
-            if (question != "0") {
-                top.location = miurl;
-            }
+    <script>
+    function confirmDelete(userId) {
+        if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+            document.getElementById('deleteForm'+userId).submit();
         }
-    </script>
+    }
+</script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
@@ -24,7 +23,7 @@
     <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
-                <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="../panela.php">
+                <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="{{ route('Personas.inicio') }}">
                     <img id="logo" src="../../../identidad/CULTURA1White.png" class="img-fluid float-end w-auto" alt="logo">
                 </a>
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,12 +163,13 @@
                                 <?= ($usuario->estado == 4) ? "Cancelado" : "" ?>
                                 <?= ($usuario->estado == 5) ? "Terminado" : "" ?>
                             </span></td>
-                        <td align="center"><a class="btn btn-primary" href="{{ route('Usuarios.show', $usuario->id) }}" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                        <td align="center">
+                            <a class="btn btn-primary" href="{{ route('Usuarios.show', $usuario->id) }}" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
                             <a class="btn btn-warning" href="{{ route('Usuarios.edit', $usuario->id) }}" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
                             <form action="{{ route('Usuarios.destroy', $usuario) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
+                                <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$usuario->id}})">Eliminar</button>
                             </form>
                         </td>
                     </tr>

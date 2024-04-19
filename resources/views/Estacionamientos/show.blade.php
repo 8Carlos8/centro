@@ -1,40 +1,73 @@
-<div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4 text-gray-900">Detalle del Estacionamiento</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('imagenes/CULTURA1.png') }}">
+    <title>CC Siglo XXI - Visualizar Evento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body style="background-image: url('{{ asset('imagenes/teatro.jpg') }}'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 
-    @if (session('status'))
-    <div class="bg-green-500 text-white p-4 mb-4 rounded-lg">
-        {{ session('status') }}
-    </div>
-    @endif
+<div class="container w-50 py-2 justify-content-center">
+    <div class="card mt-4">
+        <div class="form-group mt-2 mb-2">
+            <h2 class="mt-4 ms-3 text-black">Detalles del Evento</h2>
+        </div> 
 
-    <div class="mb-4">
-        <a href="{{ route('Estacionamientos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al listado</a>
-    </div>
+        @if (session('status'))
+        <div class="bg-green-500 text-white p-4 mb-4 rounded-lg">
+            {{ session('status') }}
+        </div>
+        @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <label for="id" class="form-label text-gray-700">ID del Estacionamiento</label>
-            <p>{{ $estacionamiento->id }}</p>
-        </div>
-        <div>
-            <label for="id_cajonIni" class="form-label text-gray-700">ID Cajon Inicio</label>
-            <p>{{ $estacionamiento->id_cajonIni }}</p>
-        </div>
-        <div>
-            <label for="id_cajonFin" class="form-label text-gray-700">ID Cajon Fin</label>
-            <p>{{ $estacionamiento->id_cajonFin }}</p>
-        </div>
-        <div>
-            <label for="entrada" class="form-label text-gray-700">Entrada</label>
-            <p>{{ $estacionamiento->entrada }}</p>
-        </div>
-        <div>
-            <label for="salida" class="form-label text-gray-700">Salida</label>
-            <p>{{ $estacionamiento->salida }}</p>
-        </div>
-        <div>
-            <label for="estado" class="form-label text-gray-700">Estado</label>
-            <p>{{ $estacionamiento->estado }}</p>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="id" class="control-label fw-bold text-gray-700">ID del Estacionamiento</label>
+                        <p>{{ $estacionamiento->id }}</p>
+                    </td>
+                    <td>
+                        <label for="id_cajonIni" class="control-label fw-bold text-gray-700">ID Cajon Inicio</label>
+                        <p>{{ $estacionamiento->id_cajonIni }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="id_cajonFin" class="control-label fw-bold text-gray-700">ID Cajon Fin</label>
+                        <p>{{ $estacionamiento->id_cajonFin }}</p>
+                    </td>
+                    <td>
+                        <label for="entrada" class="control-label fw-bold text-gray-700">Entrada</label>
+                        <p>{{ $estacionamiento->entrada }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="salida" class="control-label fw-bold text-gray-700">Salida</label>
+                        <p>{{ $estacionamiento->salida }}</p>
+                    </td>
+                    <td>
+                        <label for="estado" class="control-label fw-bold text-gray-700">Estado</label>
+                        @if($estacionamiento->estado == 1)
+                        <p style="color: green;">Disponible</p>
+                        @else
+                        <p style="color: red;">Rojo</p>
+                        @endif
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mb-4 text-end">
+            <a href="{{ route('Estacionamientos.index') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar al listado</a>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
+    

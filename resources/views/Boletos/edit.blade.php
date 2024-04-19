@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obtener Boletos</title>
+    <title>Editar Boletos</title>
     <link rel="icon" type="image/x-icon" href="../../../imagenes/CULTURA1.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -12,7 +12,7 @@
 <body style="background-image: url(../../../imagenes/teatro.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container py-2 w-50 justify-content-center">
         <div class="card">
-            <h2 class="mt-4 text-black ms-5">Obtener Boletos</h2>
+            <h2 class="mt-4 text-black ms-5">Editar Boletos</h2>
             <form action="{{ route('Boletos.update', $boleto->id) }}" method="POST">
                 @csrf
                 @method('PUT')
