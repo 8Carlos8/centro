@@ -11,16 +11,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     </script>
     <script>
-    function confirmDelete(id) {
-        if (confirm("¿Estás seguro de que quieres eliminar este estacionamiento?")) {
-            document.getElementById('deleteForm' + id).submit();
+        function confirmDelete(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar este estacionamiento?")) {
+                document.getElementById('deleteForm' + id).submit();
+            }
         }
-    }
-</script>
+    </script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
-<header class="w-100">
+    <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="{{ route('Personas.inicio') }}">
@@ -126,78 +126,104 @@
     </header>
     <div class="container-fluid py-2 z-1">
         <div class="card py-2 m-5">
-            
+
             <div class="row justify-content-center">
                 <h2 class="mt-4 text-center text-black">Estacionamiento</h1>
 
-                <div class="mb-4">
-                    @auth
-                    @if (auth()->user()->rol == 1)
-                    <a href="{{ route('Estacionamientos.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nueva zona</a>
-                    <a href="{{ route('Cajones.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo cajon</a>
-                    <a href="{{ route('Estacionamientos.reporte') }}" class="btn btn-success ms-4">Reportes</a>
-                    @endif
-                    @else
-                    <!-- Esto se mostrará si no hay una sesión activa -->
-                    <p>Por favor, inicia sesión para acceder a esta página.</p>
-                    @endauth
-                    <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
-                </div>
+                    <div class="mb-4">
+                        @auth
+                        @if (auth()->user()->rol == 1)
+                        <a href="{{ route('Estacionamientos.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nueva zona</a>
+                        <a href="{{ route('Cajones.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo cajon</a>
+                        <a href="{{ route('Cajones.reporte') }}" class="btn btn-success ms-4">Reporte</a>
+                        <a href="{{ route('Estacionamientos.reporteE') }}" class="btn btn-success ms-4">Reporte Evento</a>
+                        @endif
+                        @else
+                        <!-- Esto se mostrará si no hay una sesión activa -->
+                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                        @endauth
+                        <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
+                    </div>
 
-                <table class="table-auto w-full border-collapse border-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cajon de Inicio</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Cajon de Fin</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Entrada</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Salida</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($estacionamientos as $estacionamiento)
-                        <tr>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->id }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->id_cajonIni }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->id_cajonFin }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->entrada }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->salida }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->estado }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                <a href="{{ route('Estacionamientos.show', $estacionamiento->id) }}" class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                @auth
-                                @if (auth()->user()->rol == 1)
-                                <a href="{{ route('Estacionamientos.edit', $estacionamiento->id) }}" class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                                <form action="{{ route('Estacionamientos.destroy', $estacionamiento) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="confirmDelete({{ $estacionamiento->id }})" class="btn btn-danger ms-2">Eliminar</button>
-                                </form>
-                                @endif
-                                @else
-                                <!-- Esto se mostrará si no hay una sesión activa -->
-                                <p>Por favor, inicia sesión para acceder a esta página.</p>
-                                @endauth
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="container-fluid">
-                            <div class="row">
-                                <div class="col">
-                                    <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
-                                </div>
-                                <div class="col-2 ps-2 mt-4 text-end">
-                                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                                </div>
-                                </div>  
+                    <table class="table-auto w-full border-collapse border-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Cajones</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Entrada</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Salida</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($estacionamientos as $estacionamiento)
+                            <tr>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->id }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    @php
+                                    // Decodificar el campo cajones del modelo Estacionamiento
+                                    $cajones = json_decode($estacionamiento->cajones);
+
+                                    // Verificar si $cajones es un array y no está vacío
+                                    if (is_array($cajones) && count($cajones) > 0) {
+                                    // Crear un array para almacenar los IDs de los cajones
+                                    $cajonesIds = [];
+
+                                    // Iterar sobre cada cajón y obtener su ID
+                                    foreach ($cajones as $cajon) {
+                                    // Verificar si el elemento actual es un objeto con una propiedad 'id'
+                                    if (is_object($cajon) && isset($cajon->id)) {
+                                    // Agregar el ID del cajón al array
+                                    $cajonesIds[] = $cajon->id;
+                                    }
+                                    }
+
+                                    // Imprimir los IDs de los cajones separados por coma
+                                    echo implode(', ', $cajonesIds);
+                                    } else {
+                                    // Si $cajones no es un array o está vacío, imprimir un mensaje
+                                    echo "No hay cajones disponibles.";
+                                    }
+                                    @endphp
+                                </td>
+
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->entrada }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->salida }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->estado }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    <a href="{{ route('Estacionamientos.show', $estacionamiento->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                    @auth
+                                    @if (auth()->user()->rol == 1)
+                                    <a href="{{ route('Estacionamientos.edit', $estacionamiento->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
+                                    <form id="delete-form-{{ $estacionamiento->id }}" action="{{ route('Estacionamientos.destroy', $estacionamiento) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete({{ $estacionamiento->id }})" class="btn btn-danger ms-2">Eliminar</button>
+                                    </form>
+                                    @endif
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
                             </div>
+                            <div class="col-2 ps-2 mt-4 text-end">
+                                <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            </div>
+                        </div>
                     </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

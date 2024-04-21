@@ -64,4 +64,36 @@ class CajonController extends Controller
         $cajon->delete();
         return redirect()->route('Cajones.index')->with('success', 'Cajon eliminado correctamente');
     }
+
+    public function reporte()
+    {
+        $cajones = Cajon::all(); // Obtener todos los cajones
+        $totalCajones = $cajones->count();
+        $cajonD = 0;
+        $cajonesDisponibles = $totalCajones;
+        $cajonesOcupados = 0;
+        $cajonesReservados = 0;
+
+        foreach ($cajones as $cajon) {
+            // Verificar el estado del cajón y actualizar los contadores correspondientes
+            if ($cajon->estado == 0) {
+                $cajonD++;
+                $cajonesDisponibles--;
+            } elseif ($cajon->estado == 1) {
+                $cajonesOcupados++;
+            } elseif ($cajon->estado == 2) {
+                $cajonesReservados++;
+            }
+        }
+
+        $porcentajeDisponibilidad = ($cajonesDisponibles / $totalCajones) * 100;
+
+        return view('Cajones.reporte')->with([
+            'totalCajones' => $totalCajones,
+            'cajonD' => $cajonD,
+            'cajonesOcupados' => $cajonesOcupados,
+            'cajonesReservados' => $cajonesReservados,
+            'porcentajeDisponibilidad' => $porcentajeDisponibilidad,
+        ]);
+    }
 }

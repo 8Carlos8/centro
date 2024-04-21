@@ -33,20 +33,28 @@ class EstacionamientoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_cajonIni' => 'required',
-            'id_cajonFin' => 'required',
-            'entrada' => 'required',
-            'salida' => 'required',
-            'estado' => 'required',
+            'cajon_inicio' => 'required|integer|exists:cajons,id', // Asegúrate de que sea un ID válido
+            'cajon_fin' => 'required|integer|exists:cajons,id', // Asegúrate de que sea un ID válido
+            'entrada' => 'required|date',
+            'salida' => 'required|date',
+            'estado' => 'required|string',
         ]);
 
+        $cajon_id = $request->cajon_inicio; // Asigna el valor del cajón seleccionado como cajon_id
+
+        // Obtener el rango de cajones entre el cajón inicial y el cajón final con sus estados
+        $cajones = Cajon::where('id', '>=', $request->cajon_inicio)
+            ->where('id', '<=', $request->cajon_fin)
+            ->get(['id', 'estado']);
+
         $estacionamiento = new Estacionamiento();
-        $estacionamiento->id_cajonIni = $request->id_cajonIni;
-        $estacionamiento->id_cajonFin = $request->id_cajonFin;
+        $estacionamiento->cajon_id = $cajon_id; // Asigna el cajon_id
+        $estacionamiento->cajones = $cajones->toJson(); // Guarda el arreglo de cajones con sus estados
         $estacionamiento->entrada = $request->entrada;
         $estacionamiento->salida = $request->salida;
         $estacionamiento->estado = $request->estado;
         $estacionamiento->save();
+
         return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento creado correctamente.');
     }
 
@@ -75,14 +83,35 @@ class EstacionamientoController extends Controller
     public function update(Request $request, Estacionamiento $estacionamiento)
     {
         $request->validate([
-            'id_cajonIni' => 'required',
-            'id_cajonFin' => 'required',
+            'cajon_inicio' => 'required|integer|exists:cajons,id',
+            'cajon_fin' => 'required|integer|exists:cajons,id',
             'entrada' => 'required',
             'salida' => 'required',
             'estado' => 'required',
         ]);
 
-        $estacionamiento->update($request->all());
+        $cajon_id = $request->cajon_inicio; // Asigna el valor del cajón seleccionado como cajon_id
+
+        // Obtener el rango de cajones entre el cajón inicial y el cajón final con sus estados
+        $cajones = Cajon::where('id', '>=', $request->cajon_inicio)
+            ->where('id', '<=', $request->cajon_fin)
+            ->get(['id', 'estado']);
+
+        // Obtener los datos del formulario
+        $estacionamiento->cajones = $cajones->toJson(); // Guarda el arreglo de cajones con sus estados
+        $entrada = $request->entrada;
+        $salida = $request->salida;
+        $estado = $request->estado;
+
+        // Realizar las actualizaciones en el modelo Estacionamiento
+        $estacionamiento->update([
+            'cajones' => $cajones->toJson(), // Guarda el arreglo de cajones con sus estados
+            'entrada' => $entrada,
+            'salida' => $salida,
+            'estado' => $estado,
+        ]);
+
+        // Redirigir a la vista de índice de Estacionamientos con un mensaje de éxito
         return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento actualizado correctamente.');
     }
 
@@ -96,46 +125,44 @@ class EstacionamientoController extends Controller
         return redirect()->route('Estacionamientos.index')->with('success', 'Estacionamiento eliminado correctamente.');
     }
 
-    public function reporte(Request $request)
+    public function reporteE(Request $request)
     {
-        // Obtener la fecha del request
-        $fecha = $request->input('fecha');
+        $fecha = $request->fecha;
 
-        // Consulta para contar cajones totales
-        $totalCajones = Cajon::count();
+        // Obtener todos los estacionamientos para la fecha seleccionada
+        $estacionamientos = Estacionamiento::whereDate('entrada', $fecha)->get();
 
-        // Consulta para contar cajones ocupados y reservados en la fecha proporcionada
-        $cajonesOcupados = Cajon::whereHas('estacionamientos', function ($query) use ($fecha) {
-            $query->where('estado', 2) // Estado "ocupado"
-                ->whereDate('entrada', $fecha);
-        })->count();
+        $totalCajones = 0; // Inicializamos el contador de cajones
+        $cajonesDisponibles = 0;
+        $cajonesOcupados = 0;
+        $cajonesReservados = 0;
 
-        $cajonesReservados = Cajon::whereHas('estacionamientos', function ($query) use ($fecha) {
-            $query->where('estado', 3) // Estado "reservado"
-                ->whereDate('entrada', $fecha);
-        })->count();
+        // Calcular el número de cajones ocupados y reservados para la fecha seleccionada
+        foreach ($estacionamientos as $estacionamiento) {
+            $cajones = json_decode($estacionamiento->cajones);
+            $totalCajones += count($cajones); // Sumamos el número de cajones en este estacionamiento
+            foreach ($cajones as $cajon) {
+                // Verificar el estado del cajón y actualizar los contadores correspondientes
+                if ($cajon->estado == 0) {
+                    $cajonesDisponibles++;
+                } elseif ($cajon->estado == 1) {
+                    $cajonesOcupados++;
+                } elseif ($cajon->estado == 2) {
+                    $cajonesReservados++;
+                }
+            }
+        }
 
-        // Calcular porcentaje de disponibilidad
-        $porcentajeDisponibilidad = (($totalCajones - $cajonesOcupados - $cajonesReservados) / $totalCajones) * 100;
+        // Verificar si el total de cajones es mayor que cero para evitar la división por cero
+        $porcentajeDisponibilidad = $totalCajones > 0 ? ($cajonesDisponibles / $totalCajones) * 100 : 0;
 
-
-        // Obtener todos los cajones con su disponibilidad actual
-        $todosLosCajones = Cajon::withCount(['estacionamientos as ocupados' => function ($query) use ($fecha) {
-            $query->where('estado', 2) // Estado "ocupado"
-                ->whereDate('entrada', $fecha);
-        }])
-            ->withCount(['estacionamientos as reservados' => function ($query) use ($fecha) {
-                $query->where('estado', 3) // Estado "reservado"
-                    ->whereDate('entrada', $fecha);
-            }])
-            ->get();
-
-        return view('estacionamientos.reporte')->with([
+        return view('Estacionamientos.reporteE')->with([
+            'fecha' => $fecha,
+            'cajonesDisponibles' => $cajonesDisponibles,
             'totalCajones' => $totalCajones,
             'cajonesOcupados' => $cajonesOcupados,
             'cajonesReservados' => $cajonesReservados,
             'porcentajeDisponibilidad' => $porcentajeDisponibilidad,
-            'todosLosCajones' => $todosLosCajones,
         ]);
     }
 }

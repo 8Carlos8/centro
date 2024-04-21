@@ -38,10 +38,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('Boletos', BoletoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Cajones/{cajon}', [CajonController::class, 'update'])->name('Cajones.update');
+    Route::get('Cajones/reporte', [CajonController::class, 'reporte'])->name('Cajones.reporte');
     Route::resource('Cajones', CajonController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Estacionamientos/{estacionamiento}', [EstacionamientoController::class, 'update'])->name('Estacionamientos.update');
-    Route::get('Estacionamientos/reporte', [EstacionamientoController::class, 'reporte'])->name('Estacionamientos.reporte');
+    Route::get('Estacionamientos/reporteE', [EstacionamientoController::class, 'reporteE'])->name('Estacionamientos.reporteE');
     Route::resource('Estacionamientos', EstacionamientoController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     Route::put('/Eventos/{evento}', [EventoController::class, 'update'])->name('Eventos.update');
@@ -83,6 +84,8 @@ Route::resource('Personas', PersonaController::class)->only(['create', 'store'])
 Route::get('/Publi/CarP', function () {
     return view('Publi.CarP');
 })->name('Publi.CarP');
+
+Route::get('/carp', 'ubicacionController@indexP');
 
 Route::get('/Publi/EstP', function () {
     return view('Publi.EstP');

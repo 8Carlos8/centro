@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('estacionamientos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_cajonIni');
-            $table->unsignedBigInteger('id_cajonFin');
+            $table->json('cajones');
+            //$table->unsignedBigInteger('id_cajonIni');
+            //$table->unsignedBigInteger('id_cajonFin');
             $table->dateTime('entrada');
             $table->dateTime('salida');
             $table->string('estado');
             $table->timestamps();
 
-            $table->foreign('id_cajonIni')->references('id')->on('cajons')->onDelete('cascade');
-            $table->foreign('id_cajonFin')->references('id')->on('cajons')->onDelete('cascade');
+            $table->foreign('cajones')->references('id')->on('cajons')->onDelete('cascade');
+            //$table->foreign('id_cajonFin')->references('id')->on('cajons')->onDelete('cascade');
         });
     }
 

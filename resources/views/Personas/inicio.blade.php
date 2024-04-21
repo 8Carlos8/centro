@@ -13,7 +13,7 @@
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
-<header class="w-100">
+    <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="{{ route('Personas.inicio') }}">
@@ -116,53 +116,56 @@
                 </div>
             </div>
         </nav>
-</header>
+    </header>
 
-    <body >
-    <div class="container-fluid h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="col col-10 mt-5 mt-xxl-2 mb-xxl-5 col-xxl-5">
-                <div class="d-flex w-100 justify-content-center">
-                    <div id="login" class="card mt-xxl-5 mb-xxl-5">
-                        <div class="d-flex w-100 justify-content-center">
-                            <p class="mt-5 fs-3 fw-bold">Panel de Control</p>
-                        </div>
-                        <div class="container-fluid p-5">
-                            <div class="row w-100 justify-content-center column-gap-2">
-                                <div class="col col-xxl-6">
-                                    @auth
-                                    @if (auth()->user()->rol == 1)
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Usuarios.index') }}" ROLe="button">Usuario</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Organizadores.index') }}" ROLe="button">Organizador</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.index') }}" ROLe="button">Estacionamiento</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Cajones.index') }}" ROLe="button">Cajones</a><br>
-                                </div>
-                                <div class="col col-xxl-6">
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Salas.index') }}" ROLe="button">Sala</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Eventos.index') }}" ROLe="button">Evento</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Carteleras.index') }}" ROLe="button">Cartelera</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Personas.index') }}" ROLe="button">Personas</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Boletos.index') }}" ROLe="button">Boletos</a><br>
-                                    @endif
-                                    @else
-                                    <!-- Esto se mostrará si no hay una sesión activa -->
-                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
-                                    @endauth
-                                </div>
+    <body>
+        <div class="container-fluid h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col col-10 mt-5 mt-xxl-2 mb-xxl-5 col-xxl-5">
+                    <div class="d-flex w-100 justify-content-center">
+                        <div id="login" class="card mt-xxl-5 mb-xxl-5">
+                            <div class="d-flex w-100 justify-content-center">
+                                <p class="mt-5 fs-3 fw-bold">Panel de Control</p>
+                            </div>
+                            <div class="container-fluid p-5">
+                                <div class="row w-100 justify-content-center column-gap-2">
+                                    <div class="col col-xxl-6">
+                                        @auth
+                                        @if (auth()->user()->rol == 1)
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Usuarios.index') }}" ROLe="button">Usuario</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Organizadores.index') }}" ROLe="button">Organizador</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.index') }}" ROLe="button">Estacionamiento</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Cajones.reporte') }}" ROLe="button">Reportes</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.reporteE') }}" ROLe="button">Reportes</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Cajones.index') }}" ROLe="button">Cajones</a><br>
+                                    </div>
+                                    <div class="col col-xxl-6">
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Salas.index') }}" ROLe="button">Sala</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Eventos.index') }}" ROLe="button">Evento</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Carteleras.index') }}" ROLe="button">Cartelera</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Personas.index') }}" ROLe="button">Personas</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Boletos.index') }}" ROLe="button">Boletos</a><br>
+                                        @endif
+                                        @else
+                                        <!-- Esto se mostrará si no hay una sesión activa -->
+                                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                        @endauth
+                                    </div>
 
-                                <div class="col col-xxl-6">
-                                    @auth
-                                    @if (auth()->user()->rol == 2)
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Salas.index') }}" ROLe="button">Sala</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Eventos.index') }}" ROLe="button">Evento</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Carteleras.index') }}" ROLe="button">Cartelera</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Boletos.index') }}" ROLe="button">Boletos</a><br>
-                                    <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.index') }}" ROLe="button">Estacionamiento</a><br>
-                                    @endif
-                                    @else
-                                    <!-- Esto se mostrará si no hay una sesión activa -->
-                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
-                                    @endauth
+                                    <div class="col col-xxl-6">
+                                        @auth
+                                        @if (auth()->user()->rol == 2)
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Salas.index') }}" ROLe="button">Sala</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Eventos.index') }}" ROLe="button">Evento</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Carteleras.index') }}" ROLe="button">Cartelera</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Boletos.index') }}" ROLe="button">Boletos</a><br>
+                                        <a class="btn btn-danger w-100 btn-lg mt-2 mb-0" href="{{ route('Estacionamientos.index') }}" ROLe="button">Estacionamiento</a><br>
+                                        @endif
+                                        @else
+                                        <!-- Esto se mostrará si no hay una sesión activa -->
+                                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                        @endauth
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,8 +173,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 
     @if (Auth::check())
     <form action="{{ route('logout') }}" method="POST" class="inline-block">

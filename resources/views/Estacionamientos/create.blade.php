@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
     <div class="container py-2 w-50 justify-content-center">
         <div class="card">
@@ -18,32 +20,30 @@
                 <table class="table mt-4">
                     <tr>
                         <td class="control-label ms-2">
-                            <label for="id_cajonIni" class="form-label text-gray-700">ID del Cajon inicio</label>
+                            <label for="cajon_inicio" class="form-label text-gray-700">ID del Cajón inicio</label>
                         </td>
                         <td class="control-label ms-2">
-                            <select class="form-select" id="id_cajonIni" name="id_cajonIni">
-                                <option value="">Seleccionar Cajon</option>
+                            <select class="form-select" id="cajon_inicio" name="cajon_inicio">
+                                <option value="">Seleccionar Cajón de Inicio</option>
                                 @foreach($cajones as $cajon)
                                 <option value="{{ $cajon->id }}">Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
                                 @endforeach
                             </select>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="control-label ms-2">
-                            <label for="id_cajonFin" class="form-label text-gray-700">ID del Cajon final</label>
+                            <label for="cajon_fin" class="form-label text-gray-700">ID del Cajón final</label>
                         </td>
                         <td class="control-label ms-2">
-                            <select class="form-select" id="id_cajonFin" name="id_cajonFin">
-                                <option value="">Seleccionar Cajon</option>
+                            <select class="form-select" id="cajon_fin" name="cajon_fin">
+                                <option value="">Seleccionar Cajón Final</option>
                                 @foreach($cajones as $cajon)
                                 <option value="{{ $cajon->id }}">Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
                                 @endforeach
                             </select>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="control-label ms-2">
                             <label for="entrada" class="form-label text-gray-700">Entrada</label>
@@ -52,7 +52,6 @@
                             <input type="date" class="form-control @error('entrada') is-invalid @enderror" id="entrada" name="entrada" required>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="control-label ms-2">
                             <label for="salida" class="form-label text-gray-700">Salida</label>
@@ -61,7 +60,6 @@
                             <input type="date" class="form-control @error('salida') is-invalid @enderror" id="salida" name="salida" required>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="control-label ms-2">
                             <label for="estado" class="form-label text-gray-700">Estado</label>
@@ -70,15 +68,16 @@
                             <input type="text" class="form-control @error('estado') is-invalid @enderror" id="estado" name="estado" placeholder="Estado del Estacionamiento" required>
                         </td>
                     </tr>
-
                     <tr>
                         <td colspan="2" class="control-label ms-2">
-                            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear Zona</button>
+                            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Crear Estacionamiento</button>
                         </td>
                     </tr>
                 </table>
             </form>
+
         </div>
     </div>
 </body>
+
 </html>

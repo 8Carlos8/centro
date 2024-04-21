@@ -19,8 +19,9 @@ class Cajon extends Model
 
     public function estacionamientos()
     {
-        return $this->hasMany(Estacionamiento::class, 'id_cajonIni');
+        return $this->hasMany(Estacionamiento::class, 'cajon_id', 'id');
     }
+
     protected $dispatchesEvents = [
         'created' => CajonCreated::class,
     ];
