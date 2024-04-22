@@ -164,11 +164,12 @@
                                     @auth
                                     @if (auth()->user()->rol == 1)
                                     <a href="{{ route('Boletos.edit', $boleto->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar </a>&nbsp;
-                                    <form action="{{ route('Boletos.destroy', $boleto) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('Boletos.destroy', $boleto) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este boleto? Esta acción no se puede deshacer.')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$boleto->id}})">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
+
                                     @endif
                                     @else
                                     <!-- Esto se mostrará si no hay una sesión activa -->

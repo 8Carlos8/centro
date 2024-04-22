@@ -174,11 +174,12 @@
                                     @auth
                                     @if (auth()->user()->rol == 1)
                                     <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Cartelera</a>&nbsp;
-                                    <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta cartelera? Esta acción no se puede deshacer.')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onclick="confirmDelete({{ $cartelera->id }})" class="btn btn-danger ms-2">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
+
                                     @endif
                                     @else
                                     <!-- Esto se mostrará si no hay una sesión activa -->

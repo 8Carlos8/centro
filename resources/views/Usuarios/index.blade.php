@@ -166,10 +166,10 @@
                         <td align="center">
                             <a class="btn btn-primary" href="{{ route('Usuarios.show', $usuario->id) }}" title='Ver datalles del usuario'><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
                             <a class="btn btn-warning" href="{{ route('Usuarios.edit', $usuario->id) }}" title='Editar usuario'><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                            <form action="{{ route('Usuarios.destroy', $usuario) }}" method="POST" class="inline-block">
+                            <form action="{{ route('Usuarios.destroy', $usuario) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$usuario->id}})">Eliminar</button>
+                                <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                             </form>
                         </td>
                     </tr>

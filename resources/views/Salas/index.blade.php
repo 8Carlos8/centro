@@ -14,7 +14,7 @@
             if (confirm('¿Estás seguro de que quieres eliminar esta sala?')) {
                 document.getElementById('deleteForm' + salaId).submit();
             }
-        }   
+        }           
     </script>
 </head>
 
@@ -156,8 +156,9 @@
                             <form action="{{ route('Salas.destroy', $sala) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$sala->id}})">Eliminar</button>
+                                <button type="submit" class="btn btn-danger ms-2" onclick="return confirmDelete({{$sala->id}})">Eliminar</button>
                             </form>
+
                         </td>
                     </tr>
                     @endforeach

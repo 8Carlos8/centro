@@ -163,11 +163,12 @@
                                     <td class="border-gray-300 px-4 py-2 text-gray-700">
                                         <a href="{{ route('Organizadores.edit', $organizador->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Organizador</a>&nbsp;
                                         <a href="{{ route('Organizadores.show', $organizador->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                        <form action="{{ route('Organizadores.destroy', $organizador->id) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" onclick="confirmDelete({{ $organizador->id }})" class="btn btn-danger ms-2">Eliminar</button>
-                                        </form>
+                                        <form action="{{ route('Organizadores.destroy', $organizador->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este organizador? Esta acción no se puede deshacer.')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
+                                    </form>
+
                                     </td>
                                 </tr>
                                 @endforeach

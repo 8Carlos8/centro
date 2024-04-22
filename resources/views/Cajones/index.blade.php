@@ -187,10 +187,10 @@
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">
                                     <a href="{{ route('Cajones.edit', $cajon) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Cajón</a>&nbsp;
                                     <a href="{{ route('Cajones.show', $cajon) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                    <form action="{{ route('Cajones.destroy', $cajon) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('Cajones.destroy', $cajon) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cajón? Esta acción no se puede deshacer.')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$cajon->id}})">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

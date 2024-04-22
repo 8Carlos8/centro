@@ -173,10 +173,10 @@
                                     @auth
                                     @if (auth()->user()->rol == 1)
                                     <a href="{{ route('Eventos.edit', $evento->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Evento</a>&nbsp;
-                                    <form action="{{ route('Eventos.destroy', $evento) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('Eventos.destroy', $evento) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$evento->id}})">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
                                     @endif
                                     @else

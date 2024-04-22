@@ -201,11 +201,12 @@
                                     @auth
                                     @if (auth()->user()->rol == 1)
                                     <a href="{{ route('Estacionamientos.edit', $estacionamiento->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Estacionamiento</a>&nbsp;
-                                    <form id="delete-form-{{ $estacionamiento->id }}" action="{{ route('Estacionamientos.destroy', $estacionamiento) }}" method="POST" class="inline-block">
+                                    <form id="delete-form-{{ $estacionamiento->id }}" action="{{ route('Estacionamientos.destroy', $estacionamiento) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este estacionamiento?? Esta acción no se puede deshacer.')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onclick="confirmDelete({{ $estacionamiento->id }})" class="btn btn-danger ms-2">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger ms-2">Eliminar</button>
                                     </form>
+
                                     @endif
                                     @else
                                     <!-- Esto se mostrará si no hay una sesión activa -->
