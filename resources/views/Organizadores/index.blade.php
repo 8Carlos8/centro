@@ -1,4 +1,3 @@
-
 <head>
     <title>CC Siglo XXI - Lista de Usuarios</title>
     <link rel="icon" type="image/x-icon" href="../../../imagenes/CULTURA1.png">
@@ -7,21 +6,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    
+
     </script>
     <script>
-    function confirmDelete(id) {
-        if (confirm("¿Estás seguro de que quieres eliminar este organizador?")) {
-            document.getElementById('deleteForm' + id).submit();
+        function confirmDelete(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar este organizador?")) {
+                document.getElementById('deleteForm' + id).submit();
+            }
         }
-    }
-</script>
+    </script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;">
-        <header class="w-100">
+    <header class="w-100">
         <nav class="navbar navbar-expand-lg ps-lg-2 pe-lg-2 ps-xll-5 pe-xll-5">
             <div class="container-fluid">
                 <a id="logos" class="navbar-brand me-auto me-lg-5" aria-current="page" href="{{ route('Personas.inicio') }}">
@@ -126,60 +125,66 @@
         </nav>
     </header>
     <div class="container-fluid py-2 z-1">
-    <div class="card py-2 m-5">
-        <div class="row justify-content-center">
-            <div class="container-fluid py-2 z-1">
-                <h2 class="mt-4 text-center text-black">Organizadores</h1>
+        <div class="card py-2 m-5">
+            <div class="row justify-content-center">
+                <div class="container-fluid py-2 z-1">
+                    <h2 class="mt-4 text-center text-black">Organizadores</h1>
 
-                <div class="mb-4">
-                    <a href="{{ route('Organizadores.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo organizador</a>
-                    
+                        <div class="mb-4">
+                            <a href="{{ route('Organizadores.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo organizador</a>
+
+                        </div>
+
+                        <table class="table-auto w-full border-collapse border-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">ID Persona</th>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">Razon Social</th>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">Direccion</th>
+                                    <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($organizadores as $organizador)
+                                <tr>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->id }}</td>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->id_persona }} - {{ $organizador->persona->nombre  }}</td>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                        @if($organizador->estado == 1)
+                                        <span style="color: green;">Activo</span>
+                                        @else
+                                        <span style="color: red;">Deshabilitado</span>
+                                        @endif
+                                    </td>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->razonSoc }}</td>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->direccion }}</td>
+                                    <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                        <a href="{{ route('Organizadores.edit', $organizador->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Organizador</a>&nbsp;
+                                        <a href="{{ route('Organizadores.show', $organizador->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                        <form action="{{ route('Organizadores.destroy', $organizador->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" onclick="confirmDelete({{ $organizador->id }})" class="btn btn-danger ms-2">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                                </div>
+                                <div class="col-2 ps-2 mt-4 text-end">
+                                    <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
-
-                <table class="table-auto w-full border-collapse border-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Persona</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Razon Social</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Direccion</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($organizadores as $organizador)
-                        <tr>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->id }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->id_persona }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->estado }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->razonSoc }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $organizador->direccion }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                <a href="{{ route('Organizadores.edit', $organizador->id) }}" class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                                <a href="{{ route('Organizadores.show', $organizador->id) }}"class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                <form action="{{ route('Organizadores.destroy', $organizador->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="confirmDelete({{ $organizador->id }})" class="btn btn-danger ms-2">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
-                    </div>
-                    <div class="col-2 ps-2 mt-4 text-end">
-                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                    </div>
-                </div>
-            </div>
-
             </div>
         </div>
     </div>
-</div>

@@ -48,9 +48,8 @@
                                     <div class="mt-3 mb-3">
                                         <label class="control-label ms-2" for="id_persona">ID Persona</label>
                                         <select class="form-select" id="id_persona" name="id_persona">
-                                            <option value="">Seleccionar Persona</option>
                                             @foreach($personas as $persona)
-                                            <option value="{{ $persona->id }}">{{ $persona->nombre }} {{ $persona->a_paterno }} {{ $persona->a_materno }}</option>
+                                            <option value="{{ $persona->id }}" {{ $persona->id == $usuario->id_persona ? 'selected' : '' }}>{{ $persona->nombre }} {{ $persona->a_paterno }} {{ $persona->a_materno }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -68,7 +67,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="npass" class="form-label"> Repetir Contraseña</label>
-                                        <input type="password" class="form-control" placeholder="Contraseña">
+                                        <input type="password" class="form-control" placeholder="Contraseña" value="{{ $usuario->password }}">
                                     </div>
                                     <input type="hidden" id="estado" name="estado" value="1">
                                     <input type="hidden" id="rol" name="rol" value="2">

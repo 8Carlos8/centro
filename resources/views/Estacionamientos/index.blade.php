@@ -142,7 +142,6 @@
                         <!-- Esto se mostrará si no hay una sesión activa -->
                         <p>Por favor, inicia sesión para acceder a esta página.</p>
                         @endauth
-                        <a href="{{ route('Personas.inicio') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Regresar al Panel</a>
                     </div>
 
                     <table class="table-auto w-full border-collapse border-gray-200">
@@ -190,12 +189,18 @@
 
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->entrada }}</td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->salida }}</td>
-                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $estacionamiento->estado }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    @if($estacionamiento->estado == 1)
+                                    <span style="color: green;">Activo</span>
+                                    @else
+                                    <span style="color: red;">Deshabilitado</span>
+                                    @endif
+                                </td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">
                                     <a href="{{ route('Estacionamientos.show', $estacionamiento->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
                                     @auth
                                     @if (auth()->user()->rol == 1)
-                                    <a href="{{ route('Estacionamientos.edit', $estacionamiento->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
+                                    <a href="{{ route('Estacionamientos.edit', $estacionamiento->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Estacionamiento</a>&nbsp;
                                     <form id="delete-form-{{ $estacionamiento->id }}" action="{{ route('Estacionamientos.destroy', $estacionamiento) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')

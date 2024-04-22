@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body style="background-image: url(../../../imagenes/teatro.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container py-2 w-50 justify-content-center">
         <div class="card">
@@ -25,7 +27,7 @@
                             <select class="form-select" id="id_usuario" name="id_usuario">
                                 <option value="">Seleccionar Usuario</option>
                                 @foreach($usuarios as $usuario)
-                                <option value="{{ $usuario->id }}">{{ $usuario->username }}</option>
+                                <option value="{{ $usuario->id }}" {{$usuario->id == $boleto->id_usuario ? 'selected' : ''}}>{{ $usuario->username }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -39,7 +41,7 @@
                             <select class="form-select" id="id_cartelera" name="id_cartelera">
                                 <option value="">Seleccionar Cartelera</option>
                                 @foreach($carteleras as $cartelera)
-                                <option value="{{ $cartelera->id }}">{{ $cartelera->id }}</option>
+                                <option value="{{ $cartelera->id }}" {{$cartelera->id == $boleto->id_cartelera ? 'selected' : ''}}>{{ $cartelera->id }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -53,7 +55,7 @@
                             <select class="form-select" id="id_cajon" name="id_cajon">
                                 <option value="">Seleccionar Cajones</option>
                                 @foreach($cajones as $cajon)
-                                <option value="{{ $cajon->id }}">{{ $cajon->id }}</option>
+                                <option value="{{ $cajon->id }}" {{$cajon->id == $boleto->id_cajon ? 'selected' : ''}}>{{ $cajon->id }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -70,6 +72,7 @@
 
                     <tr>
                         <td>
+                            <input type="hidden" id="estado" name="estado" value="2">
                             <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Editar </button>
                             <a href="{{ route('Boletos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
                         </td>
@@ -79,4 +82,5 @@
         </div>
     </div>
 </body>
+
 </html>

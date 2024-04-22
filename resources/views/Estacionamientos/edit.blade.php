@@ -27,9 +27,8 @@
                             </td>
                             <td>
                                 <select class="form-select" id="id_cajonIni" name="cajon_inicio">
-                                    <option value="">Seleccionar Cajon</option>
                                     @foreach($cajones as $cajon)
-                                    <option value="{{ $cajon->id }}" @if($cajon->id == $estacionamiento->cajon_inicio) selected @endif>Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
+                                    <option value="{{ $cajon->id }}" {{ $cajon->id == $estacionamiento->cajon_inicio ? 'selected' : ''}} @if($cajon->id == $estacionamiento->cajon_inicio) selected @endif>Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -40,9 +39,8 @@
                             </td>
                             <td>
                                 <select class="form-select" id="id_cajonFin" name="cajon_fin">
-                                    <option value="">Seleccionar Cajon</option>
                                     @foreach($cajones as $cajon)
-                                    <option value="{{ $cajon->id }}" @if($cajon->id == $estacionamiento->cajon_fin) selected @endif>Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
+                                    <option value="{{ $cajon->id }}" {{ $cajon->id == $estacionamiento->cajon_fin ? 'selected' : ''}} @if($cajon->id == $estacionamiento->cajon_fin) selected @endif>Zona: {{ $cajon->zona }} - Cajón: {{ $cajon->cajon }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -52,7 +50,11 @@
                                 <label for="entrada" class="form-label text-gray-700">Entrada</label>
                             </td>
                             <td>
-                                <input type="date" class="form-control @error('entrada') is-invalid @enderror" id="entrada" name="entrada" value="{{ $estacionamiento->entrada }}" required>
+                                <?php
+                                // Convertir la fecha al formato adecuado (aaaa-mm-dd)
+                                $fecha_entrada = date('Y-m-d', strtotime($estacionamiento->entrada));
+                                ?>
+                                <input type="date" class="form-control @error('entrada') is-invalid @enderror" id="entrada" name="entrada" value="{{ $fecha_entrada }}" required>
                             </td>
                         </tr>
                         <tr>
@@ -60,7 +62,11 @@
                                 <label for="salida" class="form-label text-gray-700">Salida</label>
                             </td>
                             <td>
-                                <input type="date" class="form-control @error('salida') is-invalid @enderror" id="salida" name="salida" value="{{ $estacionamiento->salida }}" required>
+                                <?php
+                                // Convertir la fecha al formato adecuado (aaaa-mm-dd)
+                                $fecha_salida = date('Y-m-d', strtotime($estacionamiento->salida));
+                                ?>
+                                <input type="date" class="form-control @error('salida') is-invalid @enderror" id="salida" name="salida" value="{{ $fecha_salida }}" required>
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +74,11 @@
                                 <label for="estado" class="form-label text-gray-700">Estado</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control @error('estado') is-invalid @enderror" id="estado" name="estado" placeholder="Estado del Estacionamiento" value="{{ $estacionamiento->estado }}" required>
+                                <select class="form-select" id="estado" name="estado">
+                                    <option value="">Seleccionar Estado</option>
+                                    <option value="1" {{ $estacionamiento->estado == 1 ? 'selected' : '' }}>Activo</option>
+                                    <option value="2" {{ $estacionamiento->estado == 2 ? 'selected' : '' }}>Deshabilitado</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>

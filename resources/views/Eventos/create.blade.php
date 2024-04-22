@@ -4,14 +4,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
@@ -31,7 +26,7 @@
                                 <select class="form-select" id="id_persona" name="id_organizador">
                                     <option value="">Seleccionar Organizador</option>
                                     @foreach($organizadores as $organizador)
-                                    <option value="{{ $organizador->id }}">{{ $organizador->id }}</option>
+                                    <option value="{{ $organizador->id }}">{{ $organizador->id }} {{ $organizador->persona->nombre }} {{ $organizador->persona->a_paterno }} {{ $organizador->persona->a_materno }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -50,15 +45,13 @@
                         <tr>
                             <td>
                                 <label class="control-label ms-2" for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del evento"
-                                    class="form-input">
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del evento" class="form-input">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label class="control-label ms-2" for="tipo">Tipo</label>
-                                <input type="text" id="tipo" name="tipo" placeholder="Tipo de Evento"
-                                    class="form-input">
+                                <input type="text" id="tipo" name="tipo" placeholder="Tipo de Evento" class="form-input">
                             </td>
                         </tr>
                         <tr>

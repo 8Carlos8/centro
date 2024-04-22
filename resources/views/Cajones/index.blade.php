@@ -7,12 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
-    function confirmDelete(cajonId) {
-        if (confirm('¿Estás seguro de que quieres eliminar este cajón?')) {
-            document.getElementById('deleteForm'+cajonId).submit();
+        function confirmDelete(cajonId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este cajón?')) {
+                document.getElementById('deleteForm' + cajonId).submit();
+            }
         }
-    }
-</script>
+    </script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
@@ -123,64 +123,66 @@
         </nav>
     </header>
     <div class="container-fluid w-50 py-2 z-1">
-    <div class="card py-2 m-5">
-        <div class="row justify-content-center">
-            <div class="container mx-auto py-4">
-                <h2 class="mt-4 text-center text-black">Cajones</h2>
+        <div class="card py-2 m-5">
+            <div class="row justify-content-center">
+                <div class="container mx-auto py-4">
+                    <h2 class="mt-4 text-center text-black">Cajones</h2>
 
-                <div class="mb-4">
-                    <a href="{{ route('Cajones.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo Cajon</a>
-                </div>
+                    <div class="mb-4">
+                        <a href="{{ route('Cajones.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo Cajón</a>
+                    </div>
 
-                <table class="table-auto w-full border-collapse border-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Zona</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Cajon</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cajones as $cajon)
-                        <tr>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->id }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->zona }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->cajon }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                @if($cajon->estado == 1)
+                    <table class="table-auto w-full border-collapse border-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Zona</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Cajon</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cajones as $cajon)
+                            <tr>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->id }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->zona }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cajon->cajon }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    @if($cajon->estado == 0)
                                     <span style="color: green;">Disponible</span>
-                                @else
+                                    @elseif($cajon->estado == 1)
                                     <span style="color: red;">Ocupado</span>
-                                @endif
-                            </td>
+                                    @else
+                                    <span style="color: red;">Reservado</span>
+                                    @endif
+                                </td>
 
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                <a href="{{ route('Cajones.edit', $cajon) }}" class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                                <a href="{{ route('Cajones.show', $cajon) }}" class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                <form action="{{ route('Cajones.destroy', $cajon) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$cajon->id}})">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    <a href="{{ route('Cajones.edit', $cajon) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Cajón</a>&nbsp;
+                                    <a href="{{ route('Cajones.show', $cajon) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                    <form action="{{ route('Cajones.destroy', $cajon) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$cajon->id}})">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                            </div>
+                            <div class="col-2 ps-2 mt-4 text-end">
+                                <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-2 ps-2 mt-4 text-end">
-                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                    </div>
+
                 </div>
-            </div>
-
             </div>
         </div>
     </div>
-</div>

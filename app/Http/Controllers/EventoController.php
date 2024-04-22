@@ -66,7 +66,8 @@ class EventoController extends Controller
     public function show(string $id)
     {
         $evento = Evento::findOrFail($id);
-        return view('Eventos.show', compact('evento'));
+        $organizadores = Organizador::all();
+        return view('Eventos.show', ['organizadores' => $organizadores], compact('evento'));
     }
 
     /**

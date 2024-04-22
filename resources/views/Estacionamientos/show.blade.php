@@ -34,7 +34,7 @@
                         </td>
                         <td>
                             <label for="cajones" class="control-label fw-bold text-gray-700">ID Cajones</label>
-                            <p> @php
+                            <p>@php
                                 // Decodificar el campo cajones del modelo Estacionamiento
                                 $cajones = json_decode($estacionamiento->cajones);
 
@@ -58,7 +58,7 @@
                                 // Si $cajones no es un array o está vacío, imprimir un mensaje
                                 echo "No hay cajones disponibles.";
                                 }
-                                @endphp </p>
+                                @endphp</p>
                         </td>
                     </tr>
                     <tr>

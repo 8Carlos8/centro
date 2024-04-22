@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body style="background-image: url(../../../imagenes/teatro.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container py-2 w-50 justify-content-center">
         <div class="card">
@@ -23,9 +25,8 @@
                         </td>
                         <td class="control-label ms-2">
                             <select class="form-select" id="id_persona" name="id_persona">
-                                <option value="">Seleccionar Persona</option>
                                 @foreach($personas as $persona)
-                                <option value="{{ $persona->id }}">{{ $persona->nombre }} {{ $persona->a_paterno }} {{ $persona->a_materno }}</option>
+                                <option value="{{ $persona->id }}" {{ $persona->id == $organizador->id_persona ? 'selected' : '' }}>{{ $persona->nombre }} {{ $persona->a_paterno }} {{ $persona->a_materno }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -54,7 +55,7 @@
                     <tr>
                         <td>
                             <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Editar</button>
-                            <a href="{{ route('Boletos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            <a href="{{ route('Organizadores.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
                         </td>
                     </tr>
                 </table>
@@ -62,4 +63,5 @@
         </div>
     </div>
 </body>
+
 </html>

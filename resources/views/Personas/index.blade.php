@@ -8,12 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
     <script>
-    function confirmDelete(personaId) {
-        if (confirm('¿Estás seguro de que quieres eliminar esta persona?')) {
-            document.getElementById('deleteForm'+personaId).submit();
+        function confirmDelete(personaId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta persona?')) {
+                document.getElementById('deleteForm' + personaId).submit();
+            }
         }
-    }
-</script>
+    </script>
 
 </head>
 
@@ -157,8 +157,8 @@
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $persona->fecha_nac}}</td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $persona->telefono}}</td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                    <a href="{{ route('Personas.edit', $persona->id) }}"class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                                    <a href="{{ route('Personas.show', $persona->id) }}" class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                    <a href="{{ route('Personas.edit', $persona->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Persona</a>&nbsp;
+                                    <a href="{{ route('Personas.show', $persona->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
                                     <form action="{{ route('Personas.destroy', $persona) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')

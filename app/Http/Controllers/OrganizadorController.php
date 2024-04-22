@@ -16,7 +16,8 @@ class OrganizadorController extends Controller
     public function index()
     {
         $organizadores = Organizador::all();
-        return view('Organizadores.index', compact('organizadores'));
+        $personas = Persona::all();
+        return view('Organizadores.index', ['personas' => $personas], compact('organizadores'));
     }
 
     /**

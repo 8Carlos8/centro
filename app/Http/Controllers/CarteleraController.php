@@ -59,7 +59,8 @@ class CarteleraController extends Controller
     public function show(string $id)
     {
         $cartelera = Cartelera::findOrFail($id);
-        return view('Carteleras.show', compact('cartelera'));
+        $eventos = Evento::all();
+        return view('Carteleras.show', ['eventos' => $eventos], compact('cartelera'));
     }
 
     /**

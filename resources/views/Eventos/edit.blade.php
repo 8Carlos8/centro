@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container py-2 w-50 justify-content-center">
         <div class="card">
-            <h2 class="mt-4 text-black ms-5">Crear nuevo Evento</h2>
+            <h2 class="mt-4 text-black ms-5">Editar Evento</h2>
 
-            <form action="{{ route('Eventos.update', $evento->id) }}" method="POST">
+            <form action="{{ route('Eventos.update', $evento->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <table class="table mt-4">
@@ -26,7 +28,7 @@
                             <select class="form-select" id="id_persona" name="id_organizador">
                                 <option value="">Seleccionar Organizador</option>
                                 @foreach($organizadores as $organizador)
-                                    <option value="{{ $organizador->id }}">{{ $organizador->id }}</option>
+                                <option value="{{ $organizador->id }}" {{ $organizador->id == $evento->id_organizador ? 'selected' : ''}}>{{ $organizador->id }} - {{ $organizador->persona->nombre }} {{ $organizador->persona->a_paterno }} {{ $organizador->persona->a_materno }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -40,7 +42,7 @@
                             <select class="form-select" id="id_estacionamiento" name="id_estacionamiento">
                                 <option value="">Seleccionar Estacinamiento</option>
                                 @foreach($estacionamientos as $estacionamiento)
-                                    <option value="{{ $estacionamiento->id }}">{{ $estacionamiento->id }}</option>
+                                <option value="{{ $estacionamiento->id }}" {{ $estacionamiento->id == $evento->id_estacionamiento ? 'selected' : ''}}>{{ $estacionamiento->id }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -69,7 +71,11 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="duracion">Duracion</label>
                         </td>
                         <td class="control-label ms-2">
-                            <input type="date" id="duracion" name="duracion" class="form-input" value="{{ $evento->duracion }}">
+                            <?php
+                            // Convertir la fecha al formato adecuado (aaaa-mm-dd)
+                            $fecha = date('Y-m-d', strtotime($evento->duracion));
+                            ?>
+                            <input type="date" id="duracion" name="duracion" class="form-input" value="{{ $fecha }}">
                         </td>
                     </tr>
 
@@ -78,7 +84,12 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="poster">Poster</label>
                         </td>
                         <td class="control-label ms-2">
-                            <input type="file" id="poster" name="poster" class="form-input" value="{{ $evento->poster }}">
+                            @if($evento->poster)
+                            <img src="{{ asset('storage/' . $evento->poster) }}" alt="Poster Actual" style="max-width: 150px;">
+                            @else
+                            <p>No hay poster actual.</p>
+                            @endif
+                            <input type="file" id="poster" name="poster" class="form-input">
                         </td>
                     </tr>
 
@@ -87,20 +98,26 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="banner">Banner</label>
                         </td>
                         <td class="control-label ms-2">
-                            <input type="file" id="banner" name="banner" class="form-input" value="{{ $evento->banner }}">
+                            @if($evento->banner)
+                            <img src="{{ asset('storage/' . $evento->banner) }}" alt="Banner Actual" style="max-width: 150px;">
+                            @else
+                            <p>No hay banner actual.</p>
+                            @endif
+                            <input type="file" id="banner" name="banner" class="form-input">
                         </td>
                     </tr>
 
                     <tr>
-                            <td>
-                                <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Evento</button>
-                                <a href="{{ route('Eventos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                            </td>
-                        </tr>
+                        <td>
+                            <button type="submit" class="btn btn-success"><i class="bi bi-save-fill"></i>&nbsp;Evento</button>
+                            <a href="{{ route('Eventos.index') }}" class="btn btn-danger ms-2 text-end"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
+
 </html>

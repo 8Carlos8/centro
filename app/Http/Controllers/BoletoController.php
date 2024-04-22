@@ -6,6 +6,7 @@ use App\Models\Boleto;
 use App\Models\Usuario;
 use App\Models\Cartelera;
 use App\Models\Cajon;
+use App\Models\Estacionamiento;
 use Illuminate\Http\Request;
 
 class BoletoController extends Controller
@@ -27,6 +28,7 @@ class BoletoController extends Controller
         $usuarios = Usuario::all();
         $carteleras = Cartelera::all();
         $cajones = Cajon::all();
+        //$cajones = Estacionamiento::all();
         return view('Boletos.create', compact('usuarios', 'carteleras', 'cajones'));
     }
 
@@ -41,6 +43,7 @@ class BoletoController extends Controller
             'id_cartelera' => 'required',
             'id_cajon' => 'required',
             'noBoletos' => 'required',
+            'estado' => 'required',
         ]);
 
         $boleto = new Boleto();
@@ -49,8 +52,17 @@ class BoletoController extends Controller
         $boleto->id_cajon = $request->id_cajon;
         $boleto->noBoletos = $request->noBoletos;
         $boleto->save();
+
+        // Actualiza el estado del cajón asociado al boleto
+        $cajon = Cajon::find($request->id_cajon);
+        if ($cajon) {
+            $cajon->estado = $request->estado;
+            $cajon->save();
+        }
+
         return redirect()->route('Boletos.index')->with('success', 'Boleto creado correctamente');
     }
+
 
     /**
      * Display the specified resource.
@@ -83,11 +95,22 @@ class BoletoController extends Controller
             'id_cartelera' => 'required',
             'id_cajon' => 'required',
             'noBoletos' => 'required',
+            'estado' => 'required',
         ]);
 
-        Boleto::update($request->all());
-        return redirect()->route('Boleto.index')->with('success', 'Boleto actualizado correctamente.');
+        // Actualizamos los datos del boleto
+        $boleto->update($request->all());
+
+        // Actualizamos el estado del cajón asociado al boleto
+        $cajon = Cajon::find($request->id_cajon);
+        if ($cajon) {
+            $cajon->estado = $request->estado;
+            $cajon->save();
+        }
+
+        return redirect()->route('Boletos.index')->with('success', 'Boleto actualizado correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.

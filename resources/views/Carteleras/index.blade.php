@@ -7,12 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
-    function confirmDelete(id) {
-        if (confirm("¿Estás seguro de que quieres eliminar esta cartelera?")) {
-            document.getElementById('deleteForm' + id).submit();
+        function confirmDelete(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar esta cartelera?")) {
+                document.getElementById('deleteForm' + id).submit();
+            }
         }
-    }
-</script>
+    </script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
@@ -78,7 +78,7 @@
                                     <p>Por favor, inicia sesión para acceder a esta página.</p>
                                     @endauth
                                 </li>
-                                <li class="nav-item m-0" >
+                                <li class="nav-item m-0">
                                     @if (Auth::check())
                                     <form action="{{ route('logout') }}" method="POST" class="inline-block">
                                         @csrf
@@ -124,77 +124,83 @@
     </header>
 
     <div class="container-fluid py-2 z-1">
-    <div class="card py-2 m-5">
-        <div class="row justify-content-center">
-            <div class="container mx-auto py-4">
-                <h2 class="mt-4 text-center text-black">Carteleras</h2>
+        <div class="card py-2 m-5">
+            <div class="row justify-content-center">
+                <div class="container mx-auto py-4">
+                    <h2 class="mt-4 text-center text-black">Carteleras</h2>
 
-                <div class="mb-4">
-                    @auth
-                    @if (auth()->user()->rol == 1)
-                    <a href="{{ route('Carteleras.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nueva Cartelera</a>
-                    @endif
-                    @else
-                    <!-- Esto se mostrará si no hay una sesión activa -->
-                    <p>Por favor, inicia sesión para acceder a esta página.</p>
-                    @endauth
-                </div>
-
-                <table class="table-auto w-full border-collapse border-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Evento</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">ID Sala</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Inicio</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Fin</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Lugares</th>
-                            <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($carteleras as $cartelera)
-                        <tr>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_evento }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_sala }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->estado }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->inicio }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->fin }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->lugares }}</td>
-                            <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                <a href="{{ route('Carteleras.show', $cartelera->id) }}" class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
-                                @auth
-                                @if (auth()->user()->rol == 1)
-                                <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Usuario</a>&nbsp;
-                                <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="confirmDelete({{ $cartelera->id }})" class="btn btn-danger ms-2">Eliminar</button>
-                                </form>
-                                @endif
-                                @else
-                                <!-- Esto se mostrará si no hay una sesión activa -->
-                                <p>Por favor, inicia sesión para acceder a esta página.</p>
-                                @endauth
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                    <div class="mb-4">
+                        @auth
+                        @if (auth()->user()->rol == 1)
+                        <a href="{{ route('Carteleras.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nueva Cartelera</a>
+                        @endif
+                        @else
+                        <!-- Esto se mostrará si no hay una sesión activa -->
+                        <p>Por favor, inicia sesión para acceder a esta página.</p>
+                        @endauth
                     </div>
-                    <div class="col-2 ps-2 mt-4 text-end">
-                        <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
-                    </div>
-                </div>
-            </div>
 
+                    <table class="table-auto w-full border-collapse border-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Evento</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">ID Sala</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Estado</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Inicio</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Fecha Fin</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Lugares</th>
+                                <th class="border-gray-300 px-4 py-2 text-gray-700">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($carteleras as $cartelera)
+                            <tr>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_evento }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->id_sala }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    @if($cartelera->estado == 1)
+                                    <span style="color: green;">Activo</span>
+                                    @else
+                                    <span style="color: red;">Deshabilitado</span>
+                                    @endif
+                                </td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->inicio }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->fin }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $cartelera->lugares }}</td>
+                                <td class="border-gray-300 px-4 py-2 text-gray-700">
+                                    <a href="{{ route('Carteleras.show', $cartelera->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                    @auth
+                                    @if (auth()->user()->rol == 1)
+                                    <a href="{{ route('Carteleras.edit', $cartelera->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar Cartelera</a>&nbsp;
+                                    <form action="{{ route('Carteleras.destroy', $cartelera) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete({{ $cartelera->id }})" class="btn btn-danger ms-2">Eliminar</button>
+                                    </form>
+                                    @endif
+                                    @else
+                                    <!-- Esto se mostrará si no hay una sesión activa -->
+                                    <p>Por favor, inicia sesión para acceder a esta página.</p>
+                                    @endauth
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Contenedor vacío que ocupa el espacio restante en la fila -->
+                            </div>
+                            <div class="col-2 ps-2 mt-4 text-end">
+                                <a href="{{ route('Personas.inicio') }}" class="btn btn-danger ms-2"><i class="bi bi-arrow-return-left"></i>&nbsp;Regresar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>

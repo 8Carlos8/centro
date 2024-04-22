@@ -7,12 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script>
-    function confirmDelete(boletoId) {
-        if (confirm('¿Estás seguro de que quieres eliminar este boleto?')) {
-            document.getElementById('deleteForm'+boletoId).submit();
+        function confirmDelete(boletoId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este boleto?')) {
+                document.getElementById('deleteForm' + boletoId).submit();
+            }
         }
-    }
-</script>
+    </script>
 </head>
 
 <body style="background-image: url(../../../imagenes/teatro.jpg);background-repeat: no-repeat;
@@ -160,14 +160,14 @@
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->id_cajon }}</td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">{{ $boleto->noBoletos }}</td>
                                 <td class="border-gray-300 px-4 py-2 text-gray-700">
-                                    <a href="{{ route('Boletos.show', $boleto->id) }}" class="btn btn-primary"  title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
+                                    <a href="{{ route('Boletos.show', $boleto->id) }}" class="btn btn-primary" title='Ver datalles '><i class="bi bi-binoculars"></i>&nbsp;Ver Detalles</a>&nbsp;
                                     @auth
                                     @if (auth()->user()->rol == 1)
-                                    <a href="{{ route('Boletos.edit', $boleto->id) }}" class="btn btn-warning"  title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar </a>&nbsp; 
+                                    <a href="{{ route('Boletos.edit', $boleto->id) }}" class="btn btn-warning" title='Editar '><i class="bi bi-pencil"></i>&nbsp;Editar </a>&nbsp;
                                     <form action="{{ route('Boletos.destroy', $boleto) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$boleto->id}})">Eliminar</button> 
+                                        <button type="button" class="btn btn-danger ms-2" onclick="confirmDelete({{$boleto->id}})">Eliminar</button>
                                     </form>
                                     @endif
                                     @else
