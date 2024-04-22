@@ -174,11 +174,3 @@
             </div>
         </div>
     </body>
-
-    @if (Auth::check())
-    <form action="{{ route('logout') }}" method="POST" class="inline-block">
-        @csrf
-        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Cerrar Sesión</button>
-    </form>
-    @endif
-    </div>

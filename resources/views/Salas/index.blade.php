@@ -14,7 +14,7 @@
             if (confirm('¿Estás seguro de que quieres eliminar esta sala?')) {
                 document.getElementById('deleteForm' + salaId).submit();
             }
-        }
+        }   
     </script>
 </head>
 

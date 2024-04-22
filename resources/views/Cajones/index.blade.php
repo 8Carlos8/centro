@@ -12,6 +12,13 @@
                 document.getElementById('deleteForm' + cajonId).submit();
             }
         }
+
+        // Función para recargar la página cada 5 segundos
+        setInterval(function() {
+            location.reload();
+        }, 5000); 
+
+    
     </script>
 </head>
 
@@ -127,10 +134,29 @@
             <div class="row justify-content-center">
                 <div class="container mx-auto py-4">
                     <h2 class="mt-4 text-center text-black">Cajones</h2>
+                    <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <a href="{{ route('Cajones.create') }}" class="btn btn-success"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo Cajón</a>
+                        </div>
+                        <div class="col">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Filtrar por Zona
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="{{ route('Cajones.index', ['filter' => 'a']) }}">Zona A</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('Cajones.index', ['filter' => 'b']) }}">Zona B</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('Cajones.index', ['filter' => 'c']) }}">Zona C</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('Cajones.index', ['filter' => 'd']) }}">Zona D</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('Cajones.index') }}">Mostrar Todos</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+            </div>
 
-                    <div class="mb-4">
-                        <a href="{{ route('Cajones.create') }}" class="btn btn-success ms-4"><i class="bi bi-plus-circle"></i>&nbsp;Crear nuevo Cajón</a>
-                    </div>
 
                     <table class="table-auto w-full border-collapse border-gray-200">
                         <thead>

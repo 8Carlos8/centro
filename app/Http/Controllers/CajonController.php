@@ -7,9 +7,29 @@ use Illuminate\Http\Request;
 
 class CajonController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cajones = Cajon::all();
+        $cajones;
+
+        if ($request->has('filter')) {
+            $filter = $request->input('filter');
+            
+            // Lógica para filtrar según la zona
+            if ($filter === 'a') {
+                $cajones = Cajon::where('zona', 'A')->get();
+            } elseif ($filter === 'b') {
+                $cajones = Cajon::where('zona', 'B')->get();
+
+            } elseif ($filter === 'c') {
+                $cajones = Cajon::where('zona', 'C')->get();
+            } elseif ($filter === 'd') {
+                $cajones = Cajon::where('zona', 'D')->get();
+            }
+        } else {
+            // Si no hay filtro, mostrar todos los cajones
+            $cajones = Cajon::all();
+        }
+
         return view('Cajones.index', compact('cajones'));
     }
 
